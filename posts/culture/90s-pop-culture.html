@@ -1,0 +1,3740 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>90 年代流行文化深度研究 · The Nineties Dossier</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400..900;1,400..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=JetBrains+Mono:wght@400;700&family=Noto+Serif+SC:wght@300;400;500;700;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+/* ===========================================
+   90's Research Dossier — Editorial Magazine
+   =========================================== */
+:root {
+  --ink: #1a1410;
+  --paper: #f4ecd8;
+  --paper-deep: #e8dcc0;
+  --paper-shadow: #d4c399;
+  --red: #c1362a;
+  --red-deep: #8b1e16;
+  --green: #1a3a2e;
+  --green-bright: #2d5a3d;
+  --gold: #c99536;
+  --gold-bright: #d4a73a;
+  --indigo: #1e2a4a;
+  --mono: 'JetBrains Mono', ui-monospace, monospace;
+  --serif-display: 'Bodoni Moda', 'Noto Serif SC', serif;
+  --serif-body: 'Playfair Display', 'Noto Serif SC', serif;
+  --sans-cn: 'Noto Sans SC', system-ui, sans-serif;
+  --serif-cn: 'Noto Serif SC', serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--serif-cn);
+  font-weight: 400;
+  line-height: 1.75;
+  font-size: 17px;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* paper grain overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 100;
+  background-image:
+    radial-gradient(rgba(0,0,0,0.025) 1px, transparent 1px),
+    radial-gradient(rgba(0,0,0,0.02) 1px, transparent 1px);
+  background-size: 3px 3px, 5px 5px;
+  background-position: 0 0, 1px 2px;
+  mix-blend-mode: multiply;
+  opacity: 0.7;
+}
+
+/* ─────────────────────────────────
+   HERO / COVER
+   ───────────────────────────────── */
+.hero {
+  min-height: 100vh;
+  padding: 40px 60px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-bottom: 3px double var(--ink);
+  background: linear-gradient(180deg, var(--paper) 0%, var(--paper-deep) 100%);
+}
+
+.hero-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink);
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--ink);
+}
+
+.hero-top-left { display: flex; gap: 32px; }
+.hero-top .num { font-weight: 700; color: var(--red); }
+
+.hero-main {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  padding: 60px 0;
+  align-items: center;
+}
+
+.hero-title {
+  font-family: var(--serif-display);
+  font-weight: 900;
+  font-size: clamp(56px, 9vw, 148px);
+  line-height: 0.88;
+  letter-spacing: -0.04em;
+  color: var(--ink);
+}
+
+.hero-title .year {
+  font-style: italic;
+  color: var(--red);
+  font-weight: 400;
+}
+
+.hero-title .amp {
+  font-style: italic;
+  font-weight: 300;
+  color: var(--gold);
+  font-size: 0.7em;
+  vertical-align: baseline;
+}
+
+.hero-subtitle-en {
+  font-family: var(--serif-display);
+  font-style: italic;
+  font-size: 22px;
+  color: var(--green);
+  margin-top: 32px;
+  letter-spacing: 0.02em;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.hero-right {
+  padding-left: 40px;
+  border-left: 1px solid var(--ink);
+}
+
+.hero-eyebrow {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 12px;
+  display: inline-block;
+  padding: 4px 10px;
+  border: 1px solid var(--red);
+  background: var(--paper);
+}
+
+.hero-lede {
+  font-family: var(--serif-cn);
+  font-size: 18px;
+  line-height: 1.75;
+  color: var(--ink);
+  margin-bottom: 24px;
+}
+
+.hero-lede .drop {
+  font-family: var(--serif-display);
+  font-size: 72px;
+  line-height: 0.8;
+  float: left;
+  padding: 8px 10px 0 0;
+  color: var(--red);
+  font-weight: 900;
+}
+
+.hero-meta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  padding: 24px 0;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  margin-top: 24px;
+}
+
+.hero-meta-item .label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--green);
+  display: block;
+  margin-bottom: 4px;
+}
+
+.hero-meta-item .value {
+  font-family: var(--serif-display);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.hero-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-top: 24px;
+  border-top: 1px solid var(--ink);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.hero-bottom .title-seal {
+  font-family: var(--serif-display);
+  font-style: italic;
+  font-size: 18px;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--green);
+}
+
+/* decorative stamp */
+.stamp {
+  position: absolute;
+  right: 80px;
+  top: 120px;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  border: 3px double var(--red);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(-12deg);
+  opacity: 0.85;
+  text-align: center;
+  color: var(--red);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  line-height: 1.4;
+  padding: 18px;
+  font-weight: 700;
+  background: rgba(244,236,216,0.3);
+}
+
+.stamp .stamp-big {
+  font-family: var(--serif-display);
+  font-size: 32px;
+  font-weight: 900;
+  font-style: italic;
+  display: block;
+  margin: 4px 0;
+  letter-spacing: -0.02em;
+  text-transform: none;
+}
+
+/* ─────────────────────────────────
+   TABLE OF CONTENTS
+   ───────────────────────────────── */
+.toc {
+  padding: 80px 60px;
+  max-width: 1400px;
+  margin: 0 auto;
+  border-bottom: 1px solid var(--ink);
+}
+
+.toc-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 48px;
+  padding-bottom: 16px;
+  border-bottom: 3px solid var(--ink);
+}
+
+.toc-title {
+  font-family: var(--serif-display);
+  font-size: 64px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+.toc-title .ital {
+  font-style: italic;
+  color: var(--red);
+  font-weight: 400;
+}
+
+.toc-count {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--green);
+}
+
+.toc-list {
+  list-style: none;
+}
+
+.toc-item {
+  display: grid;
+  grid-template-columns: 80px 1fr auto 60px;
+  gap: 24px;
+  padding: 24px 0;
+  border-bottom: 1px solid rgba(26,20,16,0.15);
+  align-items: baseline;
+  transition: padding 0.3s, background 0.3s;
+}
+
+.toc-item:hover {
+  background: var(--paper-deep);
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.toc-num {
+  font-family: var(--serif-display);
+  font-size: 48px;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--red);
+  line-height: 1;
+}
+
+.toc-name {
+  font-family: var(--serif-display);
+  font-size: 30px;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.2;
+}
+
+.toc-en {
+  font-family: var(--serif-display);
+  font-style: italic;
+  font-size: 14px;
+  color: var(--green);
+  display: block;
+  margin-top: 6px;
+  font-weight: 400;
+}
+
+.toc-tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--green);
+  padding: 4px 10px;
+  border: 1px solid var(--green);
+}
+
+.toc-page {
+  font-family: var(--mono);
+  font-size: 14px;
+  color: var(--ink);
+  text-align: right;
+  font-weight: 700;
+}
+
+/* ─────────────────────────────────
+   CHAPTER SECTIONS
+   ───────────────────────────────── */
+.chapter {
+  padding: 120px 60px;
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.chapter-header {
+  margin-bottom: 80px;
+  position: relative;
+}
+
+.chapter-tag {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--red);
+  padding: 6px 14px;
+  border: 1px solid var(--red);
+  background: var(--paper);
+  display: inline-block;
+  margin-bottom: 24px;
+  font-weight: 700;
+}
+
+.chapter-num {
+  font-family: var(--serif-display);
+  font-size: 220px;
+  font-weight: 900;
+  font-style: italic;
+  color: var(--red);
+  line-height: 0.85;
+  letter-spacing: -0.05em;
+  opacity: 0.16;
+  position: absolute;
+  top: -40px;
+  right: 0;
+  pointer-events: none;
+  user-select: none;
+}
+
+.chapter-title {
+  font-family: var(--serif-display);
+  font-size: clamp(44px, 6vw, 88px);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  margin-bottom: 16px;
+  max-width: 900px;
+}
+
+.chapter-title .ital {
+  font-style: italic;
+  color: var(--red);
+  font-weight: 400;
+}
+
+.chapter-subtitle {
+  font-family: var(--serif-display);
+  font-style: italic;
+  font-size: 24px;
+  color: var(--green);
+  max-width: 700px;
+  line-height: 1.4;
+  margin-top: 24px;
+}
+
+.chapter-lede {
+  font-family: var(--serif-cn);
+  font-size: 20px;
+  line-height: 1.8;
+  color: var(--ink);
+  max-width: 800px;
+  margin-top: 48px;
+  padding-top: 32px;
+  border-top: 1px solid var(--ink);
+  font-weight: 400;
+}
+
+.chapter-lede .first-letter {
+  font-family: var(--serif-display);
+  font-size: 80px;
+  line-height: 0.8;
+  float: left;
+  padding: 8px 14px 0 0;
+  color: var(--red);
+  font-weight: 900;
+}
+
+/* ─────────────────────────────────
+   CONTENT BLOCKS
+   ───────────────────────────────── */
+.section {
+  margin: 80px 0;
+}
+
+.section-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 700;
+}
+
+.section-label::before {
+  content: '';
+  display: inline-block;
+  width: 40px;
+  height: 2px;
+  background: var(--red);
+}
+
+.section-title {
+  font-family: var(--serif-display);
+  font-size: 44px;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 24px;
+  max-width: 900px;
+}
+
+.section-title .ital {
+  font-style: italic;
+  color: var(--red);
+  font-weight: 400;
+}
+
+.section-intro {
+  font-family: var(--serif-cn);
+  font-size: 18px;
+  line-height: 1.75;
+  max-width: 780px;
+  margin-bottom: 40px;
+  color: var(--ink);
+}
+
+p {
+  font-family: var(--serif-cn);
+  font-size: 17px;
+  line-height: 1.85;
+  margin-bottom: 20px;
+  color: var(--ink);
+}
+
+p strong, p b {
+  font-weight: 700;
+  color: var(--red-deep);
+}
+
+/* ─────────────────────────────────
+   PULL QUOTE
+   ───────────────────────────────── */
+.pullquote {
+  font-family: var(--serif-display);
+  font-size: 32px;
+  line-height: 1.3;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--green);
+  margin: 60px 0;
+  padding: 40px 0;
+  border-top: 3px double var(--ink);
+  border-bottom: 3px double var(--ink);
+  text-align: center;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+}
+
+.pullquote::before {
+  content: '«';
+  position: absolute;
+  left: -10px;
+  top: 20px;
+  font-size: 60px;
+  color: var(--red);
+  line-height: 1;
+}
+.pullquote::after {
+  content: '»';
+  position: absolute;
+  right: -10px;
+  bottom: 20px;
+  font-size: 60px;
+  color: var(--red);
+  line-height: 1;
+}
+
+.pullquote cite {
+  display: block;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink);
+  font-style: normal;
+  margin-top: 20px;
+}
+
+/* ─────────────────────────────────
+   STAT CARDS
+   ───────────────────────────────── */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1px;
+  background: var(--ink);
+  border: 2px solid var(--ink);
+  margin: 40px 0;
+}
+
+.stat-card {
+  background: var(--paper);
+  padding: 32px 28px;
+  position: relative;
+}
+
+.stat-card .stat-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+
+.stat-card .stat-value {
+  font-family: var(--serif-display);
+  font-size: 56px;
+  font-weight: 900;
+  color: var(--red);
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.stat-card .stat-value .small {
+  font-size: 24px;
+  color: var(--ink);
+  font-weight: 400;
+}
+
+.stat-card .stat-desc {
+  font-family: var(--serif-cn);
+  font-size: 13px;
+  color: var(--ink);
+  margin-top: 10px;
+  line-height: 1.5;
+}
+
+/* ─────────────────────────────────
+   TIMELINE
+   ───────────────────────────────── */
+.timeline {
+  margin: 60px 0;
+  position: relative;
+  border-left: 2px solid var(--ink);
+  padding-left: 40px;
+}
+
+.timeline-item {
+  margin-bottom: 36px;
+  position: relative;
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -48px;
+  top: 8px;
+  width: 14px;
+  height: 14px;
+  background: var(--red);
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+}
+
+.timeline-date {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--red);
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.timeline-event {
+  font-family: var(--serif-display);
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+
+.timeline-desc {
+  font-family: var(--serif-cn);
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--ink);
+}
+
+/* ─────────────────────────────────
+   DATA TABLE
+   ───────────────────────────────── */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 40px 0;
+  font-family: var(--serif-cn);
+  font-size: 15px;
+  background: var(--paper);
+  border: 2px solid var(--ink);
+}
+
+.data-table thead {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.data-table th {
+  padding: 16px 14px;
+  text-align: left;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-weight: 700;
+  border-right: 1px solid var(--paper);
+}
+
+.data-table th:last-child { border-right: none; }
+
+.data-table td {
+  padding: 14px;
+  border-bottom: 1px solid rgba(26,20,16,0.15);
+  border-right: 1px solid rgba(26,20,16,0.08);
+  vertical-align: top;
+  line-height: 1.55;
+}
+
+.data-table td:last-child { border-right: none; }
+
+.data-table tbody tr:nth-child(even) {
+  background: var(--paper-deep);
+}
+
+.data-table tbody tr:hover {
+  background: rgba(201,149,54,0.15);
+}
+
+.data-table td strong {
+  color: var(--red-deep);
+  font-weight: 700;
+}
+
+.data-table .tag {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  background: var(--green);
+  color: var(--paper);
+  font-weight: 700;
+  margin-right: 4px;
+}
+
+.data-table .tag.red { background: var(--red); }
+.data-table .tag.gold { background: var(--gold); color: var(--ink); }
+.data-table .tag.indigo { background: var(--indigo); }
+
+/* ─────────────────────────────────
+   CARDS GRID (movies, people)
+   ───────────────────────────────── */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+  margin: 40px 0;
+}
+
+.card {
+  background: var(--paper);
+  border: 1px solid var(--ink);
+  padding: 24px;
+  position: relative;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 6px 6px 0 var(--ink);
+}
+
+.card-num {
+  font-family: var(--serif-display);
+  font-size: 48px;
+  font-weight: 900;
+  font-style: italic;
+  color: var(--red);
+  line-height: 0.8;
+  margin-bottom: 12px;
+}
+
+.card-title {
+  font-family: var(--serif-display);
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.25;
+  margin-bottom: 4px;
+}
+
+.card-title-en {
+  font-family: var(--serif-display);
+  font-style: italic;
+  font-size: 13px;
+  color: var(--green);
+  margin-bottom: 16px;
+  display: block;
+}
+
+.card-meta {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--green);
+  padding: 4px 0;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  margin-bottom: 16px;
+  font-weight: 700;
+}
+
+.card-desc {
+  font-family: var(--serif-cn);
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--ink);
+}
+
+/* ─────────────────────────────────
+   CALLOUT BOX
+   ───────────────────────────────── */
+.callout {
+  background: var(--green);
+  color: var(--paper);
+  padding: 40px;
+  margin: 50px 0;
+  position: relative;
+  border: 2px solid var(--ink);
+  box-shadow: 8px 8px 0 var(--ink);
+}
+
+.callout-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold-bright);
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+
+.callout-title {
+  font-family: var(--serif-display);
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 20px;
+  color: var(--paper);
+}
+
+.callout-title .ital {
+  font-style: italic;
+  color: var(--gold-bright);
+}
+
+.callout p {
+  color: var(--paper);
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+.callout p strong {
+  color: var(--gold-bright);
+}
+
+/* ─────────────────────────────────
+   MONTHLY CALENDAR (for 1994)
+   ───────────────────────────────── */
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--ink);
+  border: 2px solid var(--ink);
+  margin: 40px 0;
+}
+
+.month-cell {
+  background: var(--paper);
+  padding: 24px 20px;
+  min-height: 180px;
+  position: relative;
+}
+
+.month-cell.highlight {
+  background: var(--green);
+  color: var(--paper);
+}
+
+.month-cell.highlight .month-name,
+.month-cell.highlight .event-list li { color: var(--paper); }
+
+.month-cell.highlight .month-num { color: var(--gold-bright); }
+
+.month-num {
+  font-family: var(--serif-display);
+  font-size: 64px;
+  font-weight: 900;
+  color: var(--red);
+  line-height: 0.8;
+  letter-spacing: -0.03em;
+}
+
+.month-name {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  margin-top: 4px;
+  font-weight: 700;
+}
+
+.event-list {
+  list-style: none;
+  font-family: var(--serif-cn);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.event-list li {
+  margin-bottom: 6px;
+  padding-left: 14px;
+  position: relative;
+}
+
+.event-list li::before {
+  content: '◆';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--gold);
+  font-size: 8px;
+}
+
+.month-cell.highlight .event-list li::before { color: var(--gold-bright); }
+
+.event-list li strong {
+  color: var(--red-deep);
+  font-weight: 700;
+}
+
+.month-cell.highlight .event-list li strong { color: var(--gold-bright); }
+
+/* ─────────────────────────────────
+   FLOW DIAGRAM
+   ───────────────────────────────── */
+.flow-diagram {
+  background: var(--paper-deep);
+  padding: 40px;
+  margin: 40px 0;
+  border: 2px solid var(--ink);
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 2;
+  color: var(--ink);
+  white-space: pre;
+  overflow-x: auto;
+}
+
+/* ─────────────────────────────────
+   2-COLUMN LAYOUT
+   ───────────────────────────────── */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  margin: 40px 0;
+}
+
+.two-col.asymmetric {
+  grid-template-columns: 1.3fr 1fr;
+}
+
+.col-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--ink);
+  font-weight: 700;
+}
+
+/* ─────────────────────────────────
+   FOOTER
+   ───────────────────────────────── */
+.footer {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 80px 60px 40px;
+  margin-top: 80px;
+}
+
+.footer-top {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 40px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--paper);
+}
+
+.footer-title {
+  font-family: var(--serif-display);
+  font-size: 56px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.footer-title .ital {
+  font-style: italic;
+  color: var(--gold-bright);
+}
+
+.footer-col h4 {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-bright);
+  margin-bottom: 14px;
+  font-weight: 700;
+}
+
+.footer-col ul {
+  list-style: none;
+  font-family: var(--serif-cn);
+  font-size: 14px;
+  line-height: 2;
+}
+
+.footer-bottom {
+  padding-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--paper-shadow);
+}
+
+/* ─────────────────────────────────
+   WATCH GUIDE
+   ───────────────────────────────── */
+.watch-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 24px 0;
+  font-family: var(--serif-cn);
+  font-size: 14px;
+  background: var(--paper);
+  border: 2px solid var(--ink);
+}
+
+.watch-table thead {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.watch-table th {
+  padding: 12px 12px;
+  text-align: left;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-weight: 700;
+  border-right: 1px solid var(--paper);
+}
+
+.watch-table th:last-child { border-right: none; }
+
+.watch-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(26,20,16,0.12);
+  border-right: 1px solid rgba(26,20,16,0.05);
+  vertical-align: middle;
+  line-height: 1.45;
+}
+
+.watch-table td:last-child { border-right: none; }
+
+.watch-table tbody tr:nth-child(even) {
+  background: var(--paper-deep);
+}
+
+.watch-table tbody tr:hover {
+  background: rgba(201,149,54,0.15);
+}
+
+.watch-table a.jw-link {
+  color: var(--ink);
+  text-decoration: none;
+  font-weight: 700;
+  border-bottom: 1px dotted var(--red);
+  padding-bottom: 1px;
+  transition: all 0.15s;
+}
+
+.watch-table a.jw-link:hover {
+  color: var(--red);
+  border-bottom-style: solid;
+}
+
+.watch-table a.jw-link::after {
+  content: ' ↗';
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--red);
+  vertical-align: super;
+}
+
+.watch-table .original-title {
+  font-family: var(--serif-display);
+  font-style: italic;
+  font-size: 12px;
+  color: var(--green);
+  display: block;
+  margin-top: 2px;
+  font-weight: 400;
+  border-bottom: none !important;
+}
+
+.watch-table .year-col {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--green);
+  white-space: nowrap;
+  font-weight: 700;
+}
+
+.platform-badge {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  margin: 1px 2px 1px 0;
+  font-weight: 700;
+  border: 1px solid var(--ink);
+  white-space: nowrap;
+  line-height: 1.4;
+}
+
+.platform-badge.netflix { background: #e50914; color: #fff; border-color: #e50914; }
+.platform-badge.prime   { background: #00a8e1; color: #fff; border-color: #00a8e1; }
+.platform-badge.disney  { background: #1e2a4a; color: #fff; border-color: #1e2a4a; }
+.platform-badge.viu     { background: #ffcc00; color: #1a1410; border-color: #1a1410; }
+.platform-badge.hbo     { background: #6b46c1; color: #fff; border-color: #6b46c1; }
+.platform-badge.apple   { background: #1a1410; color: #fff; border-color: #1a1410; }
+.platform-badge.rent    { background: var(--paper); color: var(--ink); border-color: var(--ink); }
+.platform-badge.unknown { background: var(--paper-deep); color: var(--green); border-color: var(--green); }
+
+.watch-intro-card {
+  background: var(--gold);
+  color: var(--ink);
+  padding: 24px 28px;
+  margin: 32px 0;
+  border: 2px solid var(--ink);
+  box-shadow: 6px 6px 0 var(--ink);
+}
+
+.watch-intro-card h4 {
+  font-family: var(--serif-display);
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.watch-intro-card p {
+  font-size: 15px;
+  line-height: 1.7;
+  margin-bottom: 8px;
+}
+
+.watch-intro-card p:last-child { margin-bottom: 0; }
+
+.watch-intro-card .mono {
+  font-family: var(--mono);
+  font-size: 12px;
+  background: var(--ink);
+  color: var(--gold-bright);
+  padding: 1px 6px;
+  font-weight: 700;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 16px 0 32px;
+  padding: 16px 20px;
+  background: var(--paper-deep);
+  border: 1px solid var(--ink);
+  font-family: var(--mono);
+  font-size: 11px;
+  align-items: center;
+}
+
+.legend strong {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: var(--red);
+}
+
+.watch-group-title {
+  font-family: var(--serif-display);
+  font-size: 22px;
+  font-weight: 700;
+  margin-top: 40px;
+  margin-bottom: 8px;
+  color: var(--ink);
+}
+
+.watch-group-title .ital {
+  font-style: italic;
+  color: var(--red);
+  font-weight: 400;
+}
+
+.watch-group-title::before {
+  content: '◆';
+  color: var(--gold);
+  margin-right: 8px;
+  font-size: 14px;
+  vertical-align: middle;
+}
+
+@media (max-width: 1000px) {
+  .watch-table { font-size: 12px; }
+  .watch-table th, .watch-table td { padding: 8px 6px; }
+  .platform-badge { font-size: 8px; padding: 2px 5px; }
+}
+
+/* ─────────────────────────────────
+   FLOATING NAVIGATION
+   ───────────────────────────────── */
+.nav-float {
+  position: fixed;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 200;
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  box-shadow: 4px 4px 0 var(--ink);
+  padding: 18px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  transition: all 0.3s ease;
+}
+
+.nav-float::before {
+  content: 'NAVIGATE';
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 0.25em;
+  color: var(--red);
+  text-align: center;
+  padding-bottom: 12px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid var(--ink);
+  font-weight: 700;
+  display: block;
+}
+
+.nav-float a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 4px;
+  text-decoration: none;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: all 0.2s;
+  border-left: 2px solid transparent;
+  padding-left: 10px;
+  white-space: nowrap;
+  font-weight: 700;
+}
+
+.nav-float a:hover,
+.nav-float a.active {
+  color: var(--red);
+  border-left-color: var(--red);
+  background: var(--paper-deep);
+}
+
+.nav-float a .nav-num {
+  font-family: var(--serif-display);
+  font-size: 16px;
+  font-style: italic;
+  font-weight: 900;
+  color: var(--red);
+  min-width: 20px;
+}
+
+.nav-float a .nav-label {
+  display: none;
+  font-size: 10px;
+}
+
+.nav-float:hover a .nav-label {
+  display: inline;
+}
+
+.nav-float:hover {
+  padding-right: 18px;
+}
+
+/* Back to top button */
+.back-to-top {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  z-index: 200;
+  width: 56px;
+  height: 56px;
+  background: var(--ink);
+  color: var(--gold-bright);
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--serif-display);
+  font-size: 24px;
+  font-weight: 900;
+  box-shadow: 4px 4px 0 var(--red);
+  transition: all 0.3s;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(20px);
+}
+
+.back-to-top.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.back-to-top:hover {
+  background: var(--red);
+  color: var(--paper);
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--ink);
+}
+
+/* Reading progress bar */
+.progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: var(--red);
+  z-index: 201;
+  width: 0%;
+  transition: width 0.1s;
+}
+
+/* TOC items as clickable */
+.toc-item {
+  cursor: pointer;
+}
+
+.toc-item a {
+  display: contents;
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Anchor scroll offset for fixed elements */
+section[id] {
+  scroll-margin-top: 30px;
+}
+
+/* ─────────────────────────────────
+   RESPONSIVE
+   ───────────────────────────────── */
+@media (max-width: 1000px) {
+  .hero { padding: 30px 24px; }
+  .hero-main { grid-template-columns: 1fr; gap: 30px; }
+  .hero-right { padding-left: 0; border-left: none; border-top: 1px solid var(--ink); padding-top: 30px; }
+  .hero-title { font-size: clamp(48px, 12vw, 80px); }
+  .stamp { display: none; }
+  .chapter, .toc { padding: 60px 24px; }
+  .chapter-num { font-size: 120px; top: -20px; }
+  .section-title { font-size: 32px; }
+  .calendar-grid { grid-template-columns: repeat(2, 1fr); }
+  .two-col, .two-col.asymmetric { grid-template-columns: 1fr; gap: 24px; }
+  .footer-top { grid-template-columns: 1fr; }
+  .hero-meta { grid-template-columns: 1fr; }
+  .toc-item { grid-template-columns: 60px 1fr; gap: 16px; }
+  .toc-tag, .toc-page { display: none; }
+  .toc-num { font-size: 36px; }
+  .toc-name { font-size: 22px; }
+  .data-table { font-size: 13px; }
+  .data-table th, .data-table td { padding: 10px 8px; }
+  /* Hide floating nav on mobile, show compact version */
+  .nav-float {
+    right: 12px;
+    padding: 12px 8px;
+  }
+  .nav-float::before { font-size: 7px; padding-bottom: 8px; margin-bottom: 4px; }
+  .nav-float a .nav-label { display: none !important; }
+  .nav-float a { padding: 6px 2px; padding-left: 6px; }
+  .nav-float:hover { padding-right: 8px; }
+  .back-to-top { width: 44px; height: 44px; bottom: 20px; right: 20px; font-size: 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Reading progress bar -->
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- Floating navigation -->
+<nav class="nav-float" id="navFloat">
+  <a href="#top" data-target="top"><span class="nav-num">↑</span><span class="nav-label">封面</span></a>
+  <a href="#toc" data-target="toc"><span class="nav-num">—</span><span class="nav-label">目录</span></a>
+  <a href="#chapter-1" data-target="chapter-1"><span class="nav-num">01</span><span class="nav-label">90s 全景</span></a>
+  <a href="#chapter-2" data-target="chapter-2"><span class="nav-num">02</span><span class="nav-label">1994 神迹年</span></a>
+  <a href="#chapter-3" data-target="chapter-3"><span class="nav-num">03</span><span class="nav-label">香港扩散</span></a>
+  <a href="#chapter-4" data-target="chapter-4"><span class="nav-num">04</span><span class="nav-label">日剧 VCD</span></a>
+  <a href="#chapter-5" data-target="chapter-5"><span class="nav-num">05</span><span class="nav-label">合并视图</span></a>
+  <a href="#chapter-6" data-target="chapter-6"><span class="nav-num">📺</span><span class="nav-label">观看指南</span></a>
+</nav>
+
+<!-- Back to top -->
+<button class="back-to-top" id="backToTop" aria-label="回到顶部">↑</button>
+
+<!-- ════════════════════════════════
+     HERO — COVER
+     ════════════════════════════════ -->
+<section class="hero" id="top">
+  <div class="hero-top">
+    <div class="hero-top-left">
+      <span>No. <span class="num">001</span></span>
+      <span>Vol. <span class="num">I</span> / Issue <span class="num">90s</span></span>
+      <span>三部曲 · Trilogy</span>
+    </div>
+    <div>A Research Dossier for Ricky Yuan · Singapore</div>
+  </div>
+
+  <div class="hero-main">
+    <div>
+      <div class="hero-eyebrow">THE NINETIES DOSSIER</div>
+      <h1 class="hero-title">
+        九十年代<br>
+        <span class="amp">&</span>它<span class="year">留下的</span><br>
+        回声
+      </h1>
+      <div class="hero-subtitle-en">
+        The Nineties, and the Echo It Left Behind.<br>
+        Three threads that still shape how we watch, listen, and remember.
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="hero-eyebrow">编辑按 · EDITOR'S NOTE</div>
+      <p class="hero-lede">
+        <span class="drop">T</span>本期聚焦三条并非孤立的文化线索：<strong>1994 年的全球神迹</strong>、<strong>1997 后香港电影人才的全球扩散地图</strong>、<strong>日剧 VCD 如何通过盗版渠道重塑整个东南亚的审美代际</strong>。这三件事表面上互不相关——一个是西方流行爆发，一个是华语工业崩塌后的重组，一个是东亚软实力的地下传播——但把它们叠起来看，你会看到今天我们听的音乐、看的剧、记得的故事，是怎么在那十年里被写出来的。
+      </p>
+
+      <div class="hero-meta">
+        <div class="hero-meta-item">
+          <span class="label">Subject</span>
+          <span class="value">90s Pop Culture</span>
+        </div>
+        <div class="hero-meta-item">
+          <span class="label">Lens</span>
+          <span class="value">Cross-Regional</span>
+        </div>
+        <div class="hero-meta-item">
+          <span class="label">Length</span>
+          <span class="value">Deep Dive</span>
+        </div>
+        <div class="hero-meta-item">
+          <span class="label">Audience</span>
+          <span class="value">The Curious</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stamp">
+    DEEP<br>
+    <span class="stamp-big">Dive</span>
+    RESEARCH REPORT
+  </div>
+
+  <div class="hero-bottom">
+    <span>Compiled April 2026 · Singapore</span>
+    <span class="title-seal">— for Ricky 袁泽潭 —</span>
+    <span>Printed on digital paper</span>
+  </div>
+</section>
+
+<!-- ════════════════════════════════
+     TABLE OF CONTENTS
+     ════════════════════════════════ -->
+<section class="toc" id="toc">
+  <div class="toc-header">
+    <h2 class="toc-title">目录 <span class="ital">Contents</span></h2>
+    <span class="toc-count">五章 + 附录 · 约 20,000 字 · 60 分钟深读</span>
+  </div>
+
+  <ul class="toc-list">
+    <li class="toc-item"><a href="#chapter-1">
+      <span class="toc-num">01</span>
+      <div>
+        <div class="toc-name">90 年代全景 — 八个地域的并行发展与关系图谱
+          <span class="toc-en">The Decade in Full View · A Relational Map</span>
+        </div>
+      </div>
+      <span class="toc-tag">Overview</span>
+      <span class="toc-page">P. 01</span>
+    </a></li>
+    <li class="toc-item"><a href="#chapter-2">
+      <span class="toc-num">02</span>
+      <div>
+        <div class="toc-name">1994 — 流行文化史上最神奇的一年
+          <span class="toc-en">The Miracle Year of Pop Culture</span>
+        </div>
+      </div>
+      <span class="toc-tag">Cross-Genre</span>
+      <span class="toc-page">P. 10</span>
+    </a></li>
+    <li class="toc-item"><a href="#chapter-3">
+      <span class="toc-num">03</span>
+      <div>
+        <div class="toc-name">1997 后香港电影人才的全球扩散地图
+          <span class="toc-en">The Hong Kong Diaspora, 1997 Onwards</span>
+        </div>
+      </div>
+      <span class="toc-tag">Industry</span>
+      <span class="toc-page">P. 24</span>
+    </a></li>
+    <li class="toc-item"><a href="#chapter-4">
+      <span class="toc-num">04</span>
+      <div>
+        <div class="toc-name">日剧 VCD 与东南亚审美代际的形成
+          <span class="toc-en">J-Drama, the VCD, and Southeast Asian Taste</span>
+        </div>
+      </div>
+      <span class="toc-tag">Consumer</span>
+      <span class="toc-page">P. 36</span>
+    </a></li>
+    <li class="toc-item"><a href="#chapter-5">
+      <span class="toc-num">05</span>
+      <div>
+        <div class="toc-name">结语 — 三条线索如何汇合
+          <span class="toc-en">Why These Three Threads Matter Together</span>
+        </div>
+      </div>
+      <span class="toc-tag">Synthesis</span>
+      <span class="toc-page">P. 46</span>
+    </a></li>
+    <li class="toc-item"><a href="#chapter-6">
+      <span class="toc-num">06</span>
+      <div>
+        <div class="toc-name">附录 · 观看指南 — 每部作品的 JustWatch SG 直连
+          <span class="toc-en">Appendix · Watch Guide with Singapore Streaming Links</span>
+        </div>
+      </div>
+      <span class="toc-tag">Watch Guide</span>
+      <span class="toc-page">P. 50</span>
+    </a></li>
+  </ul>
+</section>
+
+<!-- ════════════════════════════════
+     CHAPTER 01 — THE DECADE IN FULL VIEW
+     ════════════════════════════════ -->
+<section class="chapter" id="chapter-1">
+  <div class="chapter-num">01</div>
+  <div class="chapter-header">
+    <span class="chapter-tag">CHAPTER 01 · OVERVIEW</span>
+    <h2 class="chapter-title">90 年代全景 — <span class="ital">八个地域</span><br>的并行发展与关系图谱</h2>
+    <p class="chapter-subtitle">The Decade in Full View. A relational map of parallel cultural movements across eight regions, and the invisible threads that tied them together.</p>
+
+    <p class="chapter-lede">
+      <span class="first-letter">1</span>990 年代是一个很难在事后用单一叙事概括的十年。柏林墙倒下、苏联解体、香港回归、亚洲金融危机、互联网诞生、<strong>Nirvana 的 Cobain 自杀、Princess Diana 车祸遇难</strong>——这些一代人的标志性事件全部集中在同一个十年。本章不聚焦于某一年或某一地，而是把 90 年代当作一个整体来看：<strong>同一时间里，不同地域在做什么？他们看见彼此了吗？他们互相借鉴了什么？</strong>这张"全景关系图"是后面四个深度章节的共同底图——只有先看到全景，才能理解 1994 的神迹、1997 的扩散、VCD 的跨境传播为什么能发生在彼此之间。
+    </p>
+  </div>
+
+  <!-- PHASES -->
+  <div class="section">
+    <div class="section-label">01 · 三个阶段</div>
+    <h3 class="section-title">十年可以<span class="ital">分成三段</span></h3>
+    <p class="section-intro">如果把 90 年代看作一部三幕剧——<strong>序曲、爆发、分化</strong>——那么每一幕都有非常清晰的"启幕事件"和"闭幕事件"。每个地区都同步经历着类似的三段节奏，虽然表现形式完全不同。</p>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-num">I</div>
+        <h4 class="card-title">序曲 · 后冷战的宿醉</h4>
+        <span class="card-title-en">Phase I · 1989—1993</span>
+        <div class="card-meta">关键词：意识形态真空</div>
+        <p class="card-desc"><strong>启幕：</strong>1989 柏林墙倒塌 / 天安门事件 / 日本泡沫顶峰 / Seinfeld 首播。<br><br><strong>闭幕：</strong>1993 苏联解体完成 / 克林顿上任 / Grunge 主导 MTV / 日剧东京爱情故事。<br><br>这个阶段大家都还在消化"历史终结论"，没人知道下一套主导叙事是什么。<strong>文化上充满了怀疑、嘲讽、消极、内省</strong>——Grunge、Kurt Cobain、《Se7en》《Pulp Fiction》剧本开始写作的那种气质。</p>
+      </div>
+      <div class="card">
+        <div class="card-num">II</div>
+        <h4 class="card-title">爆发 · 黄金期</h4>
+        <span class="card-title-en">Phase II · 1994—1996</span>
+        <div class="card-meta">关键词：多线并爆</div>
+        <p class="card-desc"><strong>启幕：</strong>1994 Cobain 自杀 / Britpop 诞生 / 1994 年"神迹"全球铺开 / 第五代导演全球化。<br><br><strong>闭幕：</strong>1996《悠长假期》席卷亚洲 / PlayStation 占领日本 / Trainspotting 定义 Cool Britannia。<br><br>三年里全世界的流行文化工业同时进入最高产量状态。<strong>X 世代创作者（30 岁上下）全员进入巅峰</strong>。这也是冷战后第一次大家都觉得"未来会更好"的乐观主义阶段。</p>
+      </div>
+      <div class="card">
+        <div class="card-num">III</div>
+        <h4 class="card-title">分化 · 数字化前夜</h4>
+        <span class="card-title-en">Phase III · 1997—1999</span>
+        <div class="card-meta">关键词：崩塌 + 互联网</div>
+        <p class="card-desc"><strong>启幕：</strong>1997 香港回归 / 戴安娜王妃遇难 / 亚洲金融危机 / Titanic 上映。<br><br><strong>闭幕：</strong>1999《The Matrix》/《Fight Club》/ Napster 上线 / 千禧虫恐慌 / PlayStation 2 发布会。<br><br>亚洲金融危机摧毁了整个东亚的文化工业节奏。<strong>互联网开始重写一切游戏规则</strong>。这三年的文化作品普遍带有一种"危机 + 预感"的气质——我们即将进入的世界将与之前彻底不同。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- REGIONS OVERVIEW -->
+  <div class="section">
+    <div class="section-label">02 · 八个地域</div>
+    <h3 class="section-title">同一个十年，<span class="ital">八种完全不同</span>的故事</h3>
+    <p class="section-intro">以下八个地域在 90 年代的文化走向各自独立，但又通过技术、影展、介质、盗版、移民互相连接。把它们并列起来看，才能看到这个十年真正的密度。</p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th style="width:10%;">地域</th>
+          <th style="width:22%;">核心走向</th>
+          <th style="width:35%;">代表作品 / 人物</th>
+          <th style="width:33%;">十年底色</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>🇺🇸 美国</strong></td>
+          <td>Grunge → Britpop 反制 → Hip-Hop 黄金时代 → Teen Pop；好莱坞大片工业化；独立电影借 Sundance / Miramax 崛起</td>
+          <td>Nirvana、Tarantino、Spielberg、Tupac / Biggie、Friends、ER、Seinfeld、Sopranos (1999)；Beastie Boys、Dr. Dre《The Chronic》</td>
+          <td>冷战胜者的信心 + 种族紧张（Rodney King 1992、O.J. Simpson 1995）+ 克林顿年代的科技乐观主义。文化上同时有最乐观和最虚无的作品。</td>
+        </tr>
+        <tr>
+          <td><strong>🇬🇧 英国</strong></td>
+          <td>Grunge 反制 → Britpop 崛起 → Cool Britannia → New Labour；Young British Artists (YBA)；电视喜剧黄金期</td>
+          <td>Blur、Oasis、Pulp、Radiohead；Trainspotting (1996)、Four Weddings (1994)；Damien Hirst、Tracey Emin；Mr. Bean、The Office 前身</td>
+          <td><strong>"英国再次酷起来"</strong>的集体信心。Tony Blair 1997 当选首相时把 Oasis 的 Noel Gallagher 请进唐宁街 10 号，这是 Cool Britannia 的象征瞬间。</td>
+        </tr>
+        <tr>
+          <td><strong>🇯🇵 日本</strong></td>
+          <td>泡沫破裂后的"失落十年" → trendy drama 转向内心叙事 → J-Pop 小室哲哉工业化 → 动漫黄金期 (EVA 1995)</td>
+          <td>东京爱情故事、悠长假期、Oshin、GTO、Beach Boys；小室家族、安室奈美惠、宇多田光 (1998)；新世纪福音战士、宫崎骏《幽灵公主》(1997)；村上春树《挪威的森林》全球化</td>
+          <td><strong>"经济撤退 + 文化爆发"的悖论</strong>。正因为经济不好，日本创作者转向内心、转向个人、转向日常生活——这恰恰催生了全世界最细腻的 trendy drama 和 anime。</td>
+        </tr>
+        <tr>
+          <td><strong>🇭🇰 香港</strong></td>
+          <td>新浪潮第二期巅峰 → 1997 回归 + 金融危机双击 → 电影工业产量腰斩 → 人才开始向外扩散</td>
+          <td>王家卫《重庆森林》《花样年华》；吴宇森《英雄本色》《辣手神探》；周星驰、周润发、梅艳芳、张国荣；Beyond 黄家驹 (1993 去世)；杜琪峰银河映像 (1996 创立)</td>
+          <td>前半段"东方好莱坞"的顶峰自信，后半段"殖民时代结束"的哀伤 + 产业崩塌。<strong>香港 90 年代是"辉煌和崩溃同一年发生"</strong>的罕见样本。</td>
+        </tr>
+        <tr>
+          <td><strong>🇹🇼 台湾</strong></td>
+          <td>新电影后期 → 李安出道 → 侯孝贤 / 杨德昌走向国际 → 华语流行音乐中心 → 李登辉本土化运动</td>
+          <td>李安"父亲三部曲"；杨德昌《牯岭街少年杀人事件》(1991)、《麻将》(1996)；侯孝贤《戏梦人生》(1993)；F4 (1999)、五月天；飞碟 / 滚石唱片时代</td>
+          <td>"华语世界的文化交叉口"。台湾既是华语流行音乐的工业中心，也是日剧 VCD 的字幕组源头，还出了李安这位真正跨越好莱坞的华语导演。<strong>台湾是 90 年代华语文化的"转码器"</strong>。</td>
+        </tr>
+        <tr>
+          <td><strong>🇨🇳 中国大陆</strong></td>
+          <td>第五代导演 (张艺谋 / 陈凯歌) 国际化 → 独立电影第六代萌芽 → 摇滚三巨头 → 春晚时代 → 改革开放加速</td>
+          <td>张艺谋《活着》《大红灯笼》；陈凯歌《霸王别姬》(1993 戛纳金棕榈)；贾樟柯出道 (1997《小武》)；崔健、窦唯、张楚、何勇 "摇滚三巨头+1"；春晚赵本山时代；《还珠格格》(1998) 全亚洲轰动</td>
+          <td><strong>"体制内 + 体制外"双轨制</strong>。第五代在体制内赢奥斯卡 / 戛纳，第六代在体制外偷偷拍地下电影。摇滚乐短暂爆发又被压制。中国文化工业在 90 年代储备了大量未来 20 年的能量。</td>
+        </tr>
+        <tr>
+          <td><strong>🇰🇷 韩国</strong></td>
+          <td>金大中政府 1998 年后把文化产业定为战略国策 → 为 2000 年后韩流爆发秘密筹备 → 朴赞郁 / 奉俊昊出道</td>
+          <td>朴赞郁、李沧东早期作品；H.O.T.、Seo Taiji and Boys (改写了 K-Pop DNA)；《八月照相馆》(1998)、《生死谍变》(1999)</td>
+          <td>整个 90 年代韩国文化工业在"蓄势"——看起来还没爆发，但国家战略级投入已经开始。<strong>1997 金融危机反而加速了韩国政府"用文化内容对外换外汇"的国策</strong>，这个决定在 2003 年《大长今》出来时才看见回报。</td>
+        </tr>
+        <tr>
+          <td><strong>🇪🇺 欧洲大陆</strong></td>
+          <td>法国：Luc Besson 商业化 + 老派作者派坚持；丹麦：Dogme 95 宣言 (1995)；意大利：《Cinema Paradiso》在北美长尾；德国：统一后的身份寻找</td>
+          <td>Luc Besson《Léon》(1994)；Lars von Trier《破浪》(1996)；Roberto Benigni《美丽人生》(1997)；Krzysztof Kieślowski《蓝 / 白 / 红》三部曲 (1993-94)</td>
+          <td>欧洲在 90 年代呈现"极度两极化"：一端是 Besson 式的好莱坞化商业大片，另一端是 Lars von Trier 的 Dogme 95 那种极端极简的"反好莱坞"实验。<strong>欧洲文化在 90 年代完成了对好莱坞的最后一次象征性反抗</strong>。</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- PULL QUOTE -->
+  <div class="pullquote">
+    这八个地域在同一个十年里互相看得见、听得见、读得到——但彼此的叙事是完全分岔的。1990 年代是全球流行文化"最后一次多极并立"的十年。之后随着 Netflix / Spotify / TikTok 的全球算法推送，这种多样性再也回不来了。
+    <cite>— 本章核心命题</cite>
+  </div>
+
+  <!-- RELATIONAL MAP -->
+  <div class="section">
+    <div class="section-label">03 · 关系图谱</div>
+    <h3 class="section-title">跨地域的<span class="ital">五条看不见的线</span></h3>
+    <p class="section-intro">把八个地域连起来看，90 年代其实有几条贯穿全球的文化暗线。它们不是官方合作，也不是市场营销，而是<strong>创作者之间的偷师、介质的意外传播、影展的跨洋对话</strong>——这些细小的连接线累积起来，改写了整个 10 年。</p>
+
+    <div class="flow-diagram">
+      ─────────────────────────────────────────────────────────────────
+      线 ①    独立电影的跨洋对话    SUNDANCE ↔ HONG KONG
+      ─────────────────────────────────────────────────────────────────
+
+          Sundance 电影节 (Park City, Utah)
+                     │
+                     ▼ 发掘
+          Tarantino 《Reservoir Dogs》(1992)
+                     │
+                     ▼ 参照
+          Miramax 买下发行权 → Pulp Fiction (1994)
+                     │
+                     ├── 王家卫《重庆森林》 Tarantino 亲自买美发行权 (1995)
+                     ├── Kevin Smith《Clerks》信用卡电影
+                     └── Sam Raimi / Coen Brothers 等作者派崛起
+
+          同时在香港：
+          王家卫、杜琪峰、许鞍华、陈可辛 第二次新浪潮
+          他们和 Tarantino 彼此看片、彼此抄作业
+
+    ─────────────────────────────────────────────────────────────────
+      线 ②    日剧 → 东南亚    UNAUTHORIZED ASIAN FLOW
+    ─────────────────────────────────────────────────────────────────
+
+          Fuji TV 月九剧场（东京）
+                     │ 周一播出
+                     ▼
+          台湾字幕组 3 天内压 VCD
+                     │
+                     ▼
+          香港 / 深圳 / 广州压盘厂批量生产
+                     │
+                     ▼
+          新加坡 · 马来西亚 · 印尼 · 泰国 · 越南
+          华人区与年轻中产同步消费
+
+          完全绕开日本官方版权体系
+          塑造了整整一代东南亚中产的都市审美
+
+    ─────────────────────────────────────────────────────────────────
+      线 ③    英美摇滚战争    GRUNGE vs BRITPOP
+    ─────────────────────────────────────────────────────────────────
+
+          西雅图 Grunge (1989-1994)
+          Nirvana · Pearl Jam · Soundgarden · Alice in Chains
+                     │
+                     ▼ 1994.4 Cobain 自杀
+                     │
+          英国 Britpop 接管欧洲话语权
+          Blur · Oasis · Pulp · Suede
+          (明确的"反美、反 Grunge"姿态)
+                     │
+                     ▼
+          Cool Britannia → Tony Blair New Labour (1997)
+          英国流行文化重新输出全球
+
+    ─────────────────────────────────────────────────────────────────
+      线 ④    动作工艺的东西方融合    HK MARTIAL ARTS → HOLLYWOOD
+    ─────────────────────────────────────────────────────────────────
+
+          香港动作指导工艺 (1960-1990 积累)
+          袁和平、元奎、程小东、洪金宝、成家班
+                     │
+                     ▼ 1993-1999
+          吴宇森、成龙、李连杰、袁和平陆续赴美
+                     │
+                     ▼
+          The Matrix (1999) 袁和平指导
+          Rush Hour (1998) 成龙封神
+          Crouching Tiger (2000) 袁和平指导 + 周润发主演
+                     │
+                     ▼
+          "动作指导" 成为好莱坞独立工种
+          延续至今日 Marvel / DC / Netflix 所有动作片
+
+    ─────────────────────────────────────────────────────────────────
+      线 ⑤    华语导演的国际影展路径    FESTIVALS AS LAUNCHPAD
+    ─────────────────────────────────────────────────────────────────
+
+          陈凯歌《霸王别姬》戛纳金棕榈 (1993)
+                     │
+                     ▼ 打开国际发行通道
+          张艺谋《活着》戛纳评审团大奖 (1994)
+          李安《饮食男女》奥斯卡外语片提名 (1994)
+          王家卫《春光乍泄》戛纳最佳导演 (1997)
+                     │
+                     ▼
+          华语导演进入全球艺术电影体系
+          为后来《卧虎藏龙》(2000)、《英雄》(2002) 的商业成功铺路
+
+    ─────────────────────────────────────────────────────────────────
+    </div>
+
+    <p>这五条线不是孤立的。<strong>它们在 1994-1997 这三年里密集交叉</strong>：Tarantino 买下王家卫的美国版权（线①）时，日剧 VCD 正好经过香港传向东南亚（线②）；Cobain 自杀（线③）让 Britpop 崛起的同月，张艺谋《活着》在戛纳（线⑤）；袁和平还没被好莱坞挖角（线④），但 Matrix 的剧本已经在写了。</p>
+  </div>
+
+  <!-- TECH SUBSTRATE -->
+  <div class="section">
+    <div class="section-label">04 · 技术底座</div>
+    <h3 class="section-title">所有这一切<span class="ital">共同踩在</span>的几个技术节点</h3>
+    <p class="section-intro">90 年代的文化爆发不是孤立现象。它踩在几个刚成熟又尚未被互联网颠覆的技术节点上——这些节点既赋能了创作者，又给了观众消费的渠道。</p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th style="width:18%;">技术 / 介质</th>
+          <th style="width:18%;">普及年份</th>
+          <th style="width:64%;">它赋能了什么</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>CD (Compact Disc)</strong></td>
+          <td>1990-1994 全面取代磁带</td>
+          <td>音乐动态范围 + 制作精度提升一个数量级。<strong>一张 CD 可以容纳 74 分钟音频 + 艺术性专辑设计</strong>——Parklife、Definitely Maybe、Illmatic 都是为 CD 时代设计的"完整听感作品"，之前的磁带时代做不到。</td>
+        </tr>
+        <tr>
+          <td><strong>MTV / 音乐录影带</strong></td>
+          <td>1987 开始，90 年代顶峰</td>
+          <td>MTV 让全球年轻人第一次"同步"看到美国音乐文化。<strong>Grunge、Hip-Hop、Britpop 的传播都依赖 MTV 播放轮次</strong>。MTV Asia 1991 年在新加坡设立总部，把 90 年代的流行音乐同步推送给整个亚洲。</td>
+        </tr>
+        <tr>
+          <td><strong>VHS (家庭录像带)</strong></td>
+          <td>已普及 10 年</td>
+          <td>VHS 让"重看"成为可能。《Shawshank Redemption》1994 年票房失败，靠 VHS 和 TNT 有线电视反复重播变成了 IMDb 最高分。日本 trendy drama 通过 VHS 传到台湾、再从台湾传到东南亚。</td>
+        </tr>
+        <tr>
+          <td><strong>VCD (Video CD)</strong></td>
+          <td>1993 诞生，1995-2005 亚洲黄金期</td>
+          <td>亚洲下沉市场的"DVD 替代品"。播放机便宜、内容可无限复制、文件小。<strong>直接促成了日剧 / 港片在东南亚的跨境传播</strong>（详见第 04 章）。</td>
+        </tr>
+        <tr>
+          <td><strong>卫星电视</strong></td>
+          <td>1991-1996 亚洲大铺开</td>
+          <td>香港 STAR TV、新加坡 MediaCorp、马来西亚 Astro 陆续开通。<strong>让 MTV、CNN、BBC、Discovery 等全球频道进入亚洲家庭</strong>。1993 年台湾解除"日语节目禁令"让日剧合法进入台湾电视，也是卫星普及的副产品。</td>
+        </tr>
+        <tr>
+          <td><strong>PlayStation (1994 日本发售)</strong></td>
+          <td>1995 北美 · 1996 欧洲</td>
+          <td>把游戏从"儿童玩具"推向成年人主流娱乐。<strong>CD 介质的储存量让 RPG 游戏叙事长度提升 10 倍</strong>——Final Fantasy VII (1997) 有 40 小时主线。游戏变成叙事媒介。</td>
+        </tr>
+        <tr>
+          <td><strong>World Wide Web</strong></td>
+          <td>1994 Netscape / 1995 Amazon-Yahoo 成立 / 1998 Google</td>
+          <td>互联网在 90 年代大部分时间是"边缘媒介"，但到 1999 年已经不是。<strong>Napster (1999) 第一次让人们意识到互联网可以彻底颠覆文化消费方式</strong>——虽然颠覆的爆发要到 2000 年代中期。</td>
+        </tr>
+        <tr>
+          <td><strong>Final Cut Pro / Avid</strong></td>
+          <td>1993-1999</td>
+          <td>数字非线性剪辑系统取代胶片剪辑台。<strong>让独立导演用低成本做出和好莱坞一样精细的剪辑</strong>——Sundance 独立电影的技术门槛因此降低。</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <div class="callout-label">KEY INSIGHT · 关键洞察</div>
+      <div class="callout-title">90 年代是<span class="ital">最后一个"介质多元共存"</span>的十年</div>
+      <p>1990 年的客厅里有：磁带随身听、VHS 录像机、CD 机、卫星电视盒、FM 收音机、实体杂志。<strong>每一个介质都承载一种不同的消费方式和审美</strong>——你听磁带的心态和听 CD 的心态不一样，看电视的注意力和看 VHS 的注意力也不一样。</p>
+      <p style="margin-top: 16px;">到 2010 年，这些介质都被智能手机和流媒体统一了。<strong>今天我们怀念 90 年代，很大一部分是在怀念那种"不同介质有不同质感"的物理世界</strong>——那个世界里的文化作品是为特定介质设计的，而不是为算法设计的。</p>
+    </div>
+  </div>
+
+  <!-- CONCLUDING SECTION -->
+  <div class="section">
+    <div class="section-label">05 · 本章小结</div>
+    <h3 class="section-title">带着这张地图<span class="ital">进入后面的章节</span></h3>
+
+    <p>这张 90 年代全景图给后面的深度章节提供了坐标系。接下来我们会放大三个特别的切片：</p>
+
+    <p><strong>第 02 章 "1994 神迹年"</strong> 是本章"爆发期 Phase II"的起点——我们会看到全景图上这一年为什么密度最高，为什么全球八个地域几乎同时产出代表作。</p>
+
+    <p><strong>第 03 章 "香港扩散"</strong> 是本章关系图谱里"线 ①"和"线 ④"的特写——一个被迫的产业崩塌如何把人才散播到全球，在好莱坞、大陆、东南亚都留下了印记。</p>
+
+    <p><strong>第 04 章 "日剧 VCD"</strong> 是本章关系图谱里"线 ②"的详细展开——一条<strong>完全由消费者自发、绕开版权体系</strong>的跨境传播链路，如何塑造了整整一代东南亚观众的审美。</p>
+
+    <p><strong>第 05 章 "合并视图"</strong> 把这三条线重新缝合起来——看它们如何在同一个十年里互相锁定、共同作用。</p>
+
+    <div class="pullquote">
+      把 90 年代当作一个有机整体来看，你会发现所有后来被称作"经典"的东西，其实都在这张地图的某个节点上。现在，让我们开始放大每一个节点。
+      <cite>— 本章结语 · 准备进入第 02 章</cite>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════
+     CHAPTER 02 — 1994 THE MIRACLE YEAR
+     ════════════════════════════════ -->
+<section class="chapter" id="chapter-2">
+  <div class="chapter-num">02</div>
+  <div class="chapter-header">
+    <span class="chapter-tag">CHAPTER 02 · CROSS-GENRE</span>
+    <h2 class="chapter-title">1994 — <span class="ital">流行文化史上</span><br>最神奇的一年</h2>
+    <p class="chapter-subtitle">The miracle year. One calendar, a dozen revolutions, and a pop-culture density the world has not matched since.</p>
+
+    <p class="chapter-lede">
+      <span class="first-letter">如</span>果要在 20 世纪下半叶里挑一个"一切同时发生"的年份，1994 年几乎是唯一的答案。这一年里，<strong>好莱坞同时交出了《Pulp Fiction》《Forrest Gump》《The Lion King》《The Shawshank Redemption》《Léon》《Speed》</strong>；<strong>美剧诞生了《Friends》《ER》</strong>——两部后来主宰了未来二十年电视的旗舰；<strong>英国 Britpop 在 Kurt Cobain 自杀的同一个月爆发</strong>，Oasis 和 Blur 双双交出处女作级的巅峰专辑；<strong>Hip-Hop 进入"黄金时代"</strong>，Nas 的《Illmatic》和 Biggie 的《Ready to Die》同年面世；<strong>索尼 PlayStation 在日本发售</strong>，永久改写游戏工业；<strong>王家卫的《重庆森林》、张艺谋的《活着》、李安的《饮食男女》</strong>同时登上国际影展；<strong>亚马逊、Yahoo、Netscape</strong> 相继诞生。如果说流行文化有"密度最高的一年"，1994 年是唯一的候选人。
+    </p>
+  </div>
+
+  <!-- SECTION: WHY 1994 -->
+  <div class="section">
+    <div class="section-label">01 · 为什么是 1994</div>
+    <h3 class="section-title">一个<span class="ital">宏观条件</span>完美的节点</h3>
+
+    <p>1994 年之所以成为全球流行文化的临界点，不是偶然。它处在几条历史曲线的交汇处：</p>
+
+    <p><strong>第一，冷战红利集中释放。</strong>苏联解体于 1991 年，1994 年正是后冷战乐观主义的顶峰——全球化加速、国际资本自由流动、意识形态紧张解除。创作者从未如此自由地跨国流动与互相取经。</p>
+
+    <p><strong>第二，技术拐点。</strong>家庭 VHS 录像带已经普及十年，CD 在 1994 年正式超越磁带成为主流音乐介质；PlayStation 发售；互联网虽然尚未普及，但同年 Yahoo 成立、Netscape 发布、Amazon 在西雅图车库里诞生——技术底座已经铺好，只差三四年时间就会把整个产业推进数字化。</p>
+
+    <p><strong>第三，创作者集体进入黄金期。</strong>X 世代（出生于 1965-1980）在 1994 年正好 25-35 岁，这是一个创作者最高产的年龄区间。Tarantino 31 岁，Fincher 32 岁，Damon Albarn 26 岁，王家卫 36 岁，宫崎骏已是大师，Nirvana 的 Cobain 27 岁——<strong>人类流行文化史上最密集的一批天才恰好同时进入创作巅峰</strong>。</p>
+
+    <p><strong>第四，工业体制尚未被科技公司并购。</strong>好莱坞六大还是独立公司、唱片业还是艺人主导、电视还是编剧主导——创作者的决策权在 1994 年达到历史最高点，之后随着数字化和算法的崛起逐步让渡给平台。</p>
+
+    <!-- stats -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-label">1994 年全球票房</div>
+        <div class="stat-value">$774<span class="small">M</span></div>
+        <div class="stat-desc">《The Lion King》首轮全球票房，动画电影历史纪录保持 9 年</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">IMDB 史上最高分</div>
+        <div class="stat-value">#1</div>
+        <div class="stat-desc">《The Shawshank Redemption》—— 至今 IMDb Top 250 第一名</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">英国首周销量</div>
+        <div class="stat-value">15<span class="small">M+</span></div>
+        <div class="stat-desc">Oasis《Definitely Maybe》全球累计销量，英国首周最快的处女作纪录</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">美国黄金档首播</div>
+        <div class="stat-value">2<span class="small">部</span></div>
+        <div class="stat-desc">《Friends》9 月 + 《ER》9 月 · 同一周诞生，都播了十年以上</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- THE CALENDAR -->
+  <div class="section">
+    <div class="section-label">02 · 月历重建</div>
+    <h3 class="section-title">1994 年 · <span class="ital">月度事件密度图</span></h3>
+    <p class="section-intro">把 1994 年按月拆开来看，你会看到一件事：<strong>几乎没有一个月是"没事发生"的</strong>。尤其 4 月、9 月、10 月，任何一个月的文化事件密度都能抵一般年份的全年。</p>
+
+    <div class="calendar-grid">
+      <div class="month-cell">
+        <div class="month-num">01</div>
+        <div class="month-name">January</div>
+        <ul class="event-list">
+          <li><strong>Beavis &amp; Butt-Head</strong> 席卷 MTV</li>
+          <li>《Ace Ventura》上映，Jim Carrey 进入 A 级</li>
+          <li>Oasis 进录音室录制《Definitely Maybe》</li>
+        </ul>
+      </div>
+      <div class="month-cell highlight">
+        <div class="month-num">04</div>
+        <div class="month-name">April · Pivot</div>
+        <ul class="event-list">
+          <li><strong>Kurt Cobain 自杀</strong> (4/5) · Grunge 时代终结</li>
+          <li><strong>Blur《Parklife》发行</strong> (4/25) · Britpop 奠基</li>
+          <li>Oasis 发行出道单曲《Supersonic》(4/11)</li>
+          <li>Amazon 前身成立于西雅图</li>
+        </ul>
+      </div>
+      <div class="month-cell">
+        <div class="month-num">06</div>
+        <div class="month-name">June</div>
+        <ul class="event-list">
+          <li><strong>《The Lion King》</strong>首映 (6/15)</li>
+          <li><strong>《Speed》</strong>上映 (6/10) · 基努·里维斯封神</li>
+          <li>Nas《Illmatic》压轴发行 (4 月发行，6 月入榜)</li>
+          <li>Pierce Brosnan 确认为下任 James Bond</li>
+        </ul>
+      </div>
+      <div class="month-cell highlight">
+        <div class="month-num">07</div>
+        <div class="month-name">July · Peak Summer</div>
+        <ul class="event-list">
+          <li><strong>《Forrest Gump》</strong>上映 (7/6)</li>
+          <li>Beastie Boys《Ill Communication》</li>
+          <li>法国世界杯开打，Bebeto 摇篮庆祝走红全球</li>
+          <li>宫崎骏《红猪》在日本海外上映扩大</li>
+        </ul>
+      </div>
+      <div class="month-cell">
+        <div class="month-num">08</div>
+        <div class="month-name">August</div>
+        <ul class="event-list">
+          <li><strong>Oasis《Definitely Maybe》</strong> (8/29) · 英国史上最快出道专辑</li>
+          <li>Woodstock '94 音乐节举办 · 反叛与商业化争议</li>
+          <li>《Natural Born Killers》· Tarantino 编剧</li>
+        </ul>
+      </div>
+      <div class="month-cell highlight">
+        <div class="month-num">09</div>
+        <div class="month-name">September · TV Big Bang</div>
+        <ul class="event-list">
+          <li><strong>《Friends》首播</strong> (9/22) · NBC Must-See TV</li>
+          <li><strong>《ER》首播</strong> (9/19) · 医疗剧工业标准</li>
+          <li>《My So-Called Life》首播 · X 世代青春剧</li>
+          <li><strong>王家卫《重庆森林》</strong>香港上映</li>
+        </ul>
+      </div>
+      <div class="month-cell">
+        <div class="month-num">10</div>
+        <div class="month-name">October · Cinema's Month</div>
+        <ul class="event-list">
+          <li><strong>《Pulp Fiction》</strong>北美上映 (10/14)</li>
+          <li><strong>《The Shawshank Redemption》</strong> (10/14) · 同日！</li>
+          <li>《Hoop Dreams》纪录片轰动圣丹斯</li>
+          <li>Biggie《Ready to Die》登上全美销量榜</li>
+        </ul>
+      </div>
+      <div class="month-cell">
+        <div class="month-num">11</div>
+        <div class="month-name">November</div>
+        <ul class="event-list">
+          <li><strong>《Interview with the Vampire》</strong> · Brad Pitt / Tom Cruise</li>
+          <li>《Star Trek: Generations》电影版</li>
+          <li>Netscape Navigator 1.0 发布</li>
+        </ul>
+      </div>
+      <div class="month-cell highlight">
+        <div class="month-num">12</div>
+        <div class="month-name">December · Gaming Quake</div>
+        <ul class="event-list">
+          <li><strong>索尼 PlayStation 在日本发售</strong> (12/3)</li>
+          <li><strong>Final Fantasy VI</strong> 北美上架 · JRPG 黄金时代</li>
+          <li>《Léon: The Professional》在法国上映</li>
+          <li>李安《饮食男女》北美上映</li>
+        </ul>
+      </div>
+      <div class="month-cell">
+        <div class="month-num">+</div>
+        <div class="month-name">Year-long</div>
+        <ul class="event-list">
+          <li><strong>张艺谋《活着》</strong>· 戛纳评审团大奖</li>
+          <li><strong>陈凯歌《霸王别姬》</strong>国际长尾发行</li>
+          <li>Yahoo! 在斯坦福宿舍成立</li>
+          <li>DVD 技术公开发布（Toshiba vs Sony 格式之争）</li>
+        </ul>
+      </div>
+      <div class="month-cell">
+        <div class="month-num">+</div>
+        <div class="month-name">Asia Parallel</div>
+        <ul class="event-list">
+          <li>周星驰《九品芝麻官》· 港式无厘头巅峰</li>
+          <li>松隆子出道（《悠长假期》前传）</li>
+          <li>小室哲哉音乐帝国开始全面接管日本流行</li>
+          <li>安室奈美惠独立发展前夜</li>
+        </ul>
+      </div>
+      <div class="month-cell">
+        <div class="month-num">+</div>
+        <div class="month-name">Tech Underground</div>
+        <ul class="event-list">
+          <li>Jeff Bezos 从 D.E.Shaw 辞职</li>
+          <li>Jerry Yang、David Filo 创办 Yahoo!</li>
+          <li>Marc Andreessen 成立 Netscape</li>
+          <li>Pixar 开始制作《Toy Story》</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- PULL QUOTE 1 -->
+  <div class="pullquote">
+    1994 年是人类历史上最后一个"流行文化同时在所有介质、所有地区、所有流派里集中爆发"的年份。之后的每一年都只是它的余波。
+    <cite>— 编者观察</cite>
+  </div>
+
+  <!-- MOVIES -->
+  <div class="section">
+    <div class="section-label">03 · 电影轴</div>
+    <h3 class="section-title">同一年，<span class="ital">四部传世电影</span>同月上映</h3>
+    <p class="section-intro"><strong>1994 年 10 月 14 日</strong>——这一天《Pulp Fiction》和《The Shawshank Redemption》在北美同日公映。两个月前，《Forrest Gump》正在横扫票房（最终全球 6.78 亿美元）；六月份，《The Lion King》已经刷新了动画电影的所有纪录。一年之内，好莱坞奉献了<strong>四部在未来 30 年里依然被反复重看</strong>的作品——这是制度和运气同时到位的结果。</p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th style="width:18%;">作品</th>
+          <th style="width:12%;">导演</th>
+          <th style="width:13%;">票房 / 成就</th>
+          <th style="width:57%;">为什么它重要</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Pulp Fiction</strong><br><em>低俗小说</em></td>
+          <td>Quentin Tarantino</td>
+          <td>戛纳<span class="tag red">金棕榈</span><br>$213M 全球</td>
+          <td><strong>重新定义了独立电影的商业地位</strong>。非线性叙事、流行乐作为叙事 B 面、黑色幽默 + 暴力美学——此后 30 年好莱坞的犯罪片都在模仿这套语法。<strong>也正式确立了米拉麦克斯和 Harvey Weinstein 的奥斯卡操盘能力</strong>，改变了奥斯卡公关生态。</td>
+        </tr>
+        <tr>
+          <td><strong>The Shawshank Redemption</strong><br><em>肖申克的救赎</em></td>
+          <td>Frank Darabont</td>
+          <td>票房失败<br>IMDb <span class="tag">排名 #1</span></td>
+          <td>首映时几乎扑街，全球票房仅 2800 万美元。但通过 VHS 和 TNT 有线电视反复重播，在 2000 年代末成为 IMDb 最高分——<strong>"反票房的经典"</strong>。它证明了流媒体时代来临前，电影可以靠"家庭录像带 + 口碑"逆袭。</td>
+        </tr>
+        <tr>
+          <td><strong>Forrest Gump</strong><br><em>阿甘正传</em></td>
+          <td>Robert Zemeckis</td>
+          <td>奥斯卡最佳影片<br>$678M 全球</td>
+          <td>美国 20 世纪下半叶集体记忆的"温柔版"。CGI 技术将 Tom Hanks 无缝嵌入肯尼迪、约翰逊、Elvis 等历史影像，<strong>是视觉特效与叙事融合的一个里程碑</strong>。它用一个低智主角承载了美国战后整个反思一代（从越战到艾滋到水门），既感人又避开了政治立场。</td>
+        </tr>
+        <tr>
+          <td><strong>The Lion King</strong><br><em>狮子王</em></td>
+          <td>R. Allers / R. Minkoff</td>
+          <td>奥斯卡最佳原创歌曲<br>$774M 全球</td>
+          <td>迪士尼"文艺复兴"的顶峰。Hans Zimmer 配乐 + Elton John & Tim Rice 歌词 + 莎翁《哈姆雷特》叙事，<strong>它证明了 2D 动画可以媲美真人史诗</strong>。也成了迪士尼后来"百老汇音乐剧反哺"的开端（1997 年登上百老汇至今，已成为史上票房最高的百老汇作品之一）。</td>
+        </tr>
+        <tr>
+          <td><strong>Speed</strong><br><em>生死时速</em></td>
+          <td>Jan de Bont</td>
+          <td>$350M 全球<br>两项奥斯卡（声效）</td>
+          <td>把 Keanu Reeves 和 Sandra Bullock 同时推入 A 级明星。<strong>"一辆公交车时速不能低于 50 英里否则爆炸"</strong>——高概念（high-concept）动作片工业模板的教科书。此后好莱坞大量复制这种"单一高压情境"的动作设定。</td>
+        </tr>
+        <tr>
+          <td><strong>Léon: The Professional</strong><br><em>这个杀手不太冷</em></td>
+          <td>Luc Besson</td>
+          <td>全球长线销售<br>Natalie Portman 出道</td>
+          <td>欧洲对好莱坞的回击。法国导演、Jean Reno 主演、Portman 13 岁出道。<strong>东方式冷峻美学 + 好莱坞节奏</strong>的完美融合，影响了后来所有"孤胆杀手 × 少女"题材（从《Kick-Ass》到《Hit-Girl》到《The Mandalorian》）。</td>
+        </tr>
+        <tr>
+          <td><strong>Natural Born Killers</strong><br><em>天生杀人狂</em></td>
+          <td>Oliver Stone (Tarantino 编剧)</td>
+          <td>争议焦点<br>MTV 式剪辑</td>
+          <td>Tarantino 挂名编剧但与最终版本决裂。Stone 把它拍成了<strong>对美国媒体 sensationalism 的暴力寓言</strong>。MTV 式拼贴剪辑第一次大规模进入剧情长片，直接影响了后来的 Aronofsky、Danny Boyle、甚至 Christopher Nolan 早期风格。</td>
+        </tr>
+        <tr>
+          <td><strong>Clerks</strong><br><em>疯狂店员</em></td>
+          <td>Kevin Smith</td>
+          <td>$27K 预算 / $3M 票房<br>黑白 16mm</td>
+          <td>最重要的"证明"型作品：<strong>27,000 美元（Kevin Smith 的信用卡）可以拍出进入圣丹斯的电影</strong>。直接催生了 2000 年后 mumblecore、YouTube 短片、Netflix 独立电影生态的所有自信。没有 Clerks，就没有后来的 Duplass 兄弟、Safdie 兄弟。</td>
+        </tr>
+        <tr>
+          <td><strong>重庆森林</strong><br><em>Chungking Express</em></td>
+          <td>王家卫 Wong Kar-wai</td>
+          <td>金马奖最佳导演<br>亚洲独立电影母题</td>
+          <td>王家卫在拍《东邪西毒》间隙用 23 天拍出。<strong>王菲 + 梁朝伟 + 林青霞 + 金城武的都市寓言</strong>，杜可风手持摄影 + 跳格拍摄 + 粤语 + 日语 + 英语混合。Tarantino 在美国亲自买下发行权并在 Rolling Thunder 公司发行，<strong>这是王家卫进入美国独立电影殿堂的关键一步</strong>，也让东亚都市美学第一次影响美国独立电影。</td>
+        </tr>
+        <tr>
+          <td><strong>活着</strong><br><em>To Live</em></td>
+          <td>张艺谋 Zhang Yimou</td>
+          <td>戛纳评审团大奖<br>葛优最佳男演员</td>
+          <td>改编自余华同名小说。张艺谋用一个中国普通家庭贯穿国共内战、大跃进、文革、改革开放半世纪。<strong>它在大陆被禁长达数十年</strong>——但通过盗版 VCD / LD 在华语圈广泛流传，成为 90 年代华语电影在国际上的顶峰之一。</td>
+        </tr>
+        <tr>
+          <td><strong>饮食男女</strong><br><em>Eat Drink Man Woman</em></td>
+          <td>李安 Ang Lee</td>
+          <td>奥斯卡最佳外语片提名<br>"父亲三部曲"终章</td>
+          <td>李安"父亲三部曲"(推手 / 喜宴 / 饮食男女) 的最后一部。<strong>以食物承载三个女儿与父亲之间的代际 / 性别 / 文化张力</strong>。次年好莱坞因这部片子把李安挖去拍《Sense and Sensibility》，开启了李安真正的好莱坞之路。</td>
+        </tr>
+        <tr>
+          <td><strong>Four Weddings and a Funeral</strong><br><em>四个婚礼和一个葬礼</em></td>
+          <td>Mike Newell</td>
+          <td>BAFTA 最佳影片<br>英式浪漫喜剧模板</td>
+          <td>Hugh Grant 封神之作。<strong>定义了"英式浪漫喜剧"这个子类型</strong>（Richard Curtis 编剧，后来写了 Notting Hill、Love Actually、About Time）——一种"含蓄、尴尬、怀疑主义、最后被爱击穿"的情感配方，影响了后来整个英国喜剧工业。</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <div class="callout-label">EDITOR'S INSIGHT · 编辑洞察</div>
+      <div class="callout-title"><span class="ital">"同日公映"</span>背后的工业秘密</div>
+      <p><strong>为什么 1994 年 10 月 14 日 Pulp Fiction 和 Shawshank 同日公映？</strong>这不是巧合。1994 年好莱坞六大片厂的排片逻辑还没被数据驱动，每家发行公司的档期经理相对独立。<strong>Miramax（Pulp Fiction）和 Castle Rock（Shawshank）互相不认为对方是直接对手</strong>——一个是分级片黑色喜剧，一个是温情监狱剧。结果 Pulp Fiction 爆火、Shawshank 票房失败，但 30 年后 Shawshank 反超了 Pulp Fiction 的 IMDb 评分。</p>
+      <p style="margin-top:16px;">这个故事的深层意义是：<strong>1994 年是"排片算法"出现之前的最后一年</strong>——之后 Variety、Box Office Mojo、再之后 Netflix 的数据系统彻底改变了电影档期逻辑，今天再也不可能出现两部传世经典在同一天公映。</p>
+    </div>
+  </div>
+
+  <!-- MUSIC -->
+  <div class="section">
+    <div class="section-label">04 · 音乐轴</div>
+    <h3 class="section-title">Cobain 死后，<span class="ital">整个乐坛重排了位置</span></h3>
+    <p class="section-intro">1994 年 4 月 5 日，Kurt Cobain 在西雅图自杀。这一事件不仅标志着 Grunge 时代的终结，更<strong>直接打开了其他流派接管主流的通道</strong>——英国 Britpop、美国 Hip-Hop 黄金时代、电子音乐地下，三条线同时在这一年抢占空位。</p>
+
+    <div class="two-col">
+      <div>
+        <div class="col-label">英国 · BRITPOP 爆发</div>
+        <p><strong>Blur《Parklife》</strong>(4/25) 发行，比 Cobain 之死晚 20 天。专辑在 Kurt Cobain 死后的文化真空期直接抢占了欧洲年轻人的注意力。Damon Albarn 早在 1990 年就放话："我们的第三张专辑出来时，我们会成为 90 年代最具代表性的英国乐队"——Parklife 兑现了这个承诺。</p>
+        <p><strong>Oasis《Definitely Maybe》</strong>(8/29) 是英国历史上卖得最快的出道专辑。Gallagher 兄弟公开说："我们是披头士之后最重要的英国乐队。"这种近乎傲慢的自信本身就是 Britpop 的核心：<strong>用英国音乐传统对抗美国 Grunge 的文化霸权</strong>。</p>
+        <p>1993 年《Select》杂志封面把 Suede 主唱 Brett Anderson 披英国国旗——这是"Britpop"这个词的图腾起点。但直到 1994 年 Blur 和 Oasis 的双爆发，它才从亚文化变成主流运动。<strong>Britpop 催生了 Cool Britannia 这个后来影响 Tony Blair 新工党政治品牌的文化运动</strong>。</p>
+      </div>
+      <div>
+        <div class="col-label">美国 · HIP-HOP 黄金时代</div>
+        <p><strong>Nas《Illmatic》</strong>(4/19) 发行。被认为是 Hip-Hop 史上最重要的处女作，Nas 时年 20 岁，皇后区的诗人。整张专辑只有 10 首歌、39 分钟，但每一首都成为 Hip-Hop 教科书。</p>
+        <p><strong>The Notorious B.I.G.《Ready to Die》</strong>(9/13) 发行。Biggie 时年 22 岁，和 Tupac 共同定义了"东海岸 vs 西海岸"对峙。这张专辑把街头叙事提升到文学高度。</p>
+        <p><strong>Outkast《Southernplayalisticadillacmuzik》</strong>出道，为南部 Hip-Hop 打开局面——后来 2000 年代的 Hip-Hop 地理重心从东西海岸向南部转移，起点就是 1994 年 Outkast 的出道。</p>
+        <p><strong>Wu-Tang Clan《Enter the Wu-Tang》</strong>虽然发行于 1993 年末，但 1994 年全面爆发——把 Hip-Hop 与功夫片、武侠文学、街头暴力结合。<strong>Wu-Tang 直接影响了后来 RZA 为 Tarantino《Kill Bill》配乐</strong>。</p>
+      </div>
+    </div>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>作品</th>
+          <th>艺术家</th>
+          <th>流派 / 地区</th>
+          <th>为什么它重要</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Parklife</strong></td>
+          <td>Blur</td>
+          <td><span class="tag red">Britpop</span> 英国</td>
+          <td>Britpop 运动的定音专辑。全英第一，英国音乐工业时隔 25 年第一次对美国主流重新形成反击力。</td>
+        </tr>
+        <tr>
+          <td><strong>Definitely Maybe</strong></td>
+          <td>Oasis</td>
+          <td><span class="tag red">Britpop</span> 英国</td>
+          <td>英国最快卖破白金纪录的出道专辑。全球销量 1500 万张。"Live Forever" 成为一代人的自我肯定宣言。</td>
+        </tr>
+        <tr>
+          <td><strong>Illmatic</strong></td>
+          <td>Nas</td>
+          <td><span class="tag">Hip-Hop</span> 美国东岸</td>
+          <td>Hip-Hop 史上被引用最多的处女作。定义了"诗人型 MC"的写作标准。</td>
+        </tr>
+        <tr>
+          <td><strong>Ready to Die</strong></td>
+          <td>The Notorious B.I.G.</td>
+          <td><span class="tag">Hip-Hop</span> 美国东岸</td>
+          <td>Biggie 的处女作兼遗作之一。1997 年被枪杀。整张专辑的标题成了一代东岸说唱歌手的命运预言。</td>
+        </tr>
+        <tr>
+          <td><strong>Dookie</strong></td>
+          <td>Green Day</td>
+          <td><span class="tag gold">Pop-Punk</span> 美国</td>
+          <td>把 punk 从地下带到主流 MTV。全球销量 2000 万张。奠定后来 Blink-182 / Sum 41 整整一代的美国流行朋克。</td>
+        </tr>
+        <tr>
+          <td><strong>The Division Bell</strong></td>
+          <td>Pink Floyd</td>
+          <td><span class="tag indigo">Prog Rock</span> 英国</td>
+          <td>Pink Floyd 最后一张录音室专辑（2014 年的 The Endless River 实际是旧素材）。全球巡演创下当时欧洲体育场记录。</td>
+        </tr>
+        <tr>
+          <td><strong>CrazySexyCool</strong></td>
+          <td>TLC</td>
+          <td><span class="tag">R&B</span> 美国</td>
+          <td>首张由黑人女子组合获得钻石认证（美国销量 1000 万+）的专辑。Destiny's Child（1997 出道）和后来所有女子组合的起点。</td>
+        </tr>
+        <tr>
+          <td><strong>MTV Unplugged in New York</strong></td>
+          <td>Nirvana</td>
+          <td><span class="tag red">Grunge</span> 美国</td>
+          <td>Cobain 自杀前 5 个月录制，死后发行（11 月）。Grunge 时代的绝唱。</td>
+        </tr>
+        <tr>
+          <td><strong>Debut (1993)→ Post (1995)</strong></td>
+          <td>Björk</td>
+          <td><span class="tag indigo">Art Pop</span> 冰岛</td>
+          <td>1994 年 Björk 全球巡演定义了"艺术流行女歌手"这个类别。影响了后来的 Lady Gaga、FKA Twigs。</td>
+        </tr>
+        <tr>
+          <td><strong>Home Invasion</strong></td>
+          <td>Method Man & Friends</td>
+          <td><span class="tag">Hip-Hop</span> 美国</td>
+          <td>Wu-Tang 成员独立作品崛起。Method Man 成为 Hip-Hop 圈最有表演力的 MC。</td>
+        </tr>
+        <tr>
+          <td><strong>Sonic Youth《Experimental Jet Set》/ Hole《Live Through This》</strong></td>
+          <td>Alt Rock</td>
+          <td><span class="tag gold">Alt Rock</span> 美国</td>
+          <td>在 Cobain 死后真空期，Courtney Love 的 Hole 承接了部分 Grunge 遗产。Sonic Youth 成为独立摇滚的精神领袖。</td>
+        </tr>
+        <tr>
+          <td><strong>华语：Beyond《二楼后座》/ 黄家驹周年纪念</strong></td>
+          <td>Beyond</td>
+          <td><span class="tag red">Cantopop Rock</span> 香港</td>
+          <td>黄家驹 1993 年在日本意外去世。1994 年 Beyond 推出后黄家驹时代的首张专辑，《海阔天空》在整个华语圈成为精神图腾。</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- TV -->
+  <div class="section">
+    <div class="section-label">05 · 电视轴</div>
+    <h3 class="section-title">1994 年 9 月，<span class="ital">美剧的地壳运动</span></h3>
+    <p class="section-intro"><strong>1994 年 9 月 19 日，NBC 播出《ER》首集；三天后，9 月 22 日，NBC 播出《Friends》首集。</strong>这是美剧历史上最重要的一周——两部后来播了超过十年、改变了全球电视工业的剧，在同一周、同一个电视台、同一个"Must-See TV" 黄金档里诞生。</p>
+
+    <div class="two-col asymmetric">
+      <div>
+        <div class="col-label">《FRIENDS》— 情景喜剧工业化</div>
+        <p><strong>Friends</strong> 把"都市六人行"的情景喜剧模板推向极致：三男三女、固定咖啡馆 + 公寓两个场景、每集独立故事 + 长线感情线。<strong>十季共 236 集，全球 25+ 种语言版本，现在仍然是非英语国家学英语的第一教材。</strong></p>
+        <p>Friends 的真正贡献不是内容，是<strong>工业可复制性</strong>——它证明了情景喜剧可以通过精准的角色分工、工业化剧本流水线、演员固定出场 + 客串明星的方式，做到无限长寿。这个模板后来被《How I Met Your Mother》《The Big Bang Theory》复制。</p>
+        <p>到 1994 年底，六个主演开始和 NBC 集体谈判工资——后来每人每集 100 万美元的薪酬成了美剧演员报价的天花板。<strong>Friends 也改变了美剧演员经纪关系</strong>。</p>
+      </div>
+      <div>
+        <div class="col-label">《ER》— 医疗剧的工业标准</div>
+        <p><strong>ER</strong> 由 Michael Crichton（《Jurassic Park》作者）创作，Steven Spielberg 制作。第一集用<strong>手持摄影、同步多线叙事、医学术语密度</strong>彻底重写了电视医疗剧的美学。</p>
+        <p>ER 把 George Clooney 从二流情景喜剧演员推上 A 级男星。它也确立了"医疗 / 法律 / 警察"三大职业剧模板。此后 House、Grey's Anatomy、Chicago Hope、Chicago Med 都是 ER 的儿女。</p>
+        <p>ER 播了 15 季，331 集，2009 年完结。它是美剧"长寿制作"在数字化之前最后的伟大样本。</p>
+      </div>
+    </div>
+
+    <div class="pullquote">
+      1994 年之前，电视是"消磨时间的媒介"；1994 年之后，电视开始和电影争夺文化话语权。
+      <cite>— David Chase（《Sopranos》主创）在 2001 年的访谈</cite>
+    </div>
+  </div>
+
+  <!-- GAMING & TECH -->
+  <div class="section">
+    <div class="section-label">06 · 游戏与科技</div>
+    <h3 class="section-title">PlayStation 发售那一天，<span class="ital">游戏工业改变了重心</span></h3>
+    <p class="section-intro">1994 年 12 月 3 日，索尼 PlayStation 在日本发售。这一天之前，任天堂主导游戏机市场；这一天之后，用 10 年时间，索尼把游戏从"儿童玩具"升级为"成年娱乐主流"。</p>
+
+    <p><strong>PlayStation 的成功不是硬件——是内容战略。</strong>任天堂当时拒绝 CD 介质（坚持卡带），索尼抓住机会用 CD 把游戏的<strong>存储容量、制作预算、叙事长度</strong>提升了一个数量级。《Final Fantasy VII》1997 年从任天堂 N64 跳到 PlayStation，直接让 Square（开发商）赌赢了下一个十年。</p>
+
+    <p>游戏工业在 1994 年同时发生的还有：</p>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-num">I</div>
+        <h4 class="card-title">PlayStation 发售</h4>
+        <span class="card-title-en">1994.12.03 · Japan</span>
+        <div class="card-meta">索尼 · SCE</div>
+        <p class="card-desc">12 月 3 日在日本首发，售价 ¥39,800。首年销量 300 万台。改写了任天堂 + 世嘉双霸的格局。</p>
+      </div>
+      <div class="card">
+        <div class="card-num">II</div>
+        <h4 class="card-title">Final Fantasy VI</h4>
+        <span class="card-title-en">JRPG Reaches Its Peak</span>
+        <div class="card-meta">Square · SNES</div>
+        <p class="card-desc">系列公认的剧情巅峰，日本 JRPG 工业在 16-bit 时代的最后绝唱。</p>
+      </div>
+      <div class="card">
+        <div class="card-num">III</div>
+        <h4 class="card-title">Doom II</h4>
+        <span class="card-title-en">FPS Goes Mainstream</span>
+        <div class="card-meta">id Software</div>
+        <p class="card-desc">第一人称射击游戏从硬核小众进入全美畅销榜。为后来《Half-Life》《Quake》铺路。</p>
+      </div>
+      <div class="card">
+        <div class="card-num">IV</div>
+        <h4 class="card-title">Warcraft: Orcs & Humans</h4>
+        <span class="card-title-en">RTS Template</span>
+        <div class="card-meta">Blizzard 出道</div>
+        <p class="card-desc">Blizzard 真正意义上的第一部大作。奠定了"人族 vs 兽族"的宇宙，后来衍生出《World of Warcraft》。</p>
+      </div>
+      <div class="card">
+        <div class="card-num">V</div>
+        <h4 class="card-title">Super Metroid</h4>
+        <span class="card-title-en">Metroidvania Grammar</span>
+        <div class="card-meta">Nintendo</div>
+        <p class="card-desc">定义了"银河恶魔城"子类型的全部语法规则：地图逐步解锁 + 能力升级 + 非线性探索。</p>
+      </div>
+      <div class="card">
+        <div class="card-num">VI</div>
+        <h4 class="card-title">Amazon / Yahoo! 成立</h4>
+        <span class="card-title-en">Internet Infrastructure</span>
+        <div class="card-meta">Seattle / Stanford</div>
+        <p class="card-desc">亚马逊在 Jeff Bezos 车库成立（7 月）；Yahoo! 在斯坦福宿舍开张。两家公司奠定了未来 30 年的数字经济底座。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ASIA -->
+  <div class="section">
+    <div class="section-label">07 · 华语与亚洲</div>
+    <h3 class="section-title">同一年，<span class="ital">华语电影的三驾马车</span>齐发</h3>
+    <p class="section-intro">1994 年是华语电影在国际影展最密集的一年：<strong>张艺谋《活着》戛纳评审团大奖</strong>、<strong>李安《饮食男女》奥斯卡最佳外语片提名</strong>、<strong>王家卫《重庆森林》被 Tarantino 亲自引入美国独立电影院</strong>。这三人代表了华语电影的三种不同全球化路径——历史叙事、家庭叙事、都市氛围——而他们在同一年登顶，不是巧合。</p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th style="width:20%;">作品 / 事件</th>
+          <th style="width:15%;">创作者</th>
+          <th style="width:12%;">地区</th>
+          <th style="width:53%;">1994 年的意义</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>活着</strong><br>To Live</td>
+          <td>张艺谋 / 葛优 / 巩俐</td>
+          <td>中国大陆</td>
+          <td>戛纳评审团大奖 + 葛优戛纳最佳男演员。大陆长期被禁，但通过 VHS / VCD 在全球华语圈广泛流传。<strong>代表了第五代导演的叙事野心——用家庭史折射国家史</strong>。</td>
+        </tr>
+        <tr>
+          <td><strong>饮食男女</strong><br>Eat Drink Man Woman</td>
+          <td>李安</td>
+          <td>台湾 → 好莱坞</td>
+          <td>"父亲三部曲"终章。这部片直接让哥伦比亚影业邀请李安执导《Sense and Sensibility》（1995），<strong>华语导演第一次执导奥斯卡级别的英语电影</strong>。</td>
+        </tr>
+        <tr>
+          <td><strong>重庆森林</strong><br>Chungking Express</td>
+          <td>王家卫 / 梁朝伟 / 王菲 / 林青霞 / 金城武</td>
+          <td>香港</td>
+          <td>23 天拍成的间隙作。Tarantino 在圣丹斯看完后立即买下美国发行权，<strong>用自己的 Rolling Thunder 公司发行</strong>。这是王家卫获得全球独立电影圈认可的起点，也让"香港都市美学"进入美国文艺青年视野。</td>
+        </tr>
+        <tr>
+          <td><strong>九品芝麻官</strong><br>Hail the Judge</td>
+          <td>周星驰</td>
+          <td>香港</td>
+          <td>周星驰无厘头喜剧的巅峰之一。票房全港年度前三。<strong>在 VCD 盗版产业的催化下</strong>，周星驰电影在 1995 年后成为整个东亚大学生的集体记忆（尤其是大陆和东南亚华人社区）。</td>
+        </tr>
+        <tr>
+          <td><strong>东邪西毒</strong><br>Ashes of Time</td>
+          <td>王家卫</td>
+          <td>香港</td>
+          <td>1994 年同步上映的另一部王家卫（与《重庆森林》同年），改编金庸武侠。<strong>把武侠片哲学化、氛围化</strong>——为后来《一代宗师》甚至李安《卧虎藏龙》铺设了美学基础。</td>
+        </tr>
+        <tr>
+          <td><strong>小室哲哉时代</strong><br>TK Era Begins</td>
+          <td>小室哲哉 / TRF / globe</td>
+          <td>日本</td>
+          <td>1994 年是小室哲哉音乐帝国的起点。他同时制作 TRF、华原朋美、安室奈美惠、globe——<strong>开创了"音乐人 + 制作人 + 经纪体系"的日式流水线模型</strong>，直接影响后来韩国 SM 娱乐、JYP 的工业架构。</td>
+        </tr>
+        <tr>
+          <td><strong>Beyond 黄家驹周年</strong></td>
+          <td>Beyond · 黄家贤 · 黄贯中 · 叶世荣</td>
+          <td>香港</td>
+          <td>1993 年黄家驹在日本意外去世。1994 年《二楼后座》专辑发行，《海阔天空》成为<strong>整个华语世界的青春纪念碑</strong>，至今在粤港、大陆、东南亚华人社群被反复翻唱。</td>
+        </tr>
+        <tr>
+          <td><strong>日剧全盛期开启</strong></td>
+          <td>富士电视台月九</td>
+          <td>日本</td>
+          <td>1994 年 10 月，田村正和主演《古畑任三郎》首播，重新定义日式推理剧；同年《29 歳のクリスマス》启发了后来的都市女性向日剧。这些剧在 1995-96 通过 VCD 传入东南亚，<strong>为《悠长假期》(1996) 在亚洲引爆奠定了基础</strong>。</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <div class="callout-label">深度观察 · DEEP TAKE</div>
+      <div class="callout-title">为什么<span class="ital">华语三驾马车</span>会同时在 1994 年登顶</div>
+      <p>张艺谋、李安、王家卫三人背后是三种不同的资金路径。<strong>张艺谋背靠中影与欧洲艺术电影院线</strong>（《活着》由台湾邱复生投资，通过香港公司操作绕开大陆审查）；<strong>李安背靠好莱坞独立发行</strong>（由 Goldwyn Films 发行《喜宴》后进入好莱坞主流）；<strong>王家卫背靠香港商业资金 + 国际电影节</strong>。</p>
+      <p style="margin-top:16px;">这三种不同路径在 1994 年同时见效，是因为——<strong>1994 年是全球艺术电影最后一个 "发行商赌作者" 的年份</strong>。之后随着好莱坞工业集中化、DVD 兴起、艺术院线萎缩，这种 "赌一把作者" 的模式逐渐消失。今天的 Netflix / A24 模式是另一套逻辑。</p>
+    </div>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="section">
+    <div class="section-label">08 · 本章总结</div>
+    <h3 class="section-title">为什么 1994 年<span class="ital">不可能再现</span></h3>
+
+    <p>回看这一年，有四个结构性条件让它成为"最后的黄金年"：</p>
+
+    <p><strong>一、介质红利。</strong> 1994 年，电影仍然是胶片拍摄（数字化要到 2000 年后）、音乐刚从磁带切换到 CD、电视还是有线模拟信号主导。每一种介质的物理特性都赋予了作品特定的质感——胶片的颗粒、CD 的动态范围、电视的扫描线——这些质感无法被数字媒介复刻。</p>
+
+    <p><strong>二、全球化尚未同质化。</strong> 1994 年之前各地文化工业独立运转，但已经可以互相看见（通过影展、MTV、航空邮件）；1994 年之后，随着互联网 + Netflix + 算法推荐，全球内容反而进入了"算法同温层"——表面更流通了，实际审美更单一了。</p>
+
+    <p><strong>三、创作者主权最大化。</strong> 1994 年的好莱坞六大还没被科技公司并购（索尼 1989 年并购哥伦比亚是例外，但那还是制造业逻辑）；唱片业还在艺人手里；电视还在编剧手里。今天的好莱坞是<strong>数据分析师、算法工程师、风控经理</strong>联合决策——创作者让渡了大部分权力。</p>
+
+    <p><strong>四、X 世代集中进入创作黄金期。</strong> 这一代人（出生于 1965-1980）在 1994 年正好 25-35 岁。他们成长于冷战末期 + MTV 黄金年代，吸收了足够多的多元文化养分，但又还没被互联网注意力经济耗尽。这种"文化密度 × 创作力" 的巧合，在人类历史上只会偶然出现。</p>
+
+    <div class="pullquote">
+      1994 年是一次不会再重来的文化叠加态。那些现在我们认为"经典"的作品，绝大多数都诞生在这一年，或由这一年的创作者定义。
+      <cite>— 本章结语</cite>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════
+     CHAPTER 02 — HONG KONG DIASPORA
+     ════════════════════════════════ -->
+<section class="chapter" id="chapter-3">
+  <div class="chapter-num">03</div>
+  <div class="chapter-header">
+    <span class="chapter-tag">CHAPTER 03 · INDUSTRY</span>
+    <h2 class="chapter-title">1997 后 <span class="ital">香港电影人才</span><br>的全球扩散地图</h2>
+    <p class="chapter-subtitle">The Diaspora Map · How a collapsing industry planted Hong Kong's DNA into Hollywood, Mainland China, and Southeast Asia.</p>
+
+    <p class="chapter-lede">
+      <span class="first-letter">1</span>997 年 6 月 30 日午夜，香港回归中国。就在这个仪式性的瞬间之外，另一场看不见的地壳运动正在发生：<strong>香港电影工业在 1997 年制造了 185 部电影，1998 年骤降到 85 部，随后再也没有回到 1997 年以前的规模</strong>。一个曾经被称为"东方好莱坞"的产业，在一年之内被腰斩。但这不是一个"死亡故事"——它是一个"扩散故事"。那些被挤出香港的人才、美学、工艺、配方，<strong>渗透到了好莱坞、中国大陆、东南亚、好莱坞的动作指导系统、甚至今天 Netflix 的全球亚洲内容战略</strong>。这一章追踪他们去了哪里、把什么带了过去、对全球娱乐工业产生了什么持久影响。
+    </p>
+  </div>
+
+  <!-- BACKGROUND -->
+  <div class="section">
+    <div class="section-label">01 · 崩塌的背景</div>
+    <h3 class="section-title">一年腰斩：<span class="ital">三重打击</span>下的产业</h3>
+
+    <p>1997 年的香港电影工业不是死于单一原因，而是死于三重打击的叠加：</p>
+
+    <p><strong>第一，亚洲金融危机（1997 年 7 月）。</strong>从泰国开始的货币危机一路蔓延至印尼、韩国、香港。港币被迫挂钩美元保卫战损耗了本地消费力，香港电影最大的海外市场（台湾、东南亚华人市场）直接腰斩。台湾投资方撤资，东南亚发行商破产。</p>
+
+    <p><strong>第二，好莱坞大片侵入。</strong>1997 年香港票房前三名——《Titanic》《The Lost World: Jurassic Park》《Face/Off》——前两部是好莱坞大片，<strong>第三部虽然是吴宇森执导的好莱坞制作，但那已经是 "流失在外" 的香港人才</strong>。本地观众的胃口被好莱坞大片训练，港片制作预算跟不上。</p>
+
+    <p><strong>第三，盗版 VCD 的致命一击。</strong>1995 年后 VCD 在香港、广东、东南亚流行，盗版 VCD 的发行速度有时甚至快过正规院线。港产片的成本结构（低预算、快速制作、靠大量产量养团队）一旦发行渠道被盗版击穿，整个经济模型就崩了。</p>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-label">1997 年产量</div>
+        <div class="stat-value">185<span class="small">部</span></div>
+        <div class="stat-desc">回归之年仍维持巅峰产量</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">1998 年产量</div>
+        <div class="stat-value">85<span class="small">部</span></div>
+        <div class="stat-desc">一年内产量暴跌 54%</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">2003 SARS 年产量</div>
+        <div class="stat-value">54<span class="small">部</span></div>
+        <div class="stat-desc">六年内产量再降 36%</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">2023 年产量</div>
+        <div class="stat-value">42<span class="small">部</span></div>
+        <div class="stat-desc">和 1997 年相比萎缩 77%</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DIASPORA MAP -->
+  <div class="section">
+    <div class="section-label">02 · 扩散地图</div>
+    <h3 class="section-title">他们都<span class="ital">去了哪里</span></h3>
+    <p class="section-intro">香港电影人才的扩散不是均匀的——它呈现出非常清晰的<strong>四条路径</strong>：一部分人去好莱坞寻找更大舞台；一部分人北上进入中国大陆刚起步的商业大片市场；一部分人留守香港坚持"小而精"的制作；还有一部分人去了东南亚、日本、韩国。四条路径每一条都留下了深远的影响。</p>
+
+    <div class="flow-diagram">
+                          ┌──────────────────┐
+                          │  1997 香港电影业  │
+                          │   产量 185 → 85   │
+                          └────────┬─────────┘
+                                   │
+          ┌────────────┬───────────┴───────────┬────────────┐
+          ▼            ▼                       ▼            ▼
+     🇺🇸 好莱坞     🇨🇳 北上大陆           🇭🇰 留守香港   🌏 东南亚 / 日韩
+          │            │                       │            │
+     吴宇森         陈可辛                  杜琪峰      唐季礼 (泰国合拍)
+     成龙           王家卫 (后期)            许鞍华      陈嘉上 (东南亚)
+     李连杰         陈嘉上                  彭浩翔      (TVB 艺人赴东南亚剧)
+     周润发         周星驰 (北上)            彭氏兄弟
+     徐克           林超贤
+     袁和平         尔冬升
+     林岭东         刘伟强
+          │            │                       │            │
+          ▼            ▼                       ▼            ▼
+     Matrix / Kill  赤壁 / 投名状 /        PTU / 黑社会   雷霆战警 /
+     Bill 动作       十月围城 / 风云       枪火 / 放 · 逐  黑白森林 (马)
+     工艺的源头     合拍片时代开启         银河映像时代   JV 中文片
+    </div>
+
+    <h4 style="font-family: var(--serif-display); font-size: 28px; margin: 40px 0 20px; font-weight: 700;">路径一：<span style="color: var(--red); font-style: italic;">好莱坞化</span></h4>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th style="width:14%;">人物</th>
+          <th style="width:10%;">赴美年份</th>
+          <th style="width:20%;">好莱坞代表作</th>
+          <th style="width:56%;">他们带去了什么 / 改变了什么</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>吴宇森</strong><br>John Woo</td>
+          <td>1993</td>
+          <td>Hard Target (1993)<br><strong>Face/Off (1997)</strong><br>Mission: Impossible II (2000)</td>
+          <td>把<strong>"双枪 + 慢镜头 + 白鸽"的英雄主义美学</strong>带进好莱坞。Face/Off 把好莱坞动作片的视觉语法推进了一个层级，直接启发后来 Michael Bay、Zack Snyder 的风格。但吴宇森自己的作品在好莱坞始终"差一口气"——因为好莱坞的制作流程（剧本会、制片人干预、工会限制）和香港"导演中心制"完全相反。</td>
+        </tr>
+        <tr>
+          <td><strong>成龙</strong><br>Jackie Chan</td>
+          <td>1995 (真正突破)</td>
+          <td>Rumble in the Bronx (1995)<br><strong>Rush Hour (1998-)</strong><br>Shanghai Noon (2000)</td>
+          <td>成龙是<strong>最成功的香港演员跨越</strong>。他把"杂耍式动作 + 道具互动 + 喜剧节奏" 三位一体的表演带给好莱坞。Rush Hour 系列全球票房累计 8 亿美元。但更重要的是——<strong>他证明了"非白人 + 非英语母语"可以做成好莱坞 A 级动作明星</strong>，为后来的李安、吴珊卓、关继威开路。</td>
+        </tr>
+        <tr>
+          <td><strong>李连杰</strong><br>Jet Li</td>
+          <td>1998</td>
+          <td>Lethal Weapon 4 (1998)<br><strong>Romeo Must Die (2000)</strong><br>The One (2001) / Hero (2002)</td>
+          <td>李连杰不像成龙那样走喜剧路线，而是作为<strong>"严肃动作演员"</strong>进入好莱坞。Lethal Weapon 4 里他以反派身份亮相，很多美国观众第一次看到中国武术的精准感。后来他主演的 Romeo Must Die 把武术 + 嘻哈文化结合——<strong>为后来全球"武术跨界流行"铺平道路</strong>。</td>
+        </tr>
+        <tr>
+          <td><strong>周润发</strong><br>Chow Yun-fat</td>
+          <td>1998</td>
+          <td>The Replacement Killers (1998)<br>Anna and the King (1999)<br><strong>Crouching Tiger, Hidden Dragon (2000)</strong></td>
+          <td>周润发的好莱坞之路相对波折。The Replacement Killers 是他个人突破，但真正登顶的是 <strong>李安《卧虎藏龙》</strong>——这部华语片在美国拿下 1.28 亿美元票房，打破外语片纪录，让他成为国际认知度最高的亚洲男演员之一。</td>
+        </tr>
+        <tr>
+          <td><strong>袁和平</strong><br>Yuen Woo-ping</td>
+          <td>1999</td>
+          <td><strong>The Matrix 三部曲 (1999-2003)</strong><br><strong>Kill Bill Vol.1 & 2 (2003-04)</strong><br>Crouching Tiger (2000)</td>
+          <td>袁和平是所有人里对好莱坞影响最深的。他作为<strong>动作指导 (action choreographer)</strong> 被沃卓斯基兄弟请去 The Matrix，设计了 Neo 和 Morpheus 的所有打斗。后来 Tarantino 请他设计 Kill Bill。<strong>袁和平把香港"动作设计 = 独立工种"的概念输入好莱坞</strong>——在此之前好莱坞动作戏是特技协调员做的。现在所有 Marvel / DC 大片都有独立的动作指导团队，源头在袁和平。</td>
+        </tr>
+        <tr>
+          <td><strong>徐克</strong><br>Tsui Hark</td>
+          <td>1997-98 (短暂)</td>
+          <td>Double Team (1997)<br>Knock-Off (1998)</td>
+          <td>徐克的好莱坞经验是<strong>反面教材</strong>。两部 Jean-Claude Van Damme 主演的电影都是失败作品。徐克后来回忆："在好莱坞，导演什么都不能决定。"他 1999 年后重返香港，保留了自己的创作主权，后来成为大陆合拍片时代的主力（《龙门飞甲》《狄仁杰》系列）。</td>
+        </tr>
+        <tr>
+          <td><strong>林岭东</strong><br>Ringo Lam</td>
+          <td>1996</td>
+          <td>Maximum Risk (1996)<br>Replicant (2001)</td>
+          <td>和徐克类似，林岭东的好莱坞经验也是"工艺被稀释"。他本来是香港黑色警匪片的大师（Tarantino 在 Reservoir Dogs 里公开致敬过他的 City on Fire），但到了好莱坞拍的 Van Damme 片完全没有他的风格。2000 年后回香港，直到 2018 年去世。</td>
+        </tr>
+        <tr>
+          <td><strong>唐季礼</strong><br>Stanley Tong</td>
+          <td>1997</td>
+          <td>Rumble in the Bronx (制作)<br>Mr. Magoo (1997)<br>The Myth (2005, 中港合拍)</td>
+          <td>作为成龙的长期合作导演 / 动作指导，唐季礼短暂进入好莱坞体系后很快回到华语市场，成为中港合拍片时代的重要导演。</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h4 style="font-family: var(--serif-display); font-size: 28px; margin: 50px 0 20px; font-weight: 700;">路径二：<span style="color: var(--red); font-style: italic;">北上中国大陆</span></h4>
+
+    <p>这条路径的真正爆发要到 2003 年 <strong>CEPA（内地与香港关于建立更紧密经贸关系的安排）</strong> 签署之后——合拍片被正式承认为"国产片"可以进入大陆院线，但 1997-2003 年是准备期，<strong>香港人才已经开始秘密北上</strong>。</p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th style="width:14%;">人物</th>
+          <th style="width:18%;">北上时间</th>
+          <th style="width:25%;">代表作（北上后）</th>
+          <th style="width:43%;">角色</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>陈可辛</strong></td>
+          <td>2005 左右</td>
+          <td>《如果·爱》(2005)<br>《投名状》(2007)<br>《中国合伙人》(2013)</td>
+          <td>北上最成功的导演。把香港的"情感精细度"注入大陆商业大片框架。《中国合伙人》是中港合拍片叙事成熟度的里程碑。</td>
+        </tr>
+        <tr>
+          <td><strong>王家卫</strong></td>
+          <td>2001 (《花样年华》起)</td>
+          <td>《2046》(2004)<br>《一代宗师》(2013)</td>
+          <td>王家卫不是"北上"而是"全球化"。但他的后期作品大量使用大陆演员（章子怡、张震、宋慧乔、梁朝伟），制作层面开始融合两地资源。</td>
+        </tr>
+        <tr>
+          <td><strong>周星驰</strong></td>
+          <td>2003 (《功夫》)</td>
+          <td>《功夫》(2004)<br>《长江七号》(2008)<br>《美人鱼》(2016)</td>
+          <td>周星驰在 2004 年后几乎完全转向大陆市场。《美人鱼》中国大陆票房 34 亿人民币，创当年纪录。他把港式无厘头和大陆喜剧传统融合，形成"周氏大陆喜剧"这个新品类。</td>
+        </tr>
+        <tr>
+          <td><strong>徐克</strong></td>
+          <td>2010 左右</td>
+          <td>《狄仁杰》三部曲<br>《龙门飞甲》<br>《智取威虎山》</td>
+          <td>徐克在大陆复活了"武侠 / 玄幻大片"这个类型。用 3D 技术重新包装传统武侠叙事。</td>
+        </tr>
+        <tr>
+          <td><strong>刘伟强</strong></td>
+          <td>2010 左右</td>
+          <td>《建军大业》(2017)<br>《中国机长》(2019)</td>
+          <td>《无间道》三部曲的导演北上后转向"主旋律商业大片"。他把好莱坞式紧凑叙事带进大陆大片制作。</td>
+        </tr>
+        <tr>
+          <td><strong>林超贤</strong></td>
+          <td>2014 左右</td>
+          <td>《湄公河行动》(2016)<br>《红海行动》(2018)</td>
+          <td>林超贤成为"主旋律 + 港式动作"的首席导演。《红海行动》大陆票房 36 亿。他把香港警匪片的实战动作感注入大陆军事题材。</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h4 style="font-family: var(--serif-display); font-size: 28px; margin: 50px 0 20px; font-weight: 700;">路径三：<span style="color: var(--red); font-style: italic;">留守香港</span></h4>
+
+    <p>并非所有人都走了。一批导演选择留在香港，在萎缩的产业里做出更个人化、更作者性的作品——其中最重要的是<strong>杜琪峰和他的"银河映像"</strong>。</p>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-num">I</div>
+        <h4 class="card-title">杜琪峰</h4>
+        <span class="card-title-en">Johnnie To · Milkyway Image</span>
+        <div class="card-meta">1996 创立银河映像</div>
+        <p class="card-desc">1996 年与韦家辉合创银河映像。《枪火》(1999)、《黑社会》(2005)、《放·逐》(2006) 构成了后回归时代香港电影的艺术巅峰。杜琪峰把港式警匪片提升到<strong>存在主义层面的影展级作品</strong>。戛纳、威尼斯多次入围。</p>
+      </div>
+      <div class="card">
+        <div class="card-num">II</div>
+        <h4 class="card-title">许鞍华</h4>
+        <span class="card-title-en">Ann Hui</span>
+        <div class="card-meta">新浪潮老将</div>
+        <p class="card-desc">坚持拍摄小成本人文作品。《天水围的日与夜》(2008)、《桃姐》(2011) 代表她的顶峰。<strong>香港新浪潮最后的守护者</strong>。</p>
+      </div>
+      <div class="card">
+        <div class="card-num">III</div>
+        <h4 class="card-title">彭浩翔</h4>
+        <span class="card-title-en">Pang Ho-cheung</span>
+        <div class="card-meta">都市奇想派</div>
+        <p class="card-desc">《志明与春娇》系列 + 《买凶拍人》+ 《破事儿》等。把香港年轻人的都市神经质拍得极其贴地。他是"后九七" 香港观众的精神代言人。</p>
+      </div>
+      <div class="card">
+        <div class="card-num">IV</div>
+        <h4 class="card-title">尔冬升</h4>
+        <span class="card-title-en">Derek Yee</span>
+        <div class="card-meta">现实主义派</div>
+        <p class="card-desc">《旺角黑夜》(2004) 和《门徒》(2007) 是回归后港式警匪片的两部标杆。后期担任香港金像奖主席，影响产业政策。</p>
+      </div>
+      <div class="card">
+        <div class="card-num">V</div>
+        <h4 class="card-title">彭氏兄弟</h4>
+        <span class="card-title-en">Pang Brothers</span>
+        <div class="card-meta">恐怖片 / 泰港合拍</div>
+        <p class="card-desc">《见鬼》系列 + 《见鬼 10》把港台泰三地资源整合，开创了"东亚恐怖合拍片"类型。后来好莱坞翻拍《The Eye》(2008) 由 Jessica Alba 主演。</p>
+      </div>
+      <div class="card">
+        <div class="card-num">VI</div>
+        <h4 class="card-title">邱礼涛</h4>
+        <span class="card-title-en">Herman Yau</span>
+        <div class="card-meta">B 级片工厂</div>
+        <p class="card-desc">在萎缩的产业里继续以惊人的高产量维持香港类型片传统。近几年的《拆弹专家》系列、《扫毒》系列都是他的作品。</p>
+      </div>
+    </div>
+
+    <h4 style="font-family: var(--serif-display); font-size: 28px; margin: 50px 0 20px; font-weight: 700;">路径四：<span style="color: var(--red); font-style: italic;">东南亚 / 日韩</span></h4>
+
+    <p>相对少被讨论的一条路径，但对理解你的工作市场特别关键。1997 年后有几类人才"南下东南亚"：</p>
+
+    <ul style="font-family: var(--serif-cn); font-size: 16px; line-height: 2; padding-left: 24px; margin: 20px 0;">
+      <li style="margin-bottom: 12px;"><strong>TVB 艺人转移</strong>：大量香港 TVB 二三线演员进入新加坡、马来西亚的华语电视市场，继续演出粤语 / 普通话家庭剧。新传媒（Mediacorp）的华语剧在 1999-2010 年代的审美与制作逻辑，直接继承自 TVB。</li>
+      <li style="margin-bottom: 12px;"><strong>动作指导输出</strong>：香港武术指导团队接受泰国 / 菲律宾 / 韩国电影邀请。<strong>韩国《醉拳》(1978) 的动作传承</strong>在 1990 年代末通过香港武指重新焕发——影响了后来的《老男孩》（朴赞郁 2003）的动作设计。</li>
+      <li style="margin-bottom: 12px;"><strong>港产 + 泰国合拍片</strong>：彭氏兄弟移居泰国，创立"亚洲电影"类型范式。</li>
+      <li style="margin-bottom: 12px;"><strong>马来西亚 / 新加坡华人导演接棒</strong>：蔡明亮、陈子谦、梁智强等在 2000 年代崛起的东南亚华人导演，美学上都受到香港电影的深刻影响。</li>
+    </ul>
+  </div>
+
+  <!-- PULL QUOTE -->
+  <div class="pullquote">
+    香港电影工业没有死亡。它被迫雾化、扩散到全球每一个可以接纳它的角落——并以此永久地改写了亚洲娱乐的 DNA。
+    <cite>— 本章核心观察</cite>
+  </div>
+
+  <!-- HONG KONG DNA IN HOLLYWOOD -->
+  <div class="section">
+    <div class="section-label">03 · 三大案例</div>
+    <h3 class="section-title">好莱坞的<span class="ital">"香港配方"</span>是怎么被吸收的</h3>
+    <p class="section-intro">要理解香港对好莱坞的影响有多深，看三部电影就够了：<strong>The Matrix (1999)</strong>、<strong>Crouching Tiger, Hidden Dragon (2000)</strong>、<strong>Kill Bill Vol.1 (2003)</strong>。这三部电影把"香港 DNA"通过三种完全不同的方式注入全球主流。</p>
+
+    <div class="two-col">
+      <div style="grid-column: 1 / -1;">
+        <div class="col-label">CASE 01 · THE MATRIX — 动作工艺的革命</div>
+        <p>沃卓斯基兄弟（现为姐妹）在写《The Matrix》剧本时就已决定——所有动作戏由香港人做。他们请<strong>袁和平</strong>担任动作指导，Keanu Reeves 被送到洛杉矶"袁家班"训练了 4 个月（李连杰后来回忆："Keanu 是真的在学，不是摆样子"）。</p>
+        <p>Matrix 第一部的成功之一就是那些"华丽、有节奏、可理解的动作"——这是香港电影几十年积累的东西。<strong>好莱坞在 Matrix 之前的动作戏基本是特技协调员用剪辑拼出来的</strong>，Matrix 之后，"动作设计"变成了独立的工种，今天所有 Marvel / DC / Netflix 大片都有独立的动作指导预算。</p>
+        <p>Matrix 还通过"子弹时间 (Bullet Time)" 把吴宇森的"慢镜头 + 凝固瞬间"美学数字化放大。这之后，慢镜头特效成了好莱坞标配。</p>
+      </div>
+      <div style="grid-column: 1 / -1;">
+        <div class="col-label">CASE 02 · CROUCHING TIGER — 审美进入奥斯卡殿堂</div>
+        <p>李安 2000 年的《卧虎藏龙》在美国票房 1.28 亿美元，至今仍是美国历史上最卖座的外语片。它拿下 4 个奥斯卡奖（包括最佳外语片、最佳摄影）。</p>
+        <p>这部电影的深层意义在于——它告诉好莱坞：<strong>"东方武侠"不只是"异域风情"或"B 级片噱头"，它可以是奥斯卡级别的艺术电影</strong>。之后 Zhang Yimou 的《Hero》（2002）、《House of Flying Daggers》（2004）在全球都获得商业成功。武侠这个类型从"亚洲流通"升级为"全球流通"。</p>
+        <p>动作指导同样是袁和平。摄影是鲍德熹（Peter Pau）——香港最顶尖的摄影师之一。<strong>全部主创都是香港或华人身份</strong>，这是"香港 DNA"在国际舞台上最辉煌的一次完整呈现。</p>
+      </div>
+      <div style="grid-column: 1 / -1;">
+        <div class="col-label">CASE 03 · KILL BILL — 类型片的集大成致敬</div>
+        <p>Tarantino 的《Kill Bill》Vol.1 & 2 是"香港 DNA" 吸收的终极样本。Tarantino 本人是香港电影狂粉——他在 1994 年就用 Rolling Thunder 发行了王家卫的《重庆森林》。</p>
+        <p>Kill Bill 里可以看到：<strong>吴宇森式的慢镜头对决</strong>（青叶屋之战）、<strong>徐克式的武侠片致敬</strong>（白眉角色）、<strong>邵氏功夫片的美学引用</strong>（Bride 的黄色运动服是对李小龙《死亡游戏》的致敬）、<strong>袁和平的动作设计</strong>（他是整部电影的动作指导）。<strong>Kill Bill 实际上是 Tarantino 对香港电影一次完整的、系统性的致敬</strong>。</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="callout-label">LONG-TERM IMPACT · 长期影响</div>
+      <div class="callout-title">今天 Netflix 的<span class="ital">亚洲内容战略</span>底层全部是"香港配方"</div>
+      <p>看看 Netflix 近年最成功的亚洲原创：<strong>《鱿鱼游戏》</strong>（动作 + 生存）、<strong>《王国》</strong>（武侠 + 丧尸）、<strong>《三体》</strong>（国际联合制作）、<strong>《SPY×FAMILY》《One Piece》</strong> 真人版（日本 IP 本地化）。</p>
+      <p style="margin-top: 16px;">这些作品的"可视化节奏、动作设计、东亚美学"——底层都是"香港配方"的延续。Netflix 韩国和日本制作团队里大量的动作指导、武术指导、美术指导，都有香港工艺背景或师承香港人才。</p>
+      <p style="margin-top: 16px;"><strong>换句话说：今天你在 Netflix 看到的任何一部"酷炫的亚洲原创"，都是 1997 年香港工业崩塌后，那些人才散落到全球、经过 25 年发酵的成果。</strong></p>
+    </div>
+  </div>
+
+  <!-- POST-MORTEM -->
+  <div class="section">
+    <div class="section-label">04 · 本章总结</div>
+    <h3 class="section-title">香港电影<span class="ital">未消失</span>——它被全球吸收</h3>
+
+    <p>1997 年的回归和随之而来的金融危机、好莱坞侵入、VCD 盗版，联手让香港电影工业在一年内崩塌。但正如熊彼特所说："创造性破坏"——这次崩塌迫使<strong>一个高度密集、工艺精湛、人才集中的产业爆炸式扩散</strong>。</p>
+
+    <p>今天：</p>
+    <ul style="font-family: var(--serif-cn); font-size: 16px; line-height: 2; padding-left: 24px; margin: 20px 0;">
+      <li style="margin-bottom: 12px;"><strong>好莱坞的每一部动作大片</strong>，从动作设计到镜头语言，都有香港电影的影子；</li>
+      <li style="margin-bottom: 12px;"><strong>中国大陆的商业大片工业</strong>，主创有三分之一以上是香港人或香港师承；</li>
+      <li style="margin-bottom: 12px;"><strong>东南亚华语电视剧</strong>的制作逻辑和美学，继承自 TVB；</li>
+      <li style="margin-bottom: 12px;"><strong>Netflix 韩国 / 日本 / 台湾原创剧</strong>背后的动作、摄影、美术团队，大量有香港血脉；</li>
+      <li style="margin-bottom: 12px;"><strong>Marvel、DC 大片</strong>的"动作指导 = 独立工种"这个工业流程，源于香港。</li>
+    </ul>
+
+    <p>这是一场<strong>无声的文化输出</strong>——不像 K-Pop 那样有国家战略推动，也不像日本动画那样有完整的 IP 生态——香港电影人才在 1997 年后的全球扩散，更像是一种被迫的、个人化的、散点状的传播。但它的影响深度，可能比任何一种官方文化输出都要深。</p>
+
+    <div class="pullquote">
+      你以为香港电影死了，其实它只是把自己写进了所有人的工作流里。
+      <cite>— 本章结语</cite>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════
+     CHAPTER 03 — J-DRAMA VCD SEA
+     ════════════════════════════════ -->
+<section class="chapter" id="chapter-4">
+  <div class="chapter-num">04</div>
+  <div class="chapter-header">
+    <span class="chapter-tag">CHAPTER 04 · CONSUMER</span>
+    <h2 class="chapter-title">日剧 VCD <span class="ital">与东南亚</span><br>审美代际的形成</h2>
+    <p class="chapter-subtitle">How pirated Video CDs of Japanese dramas shaped the consumer taste of an entire Southeast Asian generation — and why it still matters to your business.</p>
+
+    <p class="chapter-lede">
+      <span class="first-letter">在</span>讨论 K-Pop 席卷亚洲之前十年，有另一股东亚软实力悄悄渗透了整个东南亚——<strong>日本偶像剧（trendy drama）</strong>。而它的传播载体，不是日本政府的文化战略，也不是电视台的海外销售渠道，而是一个几乎被今天人遗忘的介质：<strong>VCD（Video Compact Disc，视频光盘）</strong>。这是一场<strong>完全由消费者自下而上、未经授权、通过盗版网络发生的跨国文化传播</strong>——而它的影响一直持续到今天，塑造了东南亚 30 岁到 50 岁人群对"都市爱情、现代生活、消费美学"的基本想象。本章追踪这条被主流叙事忽视的传播链路——一个关于介质、盗版、字幕组、跨境审美如何在没有任何官方推动的情况下，悄悄改写一代人的文化记忆的故事。
+    </p>
+  </div>
+
+  <!-- VCD BACKGROUND -->
+  <div class="section">
+    <div class="section-label">01 · 介质背景</div>
+    <h3 class="section-title">VCD：<span class="ital">一项被低估</span>的东亚技术</h3>
+
+    <p>VCD 诞生于 1993 年，由 Sony、Philips、Matsushita、JVC 共同制定标准。它的技术特点决定了它的命运：</p>
+
+    <p><strong>第一，它使用标准 CD 的物理介质。</strong>这意味着<strong>VCD 和音乐 CD 使用同样的压盘工厂</strong>——1990 年代中后期，中国、台湾、马来西亚、印尼的 CD 压盘工厂可以无缝转产 VCD，产能爆炸式提升。</p>
+
+    <p><strong>第二，它的视频压缩标准（MPEG-1）文件极小。</strong>一部 90 分钟的电影压到 VCD 上大约 600-700MB，刚好塞进 1-2 张 CD。<strong>这个 "文件小" 的特性让拷贝、分发、邮寄都极其便利</strong>——后来中国的盗版工厂一天可以压 10 万张 VCD。</p>
+
+    <p><strong>第三，播放设备便宜。</strong>1995 年后 VCD 播放机在东亚的售价迅速跌到 50 美元以下，而 LaserDisc 或 DVD 播放机要 500 美元以上。<strong>VCD 是东亚下沉市场的流媒体普及之前的"DVD"</strong>——它让每一个中产家庭乃至工人家庭都能消费视频内容。</p>
+
+    <p><strong>第四，VCD 在西方几乎不存在。</strong>美国、欧洲直接从 VHS 跳到了 DVD（1997），VCD 在那里被视为"中间过渡"而无人理会。但在亚洲——尤其是中国、东南亚、华人社区——VCD 变成了<strong>1995-2005 年这十年间最主流的视频介质</strong>。</p>
+
+    <div class="callout">
+      <div class="callout-label">TECHNICAL INSIGHT · 技术洞察</div>
+      <div class="callout-title">VCD 是一项<span class="ital">意外</span>的"反版权技术"</div>
+      <p>VCD 的核心技术特性——<strong>文件小、用标准 CD 压盘、无区域码、播放机便宜</strong>——让它成为一种<strong>天然抵抗版权管理的介质</strong>。相比之下，DVD 自带区域码（Region Code）、CSS 加密、严格的发行授权体系。VCD 没有这些。</p>
+      <p style="margin-top: 16px;">结果就是：<strong>VCD 在亚洲 10 年里承载了一场规模浩大的盗版狂欢</strong>，而这场狂欢的最大"受益者"之一就是日本偶像剧——它们在 VCD 渠道里流通的速度，远远快过任何正规版权授权流程。</p>
+    </div>
+  </div>
+
+  <!-- DISTRIBUTION CHAIN -->
+  <div class="section">
+    <div class="section-label">02 · 传播链路</div>
+    <h3 class="section-title">一部日剧<span class="ital">是怎么到东南亚观众手里</span>的</h3>
+    <p class="section-intro">在没有 Netflix、没有 YouTube、没有 BitTorrent 的 1996 年，一部东京新播的日剧是如何在 2-3 周内到达雅加达、曼谷、胡志明、吉隆坡华人区观众手里的？<strong>这是一条由字幕组、盗版工厂、地下分销网络、华人移民社区共同编织的传播链路</strong>。</p>
+
+    <div class="flow-diagram">
+                    ┌───────────────────────────────┐
+                    │   日本 · 富士电视台月九首播    │
+                    │  (每周一 21:00 · 东京)         │
+                    └──────────────┬────────────────┘
+                                   │ 周一播出
+                                   ▼
+                    ┌───────────────────────────────┐
+                    │   台湾 · 私录 VHS → 压 VCD     │
+                    │  (台湾日语字幕组 3 天内完成)    │
+                    └──────────────┬────────────────┘
+                                   │ 周四前完成
+                                   ▼
+                    ┌───────────────────────────────┐
+                    │   香港 · 广东话配音 / 中文字幕  │
+                    │  (深圳 / 广州压盘厂大量复制)    │
+                    └──────────────┬────────────────┘
+                                   │ 周末大量出货
+                                   ▼
+        ┌───────────────┬──────────┴──────────┬───────────────┐
+        ▼               ▼                     ▼               ▼
+   🇸🇬 新加坡       🇲🇾 马来西亚           🇮🇩 印尼        🇹🇭🇻🇳 泰国 / 越南
+   牛车水 / 芽笼   茨厂街 / 金河广场       Mangga Dua     唐人街 DVD 摊
+   VCD 租赁店      华人区 VCD 店           盗版市场        二次盗版 + 本地字幕
+        │               │                     │               │
+        ▼               ▼                     ▼               ▼
+   周二晚上就能看   周三能租到             周末流通到       一周内流通到
+   (真的！)         到本地 VCD 店         大城市           主要华人社区
+    </div>
+
+    <p>这条链路的<strong>关键在于香港</strong>——所有日剧经过香港（或深圳 / 广州的压盘厂）加工后，才分发到东南亚。<strong>香港既是地理中转站，也是文化转译站（中文字幕、粤语配音）</strong>。这解释了为什么香港回归后盗版 VCD 压盘业务大举北上深圳、广州——和 1997 年的香港电影工业崩塌在时间上同步发生。</p>
+
+    <p>更重要的是：<strong>这条链路完全绕开了日本官方</strong>。日本电视台（富士、TBS、NTV）直到 2000 年代中期才意识到，他们的内容已经在东南亚被几百万人消费了——而他们一分版权费都没收到。Kelly Hu 在 2005 年的学术研究记录道："东京甚至不知道这场跨境传播在发生。"</p>
+  </div>
+
+  <!-- KEY WORKS -->
+  <div class="section">
+    <div class="section-label">03 · 作品清单</div>
+    <h3 class="section-title">哪些日剧<span class="ital">塑造了</span>东南亚观众</h3>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th style="width:18%;">剧名</th>
+          <th style="width:8%;">年份</th>
+          <th style="width:20%;">演员 / 主创</th>
+          <th style="width:54%;">为什么它在 SEA 起了作用</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>阿信</strong><br><em>Oshin / おしん</em></td>
+          <td>1983-84</td>
+          <td>NHK 晨间剧</td>
+          <td><strong>日剧海外传播的鼻祖</strong>。虽早于 VCD 时代，但通过 VHS 和本地电视台在东南亚和中国广泛播出。阿信从贫苦山村女孩成长为 supermarket 女主人——这个"逆袭叙事"在 1980 年代末的东南亚劳工阶层和第一代城市化女性中引起强烈共鸣。<strong>在印尼和泰国甚至引发了"给女儿取名 Oshin"的现象</strong>。</td>
+        </tr>
+        <tr>
+          <td><strong>东京爱情故事</strong><br><em>Tokyo Love Story</em></td>
+          <td>1991</td>
+          <td>铃木保奈美 / 织田裕二 · 坂元裕二编剧</td>
+          <td>"trendy drama" 的开山之作。<strong>它第一次向东南亚观众呈现了"东京都市感"</strong>——每周上班、便利店、地铁、两居室公寓、加班、周末约会。对于 1990 年代初正在城市化的东南亚年轻人，这部剧就是"未来生活的预告片"。VCD 通过台湾字幕组传入香港，再传遍整个东南亚。<strong>至今仍是很多 40+ SEA 观众心中"完美日剧"的定义</strong>。</td>
+        </tr>
+        <tr>
+          <td><strong>101 次求婚</strong></td>
+          <td>1991</td>
+          <td>武田铁矢 / 浅野温子</td>
+          <td>"丑男追求美女"的温情喜剧。<strong>在马来西亚和新加坡华人社区流行度极高</strong>。后来被韩国（2006）、中国（2013）、台湾（2013）分别翻拍。</td>
+        </tr>
+        <tr>
+          <td><strong>同一屋檐下</strong></td>
+          <td>1993</td>
+          <td>江口洋介 / 福山雅治 / 酒井法子</td>
+          <td>家庭剧的代表作。<strong>这部剧在印尼、越南特别成功</strong>——因为它的"重组家庭"主题契合了东南亚移民社会、重组家庭普遍的现实。2001 年日本本土仍然重播并击败美剧《Friends》的收视。</td>
+        </tr>
+        <tr>
+          <td><strong>悠长假期</strong><br><em>Long Vacation</em></td>
+          <td>1996</td>
+          <td>木村拓哉 / 山口智子 · 北川悦吏子</td>
+          <td><strong>VCD 时代 SEA 日剧影响力的顶峰</strong>。"Monday 晚上东京 OL 从街头消失"的现象在香港、新加坡、吉隆坡重演。<strong>它定义了"都市文青都市小资"的审美——极简家居、慢节奏恋爱、钢琴音乐、斜射阳光的公寓</strong>。这部剧的审美至今仍深埋在 SEA 40-50 岁人群的"理想生活"想象里——现在那些中产阶级在 Instagram 晒的"日式极简咖啡馆 + 黑胶唱片 + 原木家具"，源头就在 1996 年这部剧。</td>
+        </tr>
+        <tr>
+          <td><strong>美丽人生</strong><br><em>Beautiful Life</em></td>
+          <td>2000</td>
+          <td>木村拓哉 / 常盘贵子</td>
+          <td>木村拓哉 + 残疾女孩爱情故事。日本本土收视率 41.3%（10 年间最高）。<strong>通过 VCD 在东南亚华人社区掀起一轮"眼泪热潮"</strong>。也带动了日式发型、美容、服装在 SEA 的流行。</td>
+        </tr>
+        <tr>
+          <td><strong>GTO 麻辣教师</strong></td>
+          <td>1998</td>
+          <td>反町隆史 / 松岛菜菜子</td>
+          <td>"热血老师 + 坏学生"题材。<strong>在东南亚年轻男性群体中极具人气</strong>——反町隆史式的"男性化"形象影响了整整一代东南亚华人男生的穿着打扮和态度。</td>
+        </tr>
+        <tr>
+          <td><strong>海滩男孩</strong><br><em>Beach Boys</em></td>
+          <td>1997</td>
+          <td>反町隆史 / 竹野内丰 / 广末凉子</td>
+          <td>"夏日、海滩、民宿、青春"的治愈系代表。<strong>直接催生了东南亚华人的"夏日逃离都市"审美</strong>——马来西亚、泰国的海岛旅游在 2000 年代初对日本年轻游客的爆炸性增长，与这部剧有直接关系。</td>
+        </tr>
+        <tr>
+          <td><strong>冰的世界</strong></td>
+          <td>1999</td>
+          <td>竹野内丰 / 松岛菜菜子</td>
+          <td>复仇悬疑剧。<strong>把日剧的受众从"少女 / 白领"扩展到"男性观众"</strong>。为后来《半泽直树》等职场剧在 SEA 的流行铺路。</td>
+        </tr>
+        <tr>
+          <td><strong>爱情白皮书</strong></td>
+          <td>1993</td>
+          <td>柏原崇 / 铃木杏树 · 北川悦吏子</td>
+          <td>大学生青春爱情剧。<strong>在新加坡、马来西亚华人中学生中掀起日风</strong>。北川悦吏子编剧，同一位后来写了《悠长假期》。</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="pullquote">
+      1990 年代末、2000 年代初，你走进雅加达 Mangga Dua 的 VCD 市场，可以用 5000 印尼盾（不到 1 新加坡元）买到全套《悠长假期》。那时候没有 Netflix，但你可以看遍整个东京。
+      <cite>— 东南亚 80 后观众的集体记忆</cite>
+    </div>
+  </div>
+
+  <!-- COUNTRY IMPACT -->
+  <div class="section">
+    <div class="section-label">04 · 各国影响差异</div>
+    <h3 class="section-title">同一批日剧，<span class="ital">不同国家</span>吸收的东西不一样</h3>
+    <p class="section-intro">VCD 这个介质的有趣之处在于：虽然传播的是同一批内容，但<strong>每个国家的观众根据自己的文化基础筛选、吸收、重构</strong>了日剧的不同侧面。这种差异化吸收，直接决定了今天东南亚各市场的消费者审美差异。</p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th style="width:13%;">市场</th>
+          <th style="width:18%;">主要吸收的作品</th>
+          <th style="width:25%;">吸收到的是什么</th>
+          <th style="width:44%;">长期的文化遗产</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>🇸🇬 新加坡</strong></td>
+          <td>悠长假期 / 东京爱情故事 / GTO / 海滩男孩</td>
+          <td>都市白领审美、极简家居、职场穿搭</td>
+          <td>新加坡中产的"小资审美"基因：日式咖啡馆文化、<strong>Muji 风格家装</strong>、极简主义办公室。新加坡华人 Y 世代的 "living alone in a small apartment" 美学，骨子里是 1996 年《悠长假期》的变形。</td>
+        </tr>
+        <tr>
+          <td><strong>🇲🇾 马来西亚</strong></td>
+          <td>阿信 / 101 次求婚 / 爱情白皮书 / 美丽人生</td>
+          <td>家庭剧情节、奋斗叙事、华人身份认同</td>
+          <td>马来西亚华人社区对日本流行文化最早接纳。当地的华语电视频道（如 8TV、NTV7）长期播放日剧中配版。<strong>马来西亚华人 Y 世代的 "夹缝中产阶级" 审美高度日化</strong>——比新加坡更怀旧、更情感化。</td>
+        </tr>
+        <tr>
+          <td><strong>🇮🇩 印尼</strong></td>
+          <td>阿信 / 同一屋檐下 / 东京爱情故事 / Beach Boys</td>
+          <td>励志叙事、家庭伦理、都市梦想</td>
+          <td>印尼华人社区对日剧接受度高，但非华人穆斯林社区则通过配音版（Wakuwaku Japan 频道等）接触到。<strong>"阿信"这个名字在印尼 70/80 后女性中特别多</strong>。印尼今天的 sinetron（家庭伦理肥皂剧）结构，深受"同一屋檐下"影响。</td>
+        </tr>
+        <tr>
+          <td><strong>🇹🇭 泰国</strong></td>
+          <td>GTO / Beach Boys / 阿信 / 月九偶像剧</td>
+          <td>偶像文化、可爱文化、青春叙事</td>
+          <td>泰国 1990 年代末的"日本热"极其强烈（kawaii 文化输出）。<strong>泰国今天的偶像工业（BNK48 等）、MV 美学、校园剧模板，源头都是 1990 年代末通过 VCD 传入的日剧日影</strong>。泰国的"治愈系"Y 世代审美（度假、海滩、慢生活）和 Beach Boys 直接相关。</td>
+        </tr>
+        <tr>
+          <td><strong>🇻🇳 越南</strong></td>
+          <td>Oshin / 东京爱情故事 / 同一屋檐下</td>
+          <td>女性奋斗叙事、家庭伦理</td>
+          <td>越南 1990 年代末至 2000 年代初正值改革开放加速，Oshin 和东京爱情故事通过盗版 VCD 成为"未来城市生活"的教科书。<strong>越南今天的都市女性电视剧审美深受影响</strong>。</td>
+        </tr>
+        <tr>
+          <td><strong>🇵🇭 菲律宾</strong></td>
+          <td>Oshin（有限）</td>
+          <td>少量吸收</td>
+          <td>菲律宾是东南亚唯一对日剧吸收较少的国家——<strong>因为菲律宾的主要文化输入是美国（殖民历史）+ 墨西哥肥皂剧（telenovela）</strong>。这也解释了为什么今天菲律宾的娱乐内容审美更接近美式 + 拉美式，而不是日韩式。</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- DEEP ANALYSIS -->
+  <div class="section">
+    <div class="section-label">05 · 深度分析</div>
+    <h3 class="section-title">日剧 VCD 留下的<span class="ital">五种长期结构性影响</span></h3>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-num">01</div>
+        <h4 class="card-title">跨境消费的路径依赖</h4>
+        <span class="card-title-en">Cross-border Consumption Paths</span>
+        <div class="card-meta">影响层：行为</div>
+        <p class="card-desc">VCD 时代养成了东南亚观众<strong>"去盗版 / 灰色渠道找外国内容"</strong>的路径依赖。这个习惯从 VCD → BT → 在线影视站 → 免费直播平台一脉相承。今天 SEA 用户对"免费 + 盗版 + 灰色"内容的接受度，原点在 1990 年代末 VCD 时代形成。</p>
+      </div>
+      <div class="card">
+        <div class="card-num">02</div>
+        <h4 class="card-title">审美代际固化</h4>
+        <span class="card-title-en">Aesthetic Generation Lock</span>
+        <div class="card-meta">影响层：审美</div>
+        <p class="card-desc">1975-1985 年出生的 SEA 华人 / 中产阶层审美<strong>被永久"日化"</strong>——他们今天的家装、旅行、服装、饮食偏好里，日本权重远高于其他市场。这批人现在 40-50 岁，正是 SEA 市场的消费主力。</p>
+      </div>
+      <div class="card">
+        <div class="card-num">03</div>
+        <h4 class="card-title">"偶像"产业模板</h4>
+        <span class="card-title-en">Idol Industry Template</span>
+        <div class="card-meta">影响层：产业</div>
+        <p class="card-desc">日剧培养的"男主 / 女主 + 偶像化"模式，为后来韩流（K-Pop）的进入铺平了审美底座。<strong>SEA 观众先被日本偶像"训练"过，韩国偶像才能顺利接管</strong>。没有 1990 年代的日剧 VCD 传播，2000 年代的 K-Pop 席卷东亚会更慢。</p>
+      </div>
+      <div class="card">
+        <div class="card-num">04</div>
+        <h4 class="card-title">数字内容早期产业</h4>
+        <span class="card-title-en">Early Digital Content Ecosystem</span>
+        <div class="card-meta">影响层：经济</div>
+        <p class="card-desc">VCD 产业在 1995-2005 养出了整整一代东南亚<strong>盗版内容生意人</strong>——他们后来成了 BT 站长、盗版影视站运营者、再后来转型做合法流媒体、本地化内容平台、甚至 OTT 服务。今天 SEA 很多本土娱乐科技创业者，20 年前就在做 VCD 零售。</p>
+      </div>
+      <div class="card">
+        <div class="card-num">05</div>
+        <h4 class="card-title">字幕组文化的延续</h4>
+        <span class="card-title-en">Subbing Culture Persistence</span>
+        <div class="card-meta">影响层：社群</div>
+        <p class="card-desc">1990 年代日剧 VCD 的字幕组，是整个华语圈字幕组文化的起源。<strong>今天中国大陆、台湾、东南亚的字幕组圈子</strong>，很多元老级人物都是从日剧 VCD 字幕组起家的。这个文化一直延续到今天的网飞字幕、B 站字幕组、韩剧中字圈。</p>
+      </div>
+      <div class="card">
+        <div class="card-num">06</div>
+        <h4 class="card-title">"未经授权的全球化"</h4>
+        <span class="card-title-en">Unauthorized Globalization</span>
+        <div class="card-meta">影响层：理论</div>
+        <p class="card-desc">VCD 时代证明了：<strong>消费者可以在主流渠道之外自发完成跨境文化流通</strong>。这个事实对后来 Netflix 的"全球同步上架"战略、TikTok 的"算法跨境推送"都是一个隐形的历史教训。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- LONG-TERM CULTURAL IMPACT -->
+  <div class="section">
+    <div class="section-label">06 · 本章小结</div>
+    <h3 class="section-title">一条<span class="ital">被主流叙事忽视</span>的文化暗线</h3>
+    <p class="section-intro">VCD 时代在东南亚的日剧传播，是一场<strong>由消费者自发完成的跨境文化传播</strong>——没有政府推动，没有跨国公司发行，甚至连日本电视台自己都不知道在发生什么。它只靠字幕组、盗版工厂、零售摊位、家庭客厅就完成了。这是一段很特别的历史，值得被专门记住。</p>
+
+    <div class="callout">
+      <div class="callout-label">CULTURAL OBSERVATION · 文化观察</div>
+      <div class="callout-title">三个<span class="ital">值得记住</span>的事实</div>
+      <p style="margin-bottom: 20px;"><strong>1. 盗版有时候是文化传播的主要载体。</strong> 1990 年代在东南亚消费过日剧的几千万人里，绝大多数人看的是盗版 VCD。今天的版权意识让我们倾向于简单否定盗版，但在那个特定的历史条件下，如果没有 VCD 盗版网络，<strong>整整一代东南亚年轻人可能永远不会接触到这些作品</strong>——日本电视台没有在东南亚做发行的动力和能力。</p>
+
+      <p style="margin-bottom: 20px;"><strong>2. 审美的形成比我们想象的更早、更深。</strong> 一个 10 岁左右跟着父母看《悠长假期》VCD 的印尼华人孩子，今天 40 岁，他对"理想生活"的想象很可能还带着那部剧的底色——极简家居、慢节奏、斜射阳光、钢琴音乐。<strong>文化作品在儿童和青少年期形成的审美印记，几乎是终生的</strong>。</p>
+
+      <p><strong>3. 这是东亚软实力传播的"非官方版本"。</strong> 相比于韩国政府在 1998 年后用国家战略推动的韩流、日本政府 2010 年后的"Cool Japan"，VCD 时代的日剧传播是彻底自下而上的。<strong>它证明了一件事：真正有感染力的文化作品不需要国家战略，观众会主动为它翻墙</strong>——这在今天互联网时代依然适用（比如中国大陆年轻人通过各种方式看韩综、日剧、美剧）。</p>
+    </div>
+
+    <div class="pullquote">
+      1990 年代末、2000 年代初，一个马来西亚吉隆坡的 18 岁华人女生，在家看完《悠长假期》VCD 后改变了她对爱情的想象；十年后，她住进了新加坡的一个极简公寓。她不会说这两件事有关系——但它们确实有关系。
+      <cite>— 本章结语</cite>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════
+     CHAPTER 05 — SYNTHESIS
+     ════════════════════════════════ -->
+<section class="chapter" id="chapter-5">
+  <div class="chapter-num">05</div>
+  <div class="chapter-header">
+    <span class="chapter-tag">CHAPTER 05 · SYNTHESIS</span>
+    <h2 class="chapter-title">结语 — 三条线索<br><span class="ital">如何汇合</span></h2>
+    <p class="chapter-subtitle">Why these three threads — 1994, Hong Kong, and the VCD — are really one story about the end of analog and the beginning of everything else.</p>
+
+    <p class="chapter-lede">
+      <span class="first-letter">把</span>前面三章放在一起看，你会发现<strong>它们不是三件孤立的事，而是同一场文化地质运动的三个切面</strong>。1994 年的全球神迹是"在同一个时间点上，所有东西同时到位"的最后一次表演；1997 后的香港扩散是"工业体崩塌后，人才通过个体路径重新分布"的经典案例；VCD 时代的日剧传播是"消费者自发跨境、彻底绕开产业机构"的罕见史料。三件事共同说明了一个更大的命题——<strong>1990 年代是人类文化生产与消费模式"从模拟时代过渡到数字时代"的十年</strong>。在这十年结束时，决定文化走向的主导权开始从创作者、工业体、影展、电视台手里，慢慢转移到算法和平台手里。这个转移到今天还没结束。
+    </p>
+  </div>
+
+  <!-- SYNTHESIS TABLE -->
+  <div class="section">
+    <div class="section-label">01 · 合并视图</div>
+    <h3 class="section-title">三条线索<span class="ital">如何互相锁定</span></h3>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th style="width:20%;">线索</th>
+          <th style="width:25%;">核心事件</th>
+          <th style="width:55%;">它在文化史中的位置</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>1994 年</strong><br>全球文化神迹</td>
+          <td>Pulp Fiction + Lion King + Friends + Parklife + Illmatic + PlayStation + 重庆森林同年发生</td>
+          <td>这一年是"创作者主权 + 工业体制 + 介质多元"三个条件同时到位的最后一年。<strong>之后的每一年都只是这一年的余波或反射</strong>——直到今天的作品仍在致敬、重拍、抽取 1994 的元素。这不是怀旧，是因为那一年留下的"原型"太丰厚，后面几十年都在消耗。</td>
+        </tr>
+        <tr>
+          <td><strong>1997 年</strong><br>香港扩散</td>
+          <td>香港回归 + 亚洲金融危机 + 电影工业崩塌，导致大规模人才扩散到好莱坞、大陆、东南亚</td>
+          <td>这是一场"创造性破坏"——一个工艺精湛、高度密集、以导演为中心的电影工业被迫瓦解，人才散落到全球每一个能接纳他们的角落。<strong>他们在好莱坞植入了"动作指导"这个工种，在中国大陆塑造了商业大片的样貌，在东南亚华人电视市场埋下了港式综艺的 DNA</strong>。香港没有消失——它渗透进了别人的工作流里。</td>
+        </tr>
+        <tr>
+          <td><strong>VCD 时代</strong><br>日剧渗透</td>
+          <td>1995-2005 年日剧通过盗版 VCD 在 SEA 广泛传播，塑造了一代消费者审美</td>
+          <td>这是"全球化"最罕见的一种形态——不由企业推动、不由政府推动、甚至不由原产国意识到，完全由消费者自发完成。<strong>它证明了真正有感染力的文化作品会自己找到观众</strong>。VCD 时代的日剧传播，是对后来所有"官方文化输出"战略的一次提醒。</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- DEEP OBSERVATION -->
+  <div class="section">
+    <div class="section-label">02 · 深度观察</div>
+    <h3 class="section-title">这三件事<span class="ital">在同一个坐标系里</span></h3>
+
+    <p>这三条线索之所以应当被合并来看，是因为它们共同回答了一个问题——<strong>"后来的世界是怎么变成今天这个样子的？"</strong></p>
+
+    <p>1994 年的神迹给后世留下了"最大公约数"：Tarantino 定义了类型片的致敬语法，Friends 定义了情景喜剧的工业模板，PlayStation 定义了游戏叙事的长度，重庆森林定义了华语都市美学。<strong>今天你在流媒体上看到的任何一部作品，几乎都能找到它在 1994 年的"祖先"</strong>。</p>
+
+    <p>1997 年香港工业的扩散给后世留下了"技术遗产"：动作指导变成一个全球工种，港式警匪叙事被 Scorsese 重拍成《无间风云》拿了奥斯卡，香港演员的身体训练模板在 Marvel 里被 Scott Adkins 那样的演员复制。<strong>好莱坞今天每一部动作大片，其实都在隐性地付费给 1990 年代香港电影工业</strong>——只是付费方式是"借用技术"而不是"分账"。</p>
+
+    <p>VCD 时代的日剧传播给后世留下了"文化密码"：整整一代东亚 / 东南亚中产阶级的都市审美、家居偏好、爱情想象，底层都写着 1996 年《悠长假期》那套语法。<strong>这是一段被主流记忆忽视但影响极深的历史</strong>——它没有进入任何官方文化史的章节，但它实际塑造了几亿人的日常生活。</p>
+
+    <div class="callout">
+      <div class="callout-label">META OBSERVATION · 元观察</div>
+      <div class="callout-title">三条线索<span class="ital">共同的底色</span></div>
+      <p><strong>它们都发生在"模拟向数字"的过渡期。</strong> 1994 年是胶片电影的顶峰 + CD 音乐的顶峰 + MTV 的顶峰 + 电视黄金档的顶峰；1997 年的香港电影崩塌，一部分原因是数字化（VCD 盗版）击穿了它的商业模型；VCD 本身就是模拟和数字之间的桥梁介质——它用数字压缩实现了模拟时代无法做到的跨境传播。</p>
+      <p style="margin-top: 16px;"><strong>1999 年后，三条线索都进入了它们的"数字后遗症期"。</strong> 1994 年的经典在 2000 年代被不断 HD 重制、4K 修复、重新上架；香港人才在好莱坞和大陆继续扩散但失去了集体的"香港感"；VCD 被 DVD 和 BT 种子取代后，日剧在东南亚的传播反而萎缩（直到 2010 年代 Viu 等正版平台重建渠道）。</p>
+      <p style="margin-top: 16px;"><strong>换句话说：1990 年代是"模拟时代最后的辉煌 + 数字时代最初的预兆"同时发生的十年。</strong> 我们怀念它，是因为之后再也没有这种"两个时代重叠"的罕见状态了。</p>
+    </div>
+  </div>
+
+  <!-- FINAL TAKEAWAYS -->
+  <div class="section">
+    <div class="section-label">03 · 带走这三条</div>
+    <h3 class="section-title">如果要<span class="ital">总结全文</span></h3>
+
+    <div class="card-grid">
+      <div class="card" style="border: 2px solid var(--red);">
+        <div class="card-num">★</div>
+        <h4 class="card-title">密度<br>不可复制</h4>
+        <span class="card-title-en">The Density Can't Be Replicated</span>
+        <div class="card-meta">洞察 01</div>
+        <p class="card-desc">1994 年的那种"文化密度"是一次性历史现象。它需要冷战红利、X 世代创作者巅峰、介质多元、工业体制未被科技公司并购等多个条件同时成立。<strong>这些条件在 2000 年代之后再没有同时出现过</strong>，以后也不会。所以我们怀念的不是具体的作品，而是那种"一切同时到位"的稀有状态。</p>
+      </div>
+      <div class="card" style="border: 2px solid var(--red);">
+        <div class="card-num">★</div>
+        <h4 class="card-title">工艺<br>比工业更长寿</h4>
+        <span class="card-title-en">Craft Outlives Industry</span>
+        <div class="card-meta">洞察 02</div>
+        <p class="card-desc">香港电影工业 1997 后崩塌了，但 1960-1990 积累的"工艺"（动作指导、武术体系、视觉节奏）比工业本身活得更久。<strong>今天好莱坞、大陆、Netflix 亚洲原创里都有它的影子</strong>。这告诉我们：一个工业体死亡时，如果它积累过真正硬核的工艺，这些工艺会渗透进全球工作流。工业可以消失，工艺不会。</p>
+      </div>
+      <div class="card" style="border: 2px solid var(--red);">
+        <div class="card-num">★</div>
+        <h4 class="card-title">盗版<br>曾经是传播本身</h4>
+        <span class="card-title-en">Piracy Was the Pipeline</span>
+        <div class="card-meta">洞察 03</div>
+        <p class="card-desc">VCD 时代日剧在东南亚的传播，是<strong>"盗版作为唯一可行的传播载体"</strong>的经典案例。今天我们站在版权意识健全的年代，但不能否认那段历史真实塑造了几亿人的审美。这不是为盗版辩护，而是承认——<strong>有时候，阻碍文化自由流通的，恰恰是版权体系自己</strong>。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CLOSING QUOTE -->
+  <div class="pullquote" style="font-size: 28px;">
+    1990 年代没有过去。它只是安静地变成了水下的地基——我们今天看到的所有流行文化，都站在这个地基上。理解它，就是理解我们今天在听什么、看什么、穿什么、想什么、怎么爱、怎么悲伤的源头。
+    <cite>— 全文结语</cite>
+  </div>
+</section>
+
+<!-- ════════════════════════════════
+     CHAPTER 05 — WATCH GUIDE
+     ════════════════════════════════ -->
+<section class="chapter" id="chapter-6">
+  <div class="chapter-num">06</div>
+  <div class="chapter-header">
+    <span class="chapter-tag">APPENDIX · WATCH GUIDE</span>
+    <h2 class="chapter-title">观看指南 <span class="ital">Watch Guide</span><br>Singapore 版</h2>
+    <p class="chapter-subtitle">Every title mentioned in this dossier, with a one-click JustWatch SG lookup and confirmed platform badges where available.</p>
+
+    <div class="watch-intro-card">
+      <h4>🎬 使用方法</h4>
+      <p><strong>每部作品的标题都是 JustWatch Singapore 的直连链接</strong> —— 点一下会在新标签页打开，实时显示该作品在 Netflix SG、Prime Video SG、Disney+、Viu、HBO Max、Apple TV 等所有平台的当前可用性。</p>
+      <p>我对 <strong>已确认</strong> 的核心作品加了彩色徽章；未确认的只给 JustWatch 链接让你自己一键查。</p>
+      <p>流媒体目录频繁变动，JustWatch 是最可靠的实时聚合查询器。建议看到感兴趣的，收藏一下或加入 JustWatch 的 Watchlist（免费注册）。</p>
+    </div>
+
+    <div class="legend">
+      <strong>LEGEND ·</strong>
+      <span class="platform-badge netflix">NETFLIX SG</span>
+      <span class="platform-badge prime">PRIME VIDEO SG</span>
+      <span class="platform-badge disney">DISNEY+ SG</span>
+      <span class="platform-badge viu">VIU SG</span>
+      <span class="platform-badge hbo">HBO MAX</span>
+      <span class="platform-badge apple">APPLE TV+</span>
+      <span class="platform-badge rent">RENT / BUY</span>
+      <span class="platform-badge unknown">CHECK JUSTWATCH</span>
+    </div>
+  </div>
+
+  <!-- CHAPTER 1 TITLES -->
+  <div class="section">
+    <div class="section-label">附录 · 来自 Ch.01 · 1994 神迹年</div>
+
+    <h4 class="watch-group-title">好莱坞电影 <span class="ital">Hollywood Films</span></h4>
+    <table class="watch-table">
+      <thead>
+        <tr>
+          <th style="width:40%;">作品</th>
+          <th style="width:10%;">年份</th>
+          <th style="width:50%;">可能的观看渠道</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><a class="jw-link" href="https://www.justwatch.com/sg/movie/pulp-fiction" target="_blank" rel="noopener">Pulp Fiction <span class="original-title">低俗小说 · Quentin Tarantino</span></a></td>
+          <td class="year-col">1994</td>
+          <td><span class="platform-badge rent">RENT / BUY</span><span class="platform-badge unknown">CHECK JW</span> &nbsp; SG 目前主要是 Apple TV / Amazon 租赁，Netflix SG 已下架</td>
+        </tr>
+        <tr>
+          <td><a class="jw-link" href="https://www.justwatch.com/sg/movie/forrest-gump" target="_blank" rel="noopener">Forrest Gump <span class="original-title">阿甘正传 · Robert Zemeckis</span></a></td>
+          <td class="year-col">1994</td>
+          <td><span class="platform-badge unknown">CHECK JW</span> &nbsp; Paramount 全球不同区域授权分散</td>
+        </tr>
+        <tr>
+          <td><a class="jw-link" href="https://www.justwatch.com/sg/movie/the-lion-king" target="_blank" rel="noopener">The Lion King (1994) <span class="original-title">狮子王 · 迪士尼动画</span></a></td>
+          <td class="year-col">1994</td>
+          <td><span class="platform-badge disney">DISNEY+ SG</span> &nbsp; 迪士尼自家 IP，Disney+ 独家</td>
+        </tr>
+        <tr>
+          <td><a class="jw-link" href="https://www.justwatch.com/sg/movie/the-shawshank-redemption" target="_blank" rel="noopener">The Shawshank Redemption <span class="original-title">肖申克的救赎 · Frank Darabont</span></a></td>
+          <td class="year-col">1994</td>
+          <td><span class="platform-badge unknown">CHECK JW</span> &nbsp; 全球轮流在不同平台上，SG 常在 HBO Max / 租赁</td>
+        </tr>
+        <tr>
+          <td><a class="jw-link" href="https://www.justwatch.com/sg/movie/speed" target="_blank" rel="noopener">Speed <span class="original-title">生死时速 · Jan de Bont</span></a></td>
+          <td class="year-col">1994</td>
+          <td><span class="platform-badge unknown">CHECK JW</span> &nbsp; Disney / Fox 资产整合后</td>
+        </tr>
+        <tr>
+          <td><a class="jw-link" href="https://www.justwatch.com/sg/movie/leon-the-professional" target="_blank" rel="noopener">Léon: The Professional <span class="original-title">这个杀手不太冷 · Luc Besson</span></a></td>
+          <td class="year-col">1994</td>
+          <td><span class="platform-badge unknown">CHECK JW</span></td>
+        </tr>
+        <tr>
+          <td><a class="jw-link" href="https://www.justwatch.com/sg/movie/natural-born-killers" target="_blank" rel="noopener">Natural Born Killers <span class="original-title">天生杀人狂 · Oliver Stone</span></a></td>
+          <td class="year-col">1994</td>
+          <td><span class="platform-badge unknown">CHECK JW</span></td>
+        </tr>
+        <tr>
+          <td><a class="jw-link" href="https://www.justwatch.com/sg/movie/clerks" target="_blank" rel="noopener">Clerks <span class="original-title">疯狂店员 · Kevin Smith</span></a></td>
+          <td class="year-col">1994</td>
+          <td><span class="platform-badge unknown">CHECK JW</span></td>
+        </tr>
+        <tr>
+          <td><a class="jw-link" href="https://www.justwatch.com/sg/movie/four-weddings-and-a-funeral" target="_blank" rel="noopener">Four Weddings and a Funeral <span class="original-title">四个婚礼和一个葬礼 · Mike Newell</span></a></td>
+          <td class="year-col">1994</td>
+          <td><span class="platform-badge unknown">CHECK JW</span></td>
+        </tr>
+        <tr>
+          <td><a class="jw-link" href="https://www.justwatch.com/sg/movie/interview-with-the-vampire-the-vampire-chronicles" target="_blank" rel="noopener">Interview with the Vampire <span class="original-title">夜访吸血鬼</span></a></td>
+          <td class="year-col">1994</td>
+          <td><span class="platform-badge unknown">CHECK JW</span></td>
+        </tr>
+        <tr>
+          <td><a class="jw-link" href="https://www.justwatch.com/sg/movie/ace-ventura-pet-detective" target="_blank" rel="noopener">Ace Ventura: Pet Detective <span class="original-title">神探飞机头 · Jim Carrey</span></a></td>
+          <td class="year-col">1994</td>
+          <td><span class="platform-badge unknown">CHECK JW</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h4 class="watch-group-title">美剧 <span class="ital">US TV Series</span></h4>
+    <table class="watch-table">
+      <thead>
+        <tr>
+          <th style="width:40%;">作品</th>
+          <th style="width:10%;">年份</th>
+          <th style="width:50%;">可能的观看渠道</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><a class="jw-link" href="https://www.justwatch.com/sg/tv-show/friends" target="_blank" rel="noopener">Friends <span class="original-title">六人行</span></a></td>
+          <td class="year-col">1994-2004</td>
+          <td><span class="platform-badge hbo">HBO MAX</span> &nbsp; 2024 年 11 月已从 Netflix SG 下架；WBD 收回到 HBO Max（SG 地区 HBO Go / HBO Max 有）</td>
+        </tr>
+        <tr>
+          <td><a class="jw-link" href="https://www.justwatch.com/sg/tv-show/er" target="_blank" rel="noopener">ER <span class="original-title">急诊室的故事</span></a></td>
+          <td class="year-col">1994-2009</td>
+          <td><span class="platform-badge unknown">CHECK JW</span> &nbsp; 常在 HBO Max / Max 体系</td>
+        </tr>
+        <tr>
+          <td><a class="jw-link" href="https://www.justwatch.com/sg/tv-show/my-so-called-life" target="_blank" rel="noopener">My So-Called Life</a></td>
+          <td class="year-col">1994-95</td>
+          <td><span class="platform-badge unknown">CHECK JW</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h4 class="watch-group-title">华语电影 <span class="ital">Chinese-Language Films</span></h4>
+    <table class="watch-table">
+      <thead>
+        <tr>
+          <th style="width:40%;">作品</th>
+          <th style="width:10%;">年份</th>
+          <th style="width:50%;">可能的观看渠道</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><a class="jw-link" href="https://www.justwatch.com/sg/movie/chungking-express" target="_blank" rel="noopener">Chungking Express <span class="original-title">重庆森林 · 王家卫</span></a></td>
+          <td class="year-col">1994</td>
+          <td><span class="platform-badge unknown">CHECK JW</span> &nbsp; Criterion Channel 有，SG 可能需租赁</td>
+        </tr>
+        <tr>
+          <td><a class="jw-link" href="https://www.justwatch.com/sg/movie/to-live" target="_blank" rel="noopener">To Live <span class="original-title">活着 · 张艺谋</span></a></td>
+          <td class="year-col">1994</td>
+          <td><span class="platform-badge unknown">CHECK JW</span> &nbsp; 大陆被禁，国际发行有限，多为 Criterion / 艺术院线</td>
+        </tr>
+        <tr>
+          <td><a class="jw-link" href="https://www.justwatch.com/sg/movie/eat-drink-man-woman" target="_blank" rel="noopener">Eat Drink Man Woman <span class="original-title">饮食男女 · 李安</span></a></td>
+          <td class="year-col">1994</td>
+          <td><span class="platform-badge unknown">CHECK JW</span></td>
+        </tr>
+        <tr>
+          <td><a class="jw-link" href="https://www.justwatch.com/sg/movie/ashes-of-time" target="_blank" rel="noopener">Ashes of Time Redux <span class="original-title">东邪西毒 (终极版) · 王家卫</span></a></td>
+          <td class="year-col">1994/2008</td>
+          <td><span class="platform-badge unknown">CHECK JW</span> &nbsp; 推荐看 2008 Redux 终极版</td>
+        </tr>
+        <tr>
+          <td><a class="jw-link" href="https://www.justwatch.com/sg/movie/hail-the-judge" target="_blank" rel="noopener">Hail the Judge <span class="original-title">九品芝麻官 · 周星驰</span></a></td>
+          <td class="year-col">1994</td>
+          <td><span class="platform-badge unknown">CHECK JW</span> &nbsp; 港产经典，渠道较散</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- CHAPTER 2 TITLES -->
+  <div class="section">
+    <div class="section-label">附录 · 来自 Ch.02 · 香港电影扩散</div>
+
+    <h4 class="watch-group-title">港人好莱坞作品 <span class="ital">Hong Kong → Hollywood</span></h4>
+    <table class="watch-table">
+      <thead>
+        <tr>
+          <th style="width:40%;">作品</th>
+          <th style="width:10%;">年份</th>
+          <th style="width:50%;">可能的观看渠道</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><a class="jw-link" href="https://www.justwatch.com/sg/movie/face-off" target="_blank" rel="noopener">Face/Off <span class="original-title">变脸 · 吴宇森</span></a></td>
+          <td class="year-col">1997</td>
+          <td><span class="platform-badge unknown">CHECK JW</span></td>
+        </tr>
+        <tr>
+          <td><a class="jw-link" href="https://www.justwatch.com/sg/movie/mission-impossible-ii" target="_blank" rel="noopener">Mission: Impossible II <span class="original-title">碟中谍 2 · 吴宇森</span></a></td>
+          <td class="year-col">2000</td>
+          <td><span class="platform-badge unknown">CHECK JW</span> &nbsp; Paramount 体系</td>
+        </tr>
+        <tr>
+          <td><a class="jw-link" href="https://www.justwatch.com/sg/movie/rush-hour" target="_blank" rel="noopener">Rush Hour <span class="original-title">尖峰时刻 · 成龙</span></a></td>
+          <td class="year-col">1998</td>
+          <td><span class="platform-badge unknown">CHECK JW</span></td>
+        </tr>
+        <tr>
+          <td><a class="jw-link" href="https://www.justwatch.com/sg/movie/shanghai-noon" target="_blank" rel="noopener">Shanghai Noon <span class="original-title">上海正午 · 成龙</span></a></td>
+          <td class="year-col">2000</td>
+          <td><span class="platform-badge unknown">CHECK JW</span></td>
+        </tr>
+        <tr>
+          <td><a class="jw-link" href="https://www.justwatch.com/sg/movie/romeo-must-die" target="_blank" rel="noopener">Romeo Must Die <span class="original-title">致命罗密欧 · 李连杰</span></a></td>
+          <td class="year-col">2000</td>
+          <td><span class="platform-badge unknown">CHECK JW</span></td>
+        </tr>
+        <tr>
+          <td><a class="jw-link" href="https://www.justwatch.com/sg/movie/the-matrix" target="_blank" rel="noopener">The Matrix <span class="original-title">黑客帝国 · 袁和平担任动作指导</span></a></td>
+          <td class="year-col">1999</td>
+          <td><span class="platform-badge hbo">HBO MAX</span> &nbsp; Warner Bros 资产，HBO Max 为主</td>
+        </tr>
+        <tr>
+          <td><a class="jw-link" href="https://www.justwatch.com/sg/movie/kill-bill-vol-1" target="_blank" rel="noopener">Kill Bill Vol. 1 <span class="original-title">杀死比尔 · Tarantino</span></a></td>
+          <td class="year-col">2003</td>
+          <td><span class="platform-badge unknown">CHECK JW</span> &nbsp; 流媒体归属变动较多</td>
+        </tr>
+        <tr>
+          <td><a class="jw-link" href="https://www.justwatch.com/sg/movie/kill-bill-vol-2" target="_blank" rel="noopener">Kill Bill Vol. 2 <span class="original-title">杀死比尔 2 · Tarantino</span></a></td>
+          <td class="year-col">2004</td>
+          <td><span class="platform-badge unknown">CHECK JW</span></td>
+        </tr>
+        <tr>
+          <td><a class="jw-link" href="https://www.justwatch.com/sg/movie/crouching-tiger-hidden-dragon" target="_blank" rel="noopener">Crouching Tiger, Hidden Dragon <span class="original-title">卧虎藏龙 · 李安</span></a></td>
+          <td class="year-col">2000</td>
+          <td><span class="platform-badge unknown">CHECK JW</span> &nbsp; Sony 体系</td>
+        </tr>
+        <tr>
+          <td><a class="jw-link" href="https://www.justwatch.com/sg/movie/hero" target="_blank" rel="noopener">Hero <span class="original-title">英雄 · 张艺谋</span></a></td>
+          <td class="year-col">2002</td>
+          <td><span class="platform-badge unknown">CHECK JW</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h4 class="watch-group-title">华语大陆合拍大片 <span class="ital">Mainland / Co-Production Blockbusters</span></h4>
+    <table class="watch-table">
+      <thead>
+        <tr>
+          <th style="width:40%;">作品</th>
+          <th style="width:10%;">年份</th>
+          <th style="width:50%;">可能的观看渠道</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><a class="jw-link" href="https://www.justwatch.com/sg/movie/the-warlords" target="_blank" rel="noopener">The Warlords <span class="original-title">投名状 · 陈可辛</span></a></td>
+          <td class="year-col">2007</td>
+          <td><span class="platform-badge unknown">CHECK JW</span></td>
+        </tr>
+        <tr>
+          <td><a class="jw-link" href="https://www.justwatch.com/sg/movie/american-dreams-in-china" target="_blank" rel="noopener">American Dreams in China <span class="original-title">中国合伙人 · 陈可辛</span></a></td>
+          <td class="year-col">2013</td>
+          <td><span class="platform-badge unknown">CHECK JW</span></td>
+        </tr>
+        <tr>
+          <td><a class="jw-link" href="https://www.justwatch.com/sg/movie/kung-fu-hustle" target="_blank" rel="noopener">Kung Fu Hustle <span class="original-title">功夫 · 周星驰</span></a></td>
+          <td class="year-col">2004</td>
+          <td><span class="platform-badge unknown">CHECK JW</span> &nbsp; Sony 体系</td>
+        </tr>
+        <tr>
+          <td><a class="jw-link" href="https://www.justwatch.com/sg/movie/the-mermaid" target="_blank" rel="noopener">The Mermaid <span class="original-title">美人鱼 · 周星驰</span></a></td>
+          <td class="year-col">2016</td>
+          <td><span class="platform-badge unknown">CHECK JW</span></td>
+        </tr>
+        <tr>
+          <td><a class="jw-link" href="https://www.justwatch.com/sg/movie/operation-mekong" target="_blank" rel="noopener">Operation Mekong <span class="original-title">湄公河行动 · 林超贤</span></a></td>
+          <td class="year-col">2016</td>
+          <td><span class="platform-badge unknown">CHECK JW</span></td>
+        </tr>
+        <tr>
+          <td><a class="jw-link" href="https://www.justwatch.com/sg/movie/operation-red-sea" target="_blank" rel="noopener">Operation Red Sea <span class="original-title">红海行动 · 林超贤</span></a></td>
+          <td class="year-col">2018</td>
+          <td><span class="platform-badge unknown">CHECK JW</span></td>
+        </tr>
+        <tr>
+          <td><a class="jw-link" href="https://www.justwatch.com/sg/movie/detective-dee-and-the-mystery-of-the-phantom-flame" target="_blank" rel="noopener">Detective Dee <span class="original-title">狄仁杰之通天帝国 · 徐克</span></a></td>
+          <td class="year-col">2010</td>
+          <td><span class="platform-badge unknown">CHECK JW</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h4 class="watch-group-title">香港留守派 <span class="ital">Stayed in Hong Kong</span></h4>
+    <table class="watch-table">
+      <thead>
+        <tr>
+          <th style="width:40%;">作品</th>
+          <th style="width:10%;">年份</th>
+          <th style="width:50%;">可能的观看渠道</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><a class="jw-link" href="https://www.justwatch.com/sg/movie/infernal-affairs" target="_blank" rel="noopener">Infernal Affairs <span class="original-title">无间道 · 刘伟强 / 麦兆辉</span></a></td>
+          <td class="year-col">2002</td>
+          <td><span class="platform-badge unknown">CHECK JW</span> &nbsp; 港片经典，若没看过强推先看原版再看 Scorsese 的翻拍 The Departed</td>
+        </tr>
+        <tr>
+          <td><a class="jw-link" href="https://www.justwatch.com/sg/movie/the-mission" target="_blank" rel="noopener">The Mission <span class="original-title">枪火 · 杜琪峰</span></a></td>
+          <td class="year-col">1999</td>
+          <td><span class="platform-badge unknown">CHECK JW</span></td>
+        </tr>
+        <tr>
+          <td><a class="jw-link" href="https://www.justwatch.com/sg/movie/election" target="_blank" rel="noopener">Election <span class="original-title">黑社会 · 杜琪峰</span></a></td>
+          <td class="year-col">2005</td>
+          <td><span class="platform-badge unknown">CHECK JW</span></td>
+        </tr>
+        <tr>
+          <td><a class="jw-link" href="https://www.justwatch.com/sg/movie/exiled" target="_blank" rel="noopener">Exiled <span class="original-title">放·逐 · 杜琪峰</span></a></td>
+          <td class="year-col">2006</td>
+          <td><span class="platform-badge unknown">CHECK JW</span></td>
+        </tr>
+        <tr>
+          <td><a class="jw-link" href="https://www.justwatch.com/sg/movie/a-simple-life" target="_blank" rel="noopener">A Simple Life <span class="original-title">桃姐 · 许鞍华</span></a></td>
+          <td class="year-col">2011</td>
+          <td><span class="platform-badge unknown">CHECK JW</span> &nbsp; 叶德娴威尼斯影后</td>
+        </tr>
+        <tr>
+          <td><a class="jw-link" href="https://www.justwatch.com/sg/movie/the-way-we-are" target="_blank" rel="noopener">The Way We Are <span class="original-title">天水围的日与夜 · 许鞍华</span></a></td>
+          <td class="year-col">2008</td>
+          <td><span class="platform-badge unknown">CHECK JW</span></td>
+        </tr>
+        <tr>
+          <td><a class="jw-link" href="https://www.justwatch.com/sg/movie/love-in-a-puff" target="_blank" rel="noopener">Love in a Puff <span class="original-title">志明与春娇 · 彭浩翔</span></a></td>
+          <td class="year-col">2010</td>
+          <td><span class="platform-badge unknown">CHECK JW</span></td>
+        </tr>
+        <tr>
+          <td><a class="jw-link" href="https://www.justwatch.com/sg/movie/protege" target="_blank" rel="noopener">Protégé <span class="original-title">门徒 · 尔冬升</span></a></td>
+          <td class="year-col">2007</td>
+          <td><span class="platform-badge unknown">CHECK JW</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- CHAPTER 3 TITLES -->
+  <div class="section">
+    <div class="section-label">附录 · 来自 Ch.03 · 日剧 VCD 时代</div>
+
+    <div style="background: var(--green); color: var(--paper); padding: 20px 24px; margin-bottom: 24px; border: 2px solid var(--ink);">
+      <p style="color: var(--paper); font-size: 14px; line-height: 1.7; margin: 0;">⚠ <strong style="color: var(--gold-bright);">关于日剧的实话：</strong> 1990 年代经典日剧在 Netflix SG 和 Prime Video SG 上基本<strong>不在</strong>。真正的日剧宝库是：<strong style="color: var(--gold-bright);">Viu SG</strong>（2020 年拿下一大批富士经典剧的 SEA 版权，包括《悠长假期》）+ <strong style="color: var(--gold-bright);">WeTV / iQIYI SEA</strong> + <strong style="color: var(--gold-bright);">U-Next / Hulu Japan</strong>（需日区账号）。你如果真想看经典日剧，订一个 Viu 或许比 Prime 更划算。</p>
+    </div>
+
+    <table class="watch-table">
+      <thead>
+        <tr>
+          <th style="width:40%;">作品</th>
+          <th style="width:10%;">年份</th>
+          <th style="width:50%;">可能的观看渠道</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><a class="jw-link" href="https://www.justwatch.com/sg/tv-show/oshin" target="_blank" rel="noopener">Oshin <span class="original-title">阿信 · NHK 晨间剧</span></a></td>
+          <td class="year-col">1983</td>
+          <td><span class="platform-badge unknown">CHECK JW</span> &nbsp; NHK World / YouTube 官方部分有</td>
+        </tr>
+        <tr>
+          <td><a class="jw-link" href="https://www.justwatch.com/sg/tv-show/tokyo-love-story" target="_blank" rel="noopener">Tokyo Love Story <span class="original-title">东京爱情故事 · 富士月九</span></a></td>
+          <td class="year-col">1991</td>
+          <td><span class="platform-badge viu">VIU SG</span> &nbsp; Viu 有富士系剧版权</td>
+        </tr>
+        <tr>
+          <td><a class="jw-link" href="https://www.justwatch.com/sg/tv-show/long-vacation" target="_blank" rel="noopener">Long Vacation <span class="original-title">悠长假期 · 富士月九 · 木村拓哉</span></a></td>
+          <td class="year-col">1996</td>
+          <td><span class="platform-badge viu">VIU SG</span> &nbsp; 2020 年 Viu 公开宣布拿下 SEA 版权，这部基本上就是 Viu 的独家</td>
+        </tr>
+        <tr>
+          <td><a class="jw-link" href="https://www.justwatch.com/sg/tv-show/beautiful-life" target="_blank" rel="noopener">Beautiful Life <span class="original-title">美丽人生 · 木村拓哉</span></a></td>
+          <td class="year-col">2000</td>
+          <td><span class="platform-badge unknown">CHECK JW</span> &nbsp; Viu 可能有</td>
+        </tr>
+        <tr>
+          <td><a class="jw-link" href="https://www.justwatch.com/sg/tv-show/great-teacher-onizuka" target="_blank" rel="noopener">GTO · Great Teacher Onizuka <span class="original-title">麻辣教师 · 反町隆史</span></a></td>
+          <td class="year-col">1998</td>
+          <td><span class="platform-badge unknown">CHECK JW</span></td>
+        </tr>
+        <tr>
+          <td><a class="jw-link" href="https://www.justwatch.com/sg/tv-show/beach-boys" target="_blank" rel="noopener">Beach Boys <span class="original-title">海滩男孩 · 反町隆史 / 竹野内丰</span></a></td>
+          <td class="year-col">1997</td>
+          <td><span class="platform-badge viu">VIU SG</span> &nbsp; Viu 富士月九片单</td>
+        </tr>
+        <tr>
+          <td><a class="jw-link" href="https://www.justwatch.com/sg/tv-show/under-one-roof" target="_blank" rel="noopener">Under One Roof <span class="original-title">同一屋檐下 · 江口洋介</span></a></td>
+          <td class="year-col">1993</td>
+          <td><span class="platform-badge unknown">CHECK JW</span></td>
+        </tr>
+        <tr>
+          <td><a class="jw-link" href="https://www.justwatch.com/sg/tv-show/ice-world" target="_blank" rel="noopener">Ice World <span class="original-title">冰的世界 · 竹野内丰</span></a></td>
+          <td class="year-col">1999</td>
+          <td><span class="platform-badge unknown">CHECK JW</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 补充 Ricky 的其他提及作品 -->
+  <div class="section">
+    <div class="section-label">彩蛋 · 对话中提过但不在正文的</div>
+    <p class="section-intro">这些是我们之前聊过的几部，也一起给你查询入口：</p>
+
+    <table class="watch-table">
+      <thead>
+        <tr>
+          <th style="width:40%;">作品</th>
+          <th style="width:10%;">年份</th>
+          <th style="width:50%;">可能的观看渠道</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><a class="jw-link" href="https://www.justwatch.com/sg/movie/chef" target="_blank" rel="noopener">Chef <span class="original-title">落魄大厨 · Jon Favreau</span></a></td>
+          <td class="year-col">2014</td>
+          <td><span class="platform-badge netflix">NETFLIX SG</span> &nbsp; Netflix SG 有</td>
+        </tr>
+        <tr>
+          <td><a class="jw-link" href="https://www.justwatch.com/sg/tv-show/the-bear" target="_blank" rel="noopener">The Bear <span class="original-title">熊家餐馆</span></a></td>
+          <td class="year-col">2022-</td>
+          <td><span class="platform-badge disney">DISNEY+ SG</span> &nbsp; Disney+ SG（Star 频道）有，不是 Netflix</td>
+        </tr>
+        <tr>
+          <td><a class="jw-link" href="https://www.justwatch.com/sg/movie/kill-bill-the-whole-bloody-affair" target="_blank" rel="noopener">Kill Bill: The Whole Bloody Affair <span class="original-title">完整版影迷剪辑</span></a></td>
+          <td class="year-col">2011</td>
+          <td><span class="platform-badge unknown">未正式发行</span> &nbsp; Tarantino 粉丝放映版，未正式上流媒体</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- FINAL TIP -->
+  <div class="callout" style="margin-top: 60px;">
+    <div class="callout-label">PRO TIP · 小建议</div>
+    <div class="callout-title">把 <span class="ital">JustWatch</span> 设为你的主查询入口</div>
+    <p><strong>直接访问 <a href="https://www.justwatch.com/sg" target="_blank" rel="noopener" style="color: var(--gold-bright); border-bottom: 1px solid var(--gold-bright);">justwatch.com/sg</a></strong>（新加坡版），免费注册后可以：</p>
+    <p style="margin-top: 12px;">① 建立 Watchlist —— 把感兴趣的片都收藏起来，它会在作品上线 Netflix SG / Prime SG 时自动通知你。</p>
+    <p>② <strong>过滤你的订阅平台</strong> —— 只看"我订阅了的服务上能看的内容"，自动帮你规划今晚看什么。</p>
+    <p>③ 移动端 App 支持扫条形码 / 封面识别 —— 在书店看到一本电影设定集，直接扫封面就知道能在哪看。</p>
+    <p style="margin-top: 16px;"><strong>对你最实用的功能</strong>：进入 Settings → 只勾选 Netflix 和 Amazon Prime Video —— 然后首页的"流行""新增"等推荐会自动缩小到你的两个平台能直接看的内容。省掉"找了半天原来要付费租"的尴尬。</p>
+  </div>
+</section>
+
+<!-- ════════════════════════════════
+     FOOTER
+     ════════════════════════════════ -->
+<footer class="footer">
+  <div class="footer-top">
+    <div>
+      <h3 class="footer-title">The Nineties <span class="ital">Dossier</span></h3>
+      <p style="font-family: var(--serif-display); font-style: italic; font-size: 16px; color: var(--paper-shadow); margin-top: 12px;">
+        A Deep Research Report on 1990s Global Pop Culture<br>
+        Cross-Regional · Cross-Medium · Written for the Curious
+      </p>
+    </div>
+    <div class="footer-col">
+      <h4>Chapters</h4>
+      <ul>
+        <li>01 · 1994 Miracle Year</li>
+        <li>02 · HK Diaspora Map</li>
+        <li>03 · J-Drama VCD × SEA</li>
+        <li>04 · Synthesis</li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Prepared For</h4>
+      <ul>
+        <li>Ricky Yuan 袁泽潭</li>
+        <li>个人兴趣阅读</li>
+        <li>A Cultural Study</li>
+        <li>Singapore · 2026 Spring</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 · Compiled with Claude · For Private Use</span>
+    <span>Vol. I · Issue 90s · April 2026</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const sections = [
+    { id: 'top',       nav: 'top' },
+    { id: 'toc',       nav: 'toc' },
+    { id: 'chapter-1', nav: 'chapter-1' },
+    { id: 'chapter-2', nav: 'chapter-2' },
+    { id: 'chapter-3', nav: 'chapter-3' },
+    { id: 'chapter-4', nav: 'chapter-4' },
+    { id: 'chapter-5', nav: 'chapter-5' },
+    { id: 'chapter-6', nav: 'chapter-6' }
+  ];
+  const navLinks = document.querySelectorAll('.nav-float a');
+  const progressBar = document.getElementById('progressBar');
+  const backToTop = document.getElementById('backToTop');
+
+  function updateActive() {
+    const scrollY = window.scrollY;
+    const viewportMid = scrollY + window.innerHeight * 0.35;
+    let current = 'top';
+    sections.forEach(s => {
+      const el = document.getElementById(s.id);
+      if (el && el.offsetTop <= viewportMid) {
+        current = s.nav;
+      }
+    });
+    navLinks.forEach(link => {
+      link.classList.toggle('active', link.dataset.target === current);
+    });
+
+    // progress bar
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = Math.min(100, Math.max(0, (scrollY / docHeight) * 100));
+    progressBar.style.width = pct + '%';
+
+    // back to top
+    backToTop.classList.toggle('visible', scrollY > 600);
+  }
+
+  backToTop.addEventListener('click', function(){
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // smooth scroll for all internal anchor links (TOC + nav)
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', function(e){
+      const href = this.getAttribute('href');
+      if (href.length > 1) {
+        const target = document.getElementById(href.slice(1));
+        if (target) {
+          e.preventDefault();
+          const offset = target.offsetTop - 20;
+          window.scrollTo({ top: offset, behavior: 'smooth' });
+          history.replaceState(null, '', href);
+        }
+      }
+    });
+  });
+
+  window.addEventListener('scroll', updateActive, { passive: true });
+  window.addEventListener('resize', updateActive);
+  updateActive();
+})();
+</script>
+
+</body>
+</html>
