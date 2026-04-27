@@ -1,0 +1,47 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@layouts/BaseLayout.astro';
+
+const dossiers = (await getCollection('dossiers', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+---
+<BaseLayout title="Dossiers — Ricky's Space">
+
+  <header class="site-header">
+    <div class="terminal-prompt">
+      <span>~/rickys-space/dossiers $</span>
+      <span>ls -t</span>
+      <span class="cursor"></span>
+    </div>
+    <h1 class="site-title">Dossiers</h1>
+    <p class="site-desc">长文 · 深度 · 双语 — EN-first bilingual deep dives</p>
+  </header>
+
+  <main class="posts" id="posts">
+    {dossiers.map((d) => (
+      <a class="post-card" href={`/dossiers/${d.id}`} data-category={d.data.category}>
+        <div class="post-info">
+          <span class="post-tag" data-t={d.data.category}>{d.data.category}</span>
+          <h2 class="post-title">{d.data.title}</h2>
+          {d.data.title_cn && <p class="post-title-cn" style="font-size:0.85rem;color:#888;margin:0.25rem 0 0;font-family:'JetBrains Mono',monospace;">{d.data.title_cn}</p>}
+          <p class="post-excerpt">{d.data.description}</p>
+        </div>
+        <span class="post-date">{d.data.pubDate.toISOString().slice(0, 10)}</span>
+      </a>
+    ))}
+
+    <a class="post-card" href="/dossiers/culture/90s-pop-culture" data-category="culture">
+      <div class="post-info">
+        <span class="post-tag" data-t="culture">culture</span>
+        <h2 class="post-title">90 年代流行文化深度研究</h2>
+        <p class="post-excerpt">从港台音乐到好莱坞大片，从街机游戏到互联网萌芽，一份关于 90 年代流行文化的全景式深度档案。</p>
+      </div>
+      <span class="post-date">2026-04-19</span>
+    </a>
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2026 Ricky's Space · <a href="/">← home</a></p>
+  </footer>
+
+</BaseLayout>

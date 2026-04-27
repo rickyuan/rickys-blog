@@ -1,0 +1,40 @@
+---
+import { getCollection, render } from 'astro:content';
+import EditorialLayout from '@layouts/EditorialLayout.astro';
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const entries = await getCollection('sg-life', ({ data }) => !data.draft);
+  return entries.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const { title, description, pubDate, tags } = entry.data;
+const formattedDate = pubDate.toISOString().slice(0, 10);
+---
+<EditorialLayout title={`${title} — SG Life`} description={description}>
+
+  <a href="/sg-life" style="font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:#888;text-decoration:none;padding:1rem 2rem;display:inline-block;">← sg-life</a>
+
+  <article style="max-width:680px;margin:2rem auto;padding:0 2rem 6rem;">
+    <header style="border-bottom:2px solid #1a1a1a;margin-bottom:2.5rem;padding-bottom:1.5rem;">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:#888;margin-bottom:0.5rem;">
+        {formattedDate}
+        {tags.map((t: string) => (
+          <span style="margin-left:0.75rem;">#{t}</span>
+        ))}
+      </div>
+      <h1 style="font-family:'Noto Serif SC',serif;font-size:clamp(1.6rem,4vw,2.4rem);font-weight:700;line-height:1.2;margin:0;">{title}</h1>
+    </header>
+
+    <div style="font-family:'Noto Serif SC',serif;font-size:1.05rem;line-height:1.95;color:#2a2a2a;">
+      <Content />
+    </div>
+  </article>
+
+</EditorialLayout>

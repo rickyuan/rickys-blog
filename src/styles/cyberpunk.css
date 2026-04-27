@@ -1,13 +1,3 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ricky's Space</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
-<style>
 :root {
   --bg: #0a0a0f;
   --bg-card: #12121a;
@@ -322,87 +312,86 @@ body {
   .post-card { grid-template-columns: 1fr; padding: 20px; }
   .post-date { padding-top: 0; }
 }
-</style>
-</head>
-<body>
 
-<div class="grid-bg"></div>
-<div class="glow-orb cyan"></div>
-<div class="glow-orb purple"></div>
+/* ── Weekly callout (homepage) ─────────────────────────── */
+.weekly-callout {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  margin: 0 0 32px;
+  padding: 24px 28px;
+  background: linear-gradient(135deg, rgba(0, 212, 170, 0.06), rgba(139, 92, 246, 0.04));
+  border: 1px solid var(--cyan-dim);
+  border-radius: 8px;
+  position: relative;
+  transition: all 0.25s ease;
+  overflow: hidden;
+}
 
-<div class="container">
+.weekly-callout::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, var(--cyan-dim), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
 
-  <header class="site-header">
-    <div class="terminal-prompt">
-      <span>~/rickys-space $</span>
-      <span>cat README.md</span>
-      <span class="cursor"></span>
-    </div>
-    <h1 class="site-title">Ricky's Space</h1>
-    <p class="site-desc">
-      文化 · 生活 · 工作 · 教育 — 用 <span class="highlight">AI</span> 辅助思考，<br>
-      记录一些值得分享的探索与发现。
-    </p>
-  </header>
+.weekly-callout:hover {
+  border-color: var(--cyan);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(0, 212, 170, 0.08);
+}
 
-  <div class="stats-bar">
-    <div class="stat">
-      <span class="stat-label">Posts</span>
-      <span class="stat-value" id="stat-posts">1</span>
-    </div>
-    <div class="stat">
-      <span class="stat-label">Categories</span>
-      <span class="stat-value">4</span>
-    </div>
-    <div class="stat">
-      <span class="stat-label">Powered by</span>
-      <span class="stat-value" style="font-size:0.85rem;">Claude + Human</span>
-    </div>
-    <div class="stat">
-      <span class="stat-label">Status</span>
-      <span class="stat-value" style="font-size:0.85rem;">&#9679; Online</span>
-    </div>
-  </div>
+.weekly-callout:hover::before { opacity: 0.5; }
 
-  <div class="filters">
-    <button class="filter-btn active" data-category="all">* all</button>
-    <button class="filter-btn" data-category="culture"># culture</button>
-    <button class="filter-btn" data-category="life"># life</button>
-    <button class="filter-btn" data-category="work"># work</button>
-    <button class="filter-btn" data-category="education"># education</button>
-  </div>
+.weekly-callout-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 10px;
+}
 
-  <main class="posts" id="posts">
+.weekly-callout-eyebrow {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cyan);
+}
 
-    <a class="post-card" href="posts/culture/90s-pop-culture.html" data-category="culture">
-      <div class="post-info">
-        <span class="post-tag" data-t="culture">culture</span>
-        <h2 class="post-title">90 年代流行文化深度研究</h2>
-        <p class="post-excerpt">从港台音乐到好莱坞大片，从街机游戏到互联网萌芽，一份关于 90 年代流行文化的全景式深度档案。</p>
-      </div>
-      <span class="post-date">2026-04-19</span>
-    </a>
+.weekly-callout-meta {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+}
 
-  </main>
+.weekly-callout-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  line-height: 1.4;
+  margin: 0 0 10px;
+  color: var(--text);
+}
 
-  <footer class="site-footer">
-    <p>&copy; 2026 Ricky's Space &middot; built with curiosity &amp; <a href="#">Claude</a></p>
-  </footer>
+.weekly-callout-note {
+  color: var(--text-dim);
+  font-size: 0.88rem;
+  line-height: 1.6;
+  margin: 0 0 14px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
 
-</div>
-
-<script>
-document.querySelectorAll('.filter-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    const cat = btn.dataset.category;
-    document.querySelectorAll('.post-card').forEach(card => {
-      card.style.display = (cat === 'all' || card.dataset.category === cat) ? '' : 'none';
-    });
-  });
-});
-</script>
-
-</body>
-</html>
+.weekly-callout-link {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--cyan);
+  letter-spacing: 0.04em;
+}

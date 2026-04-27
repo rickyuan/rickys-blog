@@ -1,0 +1,37 @@
+---
+import TelexLayout from '@layouts/TelexLayout.astro';
+import { supabase } from '@lib/supabase';
+
+export const prerender = false;
+
+const { data: weeklies } = await supabase
+  .from('weekly_digests')
+  .select('slug, title, published_at')
+  .order('published_at', { ascending: false })
+  .limit(50);
+---
+<TelexLayout title="Weekly Archive · Ricky's Space" noindex={true}>
+  <header class="tx-issue-header">
+    <div class="tx-issue-eyebrow">Archive</div>
+    <h1 class="tx-issue-title">Weekly digest</h1>
+    <div class="tx-curators-note">
+      AI-curated weekly intel on RTC, Voice AI, SEA + India market signals, and
+      enterprise GTM patterns. Hand-reviewed before publishing.
+    </div>
+  </header>
+
+  {weeklies && weeklies.length > 0 ? (
+    <ul class="tx-archive-list">
+      {weeklies.map((w) => (
+        <li class="tx-archive-item">
+          <span class="tx-archive-week">{w.slug}</span>
+          <a class="tx-archive-link" href={`/weekly/${w.slug}`}>{w.title}</a>
+        </li>
+      ))}
+    </ul>
+  ) : (
+    <p style="color: var(--tx-ink-muted); margin-top: 32px;">
+      No issues published yet.
+    </p>
+  )}
+</TelexLayout>

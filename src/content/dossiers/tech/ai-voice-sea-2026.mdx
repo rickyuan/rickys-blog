@@ -1,0 +1,85 @@
+---
+title: "AI Voice Agents in SEA: Market Map 2026"
+title_cn: "东南亚 AI 语音 Agent：2026 市场图谱"
+description: "How Vapi, Retell and local players are reshaping conversational AI across Southeast Asia — and what it means for enterprise RTC."
+description_cn: "Vapi、Retell 与本地玩家如何重塑东南亚对话式 AI 格局，以及对企业 RTC 的深层影响。"
+category: tech
+pubDate: 2026-04-27
+bilingual: true
+draft: false
+---
+
+import En from '@components/En.astro';
+import Cn from '@components/Cn.astro';
+
+<En>
+
+## The Stack Is Converging
+
+Three years ago, building a production voice agent required stitching together four or five vendors: a speech-to-text provider, an LLM, a text-to-speech engine, a telephony gateway, and some bespoke orchestration layer holding it all together. Today, Vapi and Retell have collapsed most of that stack into a single API surface.
+
+The consolidation is real but fragile. Vapi's core loop — microphone → Deepgram STT → GPT-4o → ElevenLabs TTS → speaker — works smoothly in a US English, low-latency demo environment. It starts fraying the moment you introduce Singlish code-switching, Bahasa Indonesia, or Tamil. The latency budget that feels acceptable at 600ms in San Francisco becomes conspicuous at 900ms in Jakarta, where mobile network variance is wider.
+
+## Why SEA Is a Different Market
+
+Southeast Asia's enterprise voice landscape has three characteristics that western-optimised stacks consistently underestimate:
+
+**Multilingual codeswitching is the norm, not the edge case.** A Singaporean customer service call will regularly toggle between English, Mandarin and Malay within a single utterance. No current voice agent handles this gracefully — they detect a language shift, pause, and either switch fully or hallucinate a mid-utterance translation.
+
+**Telephony is PSTN-heavy.** SEA enterprises — banks, telcos, government agencies — overwhelmingly still route customer calls over PSTN/SIP, not VoIP-native WebRTC. Integrating a modern voice AI stack with a 20-year-old Avaya or Cisco CUCM deployment is not a solved problem.
+
+**Regulatory fragmentation is accelerating.** Singapore's PDPA amendments, Indonesia's PDP Law (effective Oct 2024), and India's DPDPA each impose different requirements on voice call recording, data residency, and consent logging. A voice agent that is compliant in SG may not be compliant in ID.
+
+## The Local Opportunity
+
+This is where the market gap opens. The global platforms — Vapi, Retell, Bland — are optimising for English-first enterprise workflows in North America and Western Europe. The SEA-specific opportunity is in:
+
+1. **Multilingual STT fine-tuning** for Singlish, Manglish, and mixed-code Indonesian
+2. **PSTN/SIP adapter layers** that bridge legacy PBX systems to modern AI stacks
+3. **Compliance packaging** — consent banners, call recording governance, data residency routing
+
+Tencent Cloud's TRTC + Chat stack has a structural advantage here: existing PSTN termination coverage across SEA, regional data centres in Singapore, Mumbai and Jakarta, and a pre-built compliance layer inherited from WeChat/Weixin governance requirements.
+
+## Where This Is Going
+
+The 12-month trajectory I'd bet on: voice agent infrastructure commoditises faster than anyone expects (Twilio's bet on AI is the signal), while the differentiation shifts to **domain-specific fine-tuning** and **systems integration depth**. The winner in SEA enterprise voice won't be the platform with the best LLM — it will be the one that can reliably handle a codeswitched call in Singlish, log it compliantly under PDPA, and route it into a Salesforce workflow on a Cisco CUCM trunk.
+
+That's a harder problem than it sounds. It's also a more defensible one.
+
+</En>
+
+<Cn>
+
+## 技术栈正在收敛
+
+三年前，要搭建一套生产级语音 Agent，你需要把四五个供应商拼凑在一起：语音转文字、大模型、文字转语音、电话网关，再加上某个把一切黏合起来的定制编排层。今天，Vapi 和 Retell 已经把这套拼图压缩进了一个 API 接口。
+
+整合是真实发生的，但也是脆弱的。Vapi 的核心回路——麦克风 → Deepgram STT → GPT-4o → ElevenLabs TTS → 扬声器——在美式英语、低延迟的演示环境下运行流畅。但一旦引入新式英语（Singlish）语码混用、印度尼西亚语或泰米尔语，就开始出现裂缝。旧金山 600ms 感觉可接受的延迟，在雅加达——移动网络抖动更大的地方——900ms 就已经让人明显察觉。
+
+## 为什么东南亚是一个不同的市场
+
+东南亚的企业语音场景有三个特点，西方优化的技术栈一再低估：
+
+**多语言语码混用是常态，不是边缘案例。** 一通新加坡客服电话，在单次对话中频繁切换英语、普通话和马来语是司空见惯的事。目前没有任何语音 Agent 能优雅地处理这一点——它们检测到语言切换时会停顿，然后要么完全切换语言，要么在切换过程中产生幻觉式翻译。
+
+**电话仍然以 PSTN 为主。** 东南亚企业——银行、运营商、政府机构——绝大多数依然通过 PSTN/SIP 路由客户来电，而非原生 VoIP 的 WebRTC。把现代 AI 语音栈与一套 20 年历史的 Avaya 或 Cisco CUCM 系统对接，远不是一个已解决的问题。
+
+**监管碎片化正在加速。** 新加坡 PDPA 修正案、印度尼西亚《个人数据保护法》（2024 年 10 月生效）、印度 DPDPA，在语音录音、数据驻留和知情同意记录方面各有不同要求。在新加坡合规的语音 Agent，在印尼未必合规。
+
+## 本土机会在哪里
+
+这正是市场缺口打开的地方。全球平台——Vapi、Retell、Bland——正在为北美和西欧的英语优先企业工作流而优化。东南亚特有的机会在于：
+
+1. **多语言 STT 微调**：面向 Singlish、马来式英语和混码印尼语
+2. **PSTN/SIP 适配层**：将传统 PBX 系统与现代 AI 栈桥接
+3. **合规打包**：知情同意提示、通话录音治理、数据驻留路由
+
+腾讯云的 TRTC + Chat 在这里有结构性优势：覆盖东南亚的 PSTN 终端接入、新加坡、孟买和雅加达的区域数据中心，以及从微信/Weixin 治理要求继承而来的预置合规层。
+
+## 接下来会怎样
+
+我押注的 12 个月走势是：语音 Agent 基础设施的商品化速度会快于所有人的预期（Twilio 在 AI 上的押注就是信号），而差异化会转向**垂直领域微调**和**系统集成深度**。东南亚企业语音市场的赢家，不会是大模型最好的平台——而是能可靠处理新式英语语码混用通话、在 PDPA 框架下合规记录，并在 Cisco CUCM 中继上路由进 Salesforce 工作流的那一家。
+
+这比听起来要难得多。也因此更难被复制。
+
+</Cn>

@@ -1,0 +1,44 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@layouts/BaseLayout.astro';
+
+const entries = (await getCollection('sg-life', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+---
+<BaseLayout title="SG Life — Ricky's Space">
+
+  <header class="site-header">
+    <div class="terminal-prompt">
+      <span>~/rickys-space/sg-life $</span>
+      <span>ls -t</span>
+      <span class="cursor"></span>
+    </div>
+    <h1 class="site-title">SG Life</h1>
+    <p class="site-desc">新加坡笔记本 — 生活流水账，随手记</p>
+  </header>
+
+  <main class="posts" id="posts">
+    {entries.map((e) => (
+      <a class="post-card" href={`/sg-life/${e.id}`} data-category="sg-life">
+        <div class="post-info">
+          <span class="post-tag" data-t="sg-life">sg-life</span>
+          <h2 class="post-title">{e.data.title}</h2>
+          <p class="post-excerpt">{e.data.description}</p>
+          {e.data.tags.length > 0 && (
+            <div style="margin-top:0.4rem;display:flex;gap:0.4rem;flex-wrap:wrap;">
+              {e.data.tags.map((t: string) => (
+                <span style="font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:#888;">#{t}</span>
+              ))}
+            </div>
+          )}
+        </div>
+        <span class="post-date">{e.data.pubDate.toISOString().slice(0, 10)}</span>
+      </a>
+    ))}
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2026 Ricky's Space · <a href="/">← home</a></p>
+  </footer>
+
+</BaseLayout>

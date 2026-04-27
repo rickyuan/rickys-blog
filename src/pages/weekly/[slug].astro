@@ -1,0 +1,51 @@
+---
+import { marked } from 'marked';
+import TelexLayout from '@layouts/TelexLayout.astro';
+import { supabase, type WeeklyDigest } from '@lib/supabase';
+
+export const prerender = false;
+
+const { slug } = Astro.params;
+
+const { data, error } = await supabase
+  .from('weekly_digests')
+  .select('*')
+  .eq('slug', slug as string)
+  .maybeSingle<WeeklyDigest>();
+
+if (error || !data) {
+  return Astro.redirect('/weekly');
+}
+
+const bodyHtml = marked.parse(data.body_md ?? '', { gfm: true, breaks: false });
+const publishedDate = data.published_at
+  ? new Date(data.published_at).toISOString().slice(0, 10)
+  : '';
+---
+<TelexLayout title={`${data.title} · Ricky's Weekly`} noindex={true}>
+  <header class="tx-issue-header">
+    <div class="tx-issue-eyebrow">Issue {data.slug} · {publishedDate}</div>
+    <h1 class="tx-issue-title">{data.title}</h1>
+
+    {data.curators_note_en && (
+      <div class="tx-curators-note">{data.curators_note_en}</div>
+    )}
+    {data.curators_note_cn && (
+      <div class="tx-curators-note">{data.curators_note_cn}</div>
+    )}
+  </header>
+
+  <article class="tx-body" set:html={bodyHtml} />
+
+  {data.deep_dive_url && (
+    <aside class="tx-deep-dive">
+      <div class="tx-deep-dive-eyebrow">Deep Dive of the Week</div>
+      <h3>Worth your full attention</h3>
+      {data.deep_dive_summary_en && <p>{data.deep_dive_summary_en}</p>}
+      {data.deep_dive_summary_cn && <p>{data.deep_dive_summary_cn}</p>}
+      <a class="tx-deep-dive-link" href={data.deep_dive_url} target="_blank" rel="noopener">
+        Read the full piece →
+      </a>
+    </aside>
+  )}
+</TelexLayout>

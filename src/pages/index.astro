@@ -1,0 +1,142 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { supabase } from '@lib/supabase';
+
+export const prerender = false;
+
+const { data: latestWeekly } = await supabase
+  .from('weekly_digests')
+  .select('slug, title, curators_note_cn, curators_note_en, published_at')
+  .order('published_at', { ascending: false })
+  .limit(1)
+  .maybeSingle();
+
+const { count: weeklyCount } = await supabase
+  .from('weekly_digests')
+  .select('slug', { count: 'exact', head: true });
+
+const weeklyDate = latestWeekly?.published_at
+  ? new Date(latestWeekly.published_at).toISOString().slice(0, 10)
+  : '';
+
+const dossiers = (await getCollection('dossiers', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+
+const sgLifeEntries = (await getCollection('sg-life', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+
+const latestSgLife = sgLifeEntries[0];
+---
+<BaseLayout title="Ricky's Space">
+
+  <header class="site-header">
+    <div class="terminal-prompt">
+      <span>~/rickys-space $</span>
+      <span>cat README.md</span>
+      <span class="cursor"></span>
+    </div>
+    <h1 class="site-title">Ricky's Space</h1>
+    <p class="site-desc">
+      文化 · 生活 · 工作 — 用 <span class="highlight">AI</span> 辅助思考，<br />
+      记录一些值得分享的探索与发现。
+    </p>
+  </header>
+
+  <div class="stats-bar">
+    <div class="stat">
+      <span class="stat-label">Dossiers</span>
+      <span class="stat-value">{dossiers.length + 1}</span>
+    </div>
+    <div class="stat">
+      <span class="stat-label">Weekly</span>
+      <span class="stat-value">{weeklyCount ?? 0}</span>
+    </div>
+    <div class="stat">
+      <span class="stat-label">SG Life</span>
+      <span class="stat-value">{sgLifeEntries.length}</span>
+    </div>
+    <div class="stat">
+      <span class="stat-label">Status</span>
+      <span class="stat-value" style="font-size:0.85rem;">● Online</span>
+    </div>
+  </div>
+
+  {latestWeekly && (
+    <a class="weekly-callout" href={`/weekly/${latestWeekly.slug}`}>
+      <div class="weekly-callout-head">
+        <span class="weekly-callout-eyebrow">📡 Latest Weekly</span>
+        <span class="weekly-callout-meta">{latestWeekly.slug} · {weeklyDate}</span>
+      </div>
+      <h2 class="weekly-callout-title">{latestWeekly.title}</h2>
+      {latestWeekly.curators_note_cn && (
+        <p class="weekly-callout-note">{latestWeekly.curators_note_cn}</p>
+      )}
+      <span class="weekly-callout-link">Read full digest →</span>
+    </a>
+  )}
+
+  <div class="filters">
+    <button class="filter-btn active" data-category="all">* all</button>
+    <button class="filter-btn" data-category="culture"># culture</button>
+    <button class="filter-btn" data-category="sports"># sports</button>
+    <button class="filter-btn" data-category="tech"># tech</button>
+    <button class="filter-btn" data-category="sg-life"># sg-life</button>
+  </div>
+
+  <main class="posts" id="posts">
+
+    {dossiers.map((d) => (
+      <a class="post-card" href={`/dossiers/${d.id}`} data-category={d.data.category}>
+        <div class="post-info">
+          <span class="post-tag" data-t={d.data.category}>{d.data.category}</span>
+          <h2 class="post-title">{d.data.title}</h2>
+          {d.data.title_cn && (
+            <p style="font-size:0.8rem;color:#888;margin:0.2rem 0 0.25rem;font-family:'JetBrains Mono',monospace;">{d.data.title_cn}</p>
+          )}
+          <p class="post-excerpt">{d.data.description}</p>
+        </div>
+        <span class="post-date">{d.data.pubDate.toISOString().slice(0, 10)}</span>
+      </a>
+    ))}
+
+    <a class="post-card" href="/dossiers/culture/90s-pop-culture" data-category="culture">
+      <div class="post-info">
+        <span class="post-tag" data-t="culture">culture</span>
+        <h2 class="post-title">90 年代流行文化深度研究</h2>
+        <p class="post-excerpt">从港台音乐到好莱坞大片，从街机游戏到互联网萌芽，一份关于 90 年代流行文化的全景式深度档案。</p>
+      </div>
+      <span class="post-date">2026-04-19</span>
+    </a>
+
+    {sgLifeEntries.map((e) => (
+      <a class="post-card" href={`/sg-life/${e.id}`} data-category="sg-life">
+        <div class="post-info">
+          <span class="post-tag" data-t="sg-life">sg-life</span>
+          <h2 class="post-title">{e.data.title}</h2>
+          <p class="post-excerpt">{e.data.description}</p>
+        </div>
+        <span class="post-date">{e.data.pubDate.toISOString().slice(0, 10)}</span>
+      </a>
+    ))}
+
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2026 Ricky's Space · built with curiosity & <a href="#">Claude</a></p>
+  </footer>
+
+</BaseLayout>
+
+<script>
+  document.querySelectorAll('.filter-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach((b) => b.classList.remove('active'));
+      btn.classList.add('active');
+      const cat = (btn as HTMLElement).dataset.category;
+      document.querySelectorAll<HTMLElement>('.post-card').forEach((card) => {
+        card.style.display = cat === 'all' || card.dataset.category === cat ? '' : 'none';
+      });
+    });
+  });
+</script>

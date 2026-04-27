@@ -1,0 +1,26 @@
+{
+  "competitors": [
+    "twilio", "agora", "vonage", "sinch", "zegocloud", "sendbird",
+    "livekit", "genesys", "pubnub", "nexmo", "openai realtime",
+    "daily.co", "chime", "amazon connect", "five9", "talkdesk",
+    "nice", "zoom contact center", "dialpad", "ringcentral"
+  ],
+  "tech": [
+    "rtc", "webrtc", "real-time", "voice ai", "conversational ai",
+    "stt", "tts", "asr", "sip", "rtp", "codec", "cpaas", "ccaas",
+    "video sdk", "live streaming", "low latency", "voice agent",
+    "ai agent", "anthropic", "claude", "gpt-4", "openai", "gemini",
+    "deepgram", "elevenlabs", "cartesia", "vapi", "retell", "pipecat"
+  ],
+  "sea_india": [
+    "singapore", "indonesia", "malaysia", "thailand", "vietnam",
+    "philippines", "india", "grab", "gojek", "shopee", "lazada",
+    "sea region", "asean", "imda", "mas", "singtel", "starhub",
+    "telkom", "jio", "reliance", "ais"
+  ],
+  "gtm": [
+    "developer", "api pricing", "platform launch", "partnership",
+    "integration", "enterprise", "case study", "saas", "go-to-market",
+    "channel", "reseller", "acquisition", "funding", "ipo"
+  ]
+}

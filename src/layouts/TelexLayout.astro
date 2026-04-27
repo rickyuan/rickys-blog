@@ -1,0 +1,43 @@
+---
+import '@styles/telex.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description = "Ricky's Weekly — RTC, Voice AI, SEA market intelligence",
+  noindex = true,
+} = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  {noindex && <meta name="robots" content="noindex, nofollow" />}
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap"
+    rel="stylesheet"
+  />
+</head>
+<body class="telex">
+  <div class="telex-container">
+    <header class="tx-masthead">
+      <div class="tx-masthead-title"><a href="/">~/rickys-space</a> · weekly</div>
+      <div class="tx-masthead-meta">curated · ai-assisted</div>
+    </header>
+    <slot />
+    <footer class="tx-footer">
+      <p>© 2026 Ricky's Space · <a href="/">home</a> · <a href="/weekly">archive</a></p>
+    </footer>
+  </div>
+</body>
+</html>

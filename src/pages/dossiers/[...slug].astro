@@ -1,0 +1,37 @@
+---
+import { getCollection, render } from 'astro:content';
+import BilingualLayout from '@layouts/BilingualLayout.astro';
+import EditorialLayout from '@layouts/EditorialLayout.astro';
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const dossiers = await getCollection('dossiers', ({ data }) => !data.draft);
+  return dossiers.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const { title, title_cn, description, description_en, pubDate, category, bilingual } = entry.data;
+---
+
+{bilingual ? (
+  <BilingualLayout
+    title={title}
+    title_cn={title_cn}
+    description={description_en ?? description}
+    pubDate={pubDate.toISOString()}
+    category={category}
+  >
+    <Content />
+  </BilingualLayout>
+) : (
+  <EditorialLayout title={title} description={description}>
+    <article style="max-width:760px;margin:3rem auto;padding:0 2rem;">
+      <Content />
+    </article>
+  </EditorialLayout>
+)}
