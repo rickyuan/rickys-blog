@@ -26,7 +26,7 @@ const dossiers = (await getCollection('dossiers', ({ data }) => !data.draft))
 const sgLifeEntries = (await getCollection('sg-life', ({ data }) => !data.draft))
   .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
 
-const latestSgLife = sgLifeEntries[0];
+
 ---
 <BaseLayout title="Ricky's Space">
 

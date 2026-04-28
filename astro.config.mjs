@@ -4,11 +4,9 @@ import cloudflare from '@astrojs/cloudflare';
 import mdx from '@astrojs/mdx';
 
 export default defineConfig({
-  site: 'https://rickys-blog.pages.dev',
+  site: 'https://rickys-blog.rickyyuansg.workers.dev',
   output: 'server',
-  adapter: cloudflare({
-    platformProxy: { enabled: true },
-  }),
+  adapter: cloudflare(),
   integrations: [mdx()],
   vite: {
     resolve: {

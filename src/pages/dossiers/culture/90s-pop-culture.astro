@@ -2265,9 +2265,9 @@ import EditorialLayout from '@layouts/EditorialLayout.astro';
     { id: 'chapter-5', nav: 'chapter-5' },
     { id: 'chapter-6', nav: 'chapter-6' }
   ];
-  const navLinks = document.querySelectorAll('.nav-float a');
-  const progressBar = document.getElementById('progressBar');
-  const backToTop = document.getElementById('backToTop');
+  const navLinks = document.querySelectorAll<HTMLAnchorElement>('.nav-float a');
+  const progressBar = document.getElementById('progressBar') as HTMLElement | null;
+  const backToTop = document.getElementById('backToTop') as HTMLElement | null;
 
   function updateActive() {
     const scrollY = window.scrollY;
@@ -2286,21 +2286,21 @@ import EditorialLayout from '@layouts/EditorialLayout.astro';
     // progress bar
     const docHeight = document.documentElement.scrollHeight - window.innerHeight;
     const pct = Math.min(100, Math.max(0, (scrollY / docHeight) * 100));
-    progressBar.style.width = pct + '%';
+    if (progressBar) progressBar.style.width = pct + '%';
 
     // back to top
-    backToTop.classList.toggle('visible', scrollY > 600);
+    if (backToTop) backToTop.classList.toggle('visible', scrollY > 600);
   }
 
-  backToTop.addEventListener('click', function(){
+  backToTop?.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
   // smooth scroll for all internal anchor links (TOC + nav)
-  document.querySelectorAll('a[href^="#"]').forEach(link => {
-    link.addEventListener('click', function(e){
-      const href = this.getAttribute('href');
-      if (href.length > 1) {
+  document.querySelectorAll<HTMLAnchorElement>('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      const href = link.getAttribute('href');
+      if (href && href.length > 1) {
         const target = document.getElementById(href.slice(1));
         if (target) {
           e.preventDefault();
