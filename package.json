@@ -8,7 +8,7 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "wrangler pages dev ./dist",
-    "deploy": "astro build && wrangler pages deploy ./dist",
+    "deploy": "astro build && mkdir -p dist/client/_worker.js && cp dist/server/entry.mjs dist/client/_worker.js/index.js && cp dist/server/virtual_astro_middleware.mjs dist/client/_worker.js/ && cp -r dist/server/chunks dist/client/_worker.js/ && wrangler pages deploy ./dist/client --project-name rickys-blog --branch main --commit-dirty=true",
     "astro": "astro",
     "check": "astro check"
   },
