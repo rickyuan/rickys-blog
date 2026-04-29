@@ -1,0 +1,64 @@
+---
+import TelexLayout from '@layouts/TelexLayout.astro';
+import { supabasePublic, type Signal } from '@lib/supabase';
+
+export const prerender = false;
+
+const { data: signals } = await supabasePublic
+  .from('signals')
+  .select('id, title, company_name, country, signal_type, icp_score, entry_point, url, published_at, created_at, status')
+  .not('icp_score', 'is', null)
+  .gte('icp_score', 50)
+  .in('status', ['scored', 'queued', 'drafted', 'sent', 'replied', 'won'])
+  .order('created_at', { ascending: false })
+  .limit(50)
+  .returns<Signal[]>();
+
+const typeLabel: Record<string, string> = {
+  competitor_blog: 'Competitor',
+  product_launch: 'Launch',
+  funding_round: 'Funding',
+  hiring_signal: 'Hiring',
+  regulation_update: 'Regulation',
+  partnership: 'Partnership',
+  expansion: 'Expansion',
+  other: 'Other',
+};
+
+function scoreClass(score: number) {
+  if (score >= 80) return 'tx-gtm-score--high';
+  if (score >= 65) return 'tx-gtm-score--mid';
+  return 'tx-gtm-score--low';
+}
+---
+<TelexLayout title="GTM Intelligence · Ricky's Space" section="gtm" noindex={true}>
+  <header class="tx-issue-header">
+    <div class="tx-issue-eyebrow">Intelligence Feed</div>
+    <h1 class="tx-issue-title">GTM Signals</h1>
+    <div class="tx-curators-note">
+      AI-scored market signals from SEA & India — competitor moves, funding rounds,
+      partnerships, and expansion plays. Updated daily.
+    </div>
+  </header>
+
+  {signals && signals.length > 0 ? (
+    <ul class="tx-gtm-list">
+      {signals.map((s) => (
+        <li class="tx-gtm-item">
+          <div class="tx-gtm-meta">
+            <span class="tx-gtm-country">{s.country ?? '—'}</span>
+            <span class="tx-gtm-company">{s.company_name ?? 'Unknown'}</span>
+          </div>
+          <a class="tx-gtm-title" href={`/gtm/${s.id}`}>{s.title}</a>
+          <span class="tx-gtm-badge">{typeLabel[s.signal_type] ?? s.signal_type}</span>
+          <span class={`tx-gtm-score ${scoreClass(s.icp_score)}`}>{Math.round(s.icp_score)}</span>
+          <span class="tx-gtm-date">{new Date(s.created_at).toISOString().slice(0, 10)}</span>
+        </li>
+      ))}
+    </ul>
+  ) : (
+    <p style="color: var(--tx-ink-muted); margin-top: 32px;">
+      No signals yet — check back after the next collector run.
+    </p>
+  )}
+</TelexLayout>

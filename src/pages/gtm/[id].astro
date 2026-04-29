@@ -1,0 +1,94 @@
+---
+import TelexLayout from '@layouts/TelexLayout.astro';
+import { supabasePublic, type Signal } from '@lib/supabase';
+
+export const prerender = false;
+
+const { id } = Astro.params;
+
+const { data, error } = await supabasePublic
+  .from('signals')
+  .select('id, title, company_name, country, signal_type, icp_score, entry_point, url, published_at, created_at, status')
+  .eq('id', id as string)
+  .maybeSingle<Signal>();
+
+if (error || !data) {
+  return Astro.redirect('/gtm');
+}
+
+const typeLabel: Record<string, string> = {
+  competitor_blog: 'Competitor',
+  product_launch: 'Launch',
+  funding_round: 'Funding',
+  hiring_signal: 'Hiring',
+  regulation_update: 'Regulation',
+  partnership: 'Partnership',
+  expansion: 'Expansion',
+  other: 'Other',
+};
+
+function scoreClass(score: number) {
+  if (score >= 80) return 'tx-gtm-score--high';
+  if (score >= 65) return 'tx-gtm-score--mid';
+  return 'tx-gtm-score--low';
+}
+
+const publishedDate = data.published_at
+  ? new Date(data.published_at).toISOString().slice(0, 10)
+  : null;
+const createdDate = new Date(data.created_at).toISOString().slice(0, 10);
+---
+<TelexLayout title={`${data.title} · GTM`} section="gtm" noindex={true}>
+  <header class="tx-issue-header">
+    <div class="tx-issue-eyebrow">
+      {typeLabel[data.signal_type] ?? data.signal_type} · {data.country ?? 'Global'} · {data.status}
+    </div>
+    <h1 class="tx-issue-title">{data.title}</h1>
+  </header>
+
+  <div class="tx-gtm-detail">
+    {data.company_name && (
+      <div class="tx-gtm-detail-row">
+        <span class="tx-gtm-detail-label">Company</span>
+        <span class="tx-gtm-detail-value">{data.company_name}</span>
+      </div>
+    )}
+
+    <div class="tx-gtm-detail-row">
+      <span class="tx-gtm-detail-label">ICP Score</span>
+      <span class={`tx-gtm-score ${scoreClass(data.icp_score)}`} style="font-size:1.1rem;">
+        {Math.round(data.icp_score)}
+      </span>
+    </div>
+
+    {data.entry_point && (
+      <div class="tx-gtm-detail-row">
+        <span class="tx-gtm-detail-label">Entry Point</span>
+        <span class="tx-gtm-detail-value">{data.entry_point}</span>
+      </div>
+    )}
+
+    {data.url && (
+      <div class="tx-gtm-detail-row">
+        <span class="tx-gtm-detail-label">Source</span>
+        <a class="tx-gtm-detail-value" href={data.url} target="_blank" rel="noopener">
+          {new URL(data.url).hostname} →
+        </a>
+      </div>
+    )}
+
+    <div class="tx-gtm-detail-row">
+      <span class="tx-gtm-detail-label">Ingested</span>
+      <span class="tx-gtm-detail-value">{createdDate}</span>
+    </div>
+
+    {publishedDate && (
+      <div class="tx-gtm-detail-row">
+        <span class="tx-gtm-detail-label">Published</span>
+        <span class="tx-gtm-detail-value">{publishedDate}</span>
+      </div>
+    )}
+  </div>
+
+  <a class="tx-gtm-back" href="/gtm">← Back to signals</a>
+</TelexLayout>

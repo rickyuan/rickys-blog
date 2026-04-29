@@ -5,12 +5,14 @@ interface Props {
   title: string;
   description?: string;
   noindex?: boolean;
+  section?: string;
 }
 
 const {
   title,
   description = "Ricky's Weekly — RTC, Voice AI, SEA market intelligence",
   noindex = true,
+  section = 'weekly',
 } = Astro.props;
 ---
 <!DOCTYPE html>
@@ -31,12 +33,12 @@ const {
 <body class="telex">
   <div class="telex-container">
     <header class="tx-masthead">
-      <div class="tx-masthead-title"><a href="/">~/rickys-space</a> · weekly</div>
+      <div class="tx-masthead-title"><a href="/">~/rickys-space</a> · {section}</div>
       <div class="tx-masthead-meta">curated · ai-assisted</div>
     </header>
     <slot />
     <footer class="tx-footer">
-      <p>© 2026 Ricky's Space · <a href="/">home</a> · <a href="/weekly">archive</a></p>
+      <p>© 2026 Ricky's Space · <a href="/">home</a> · <a href="/weekly">weekly</a> · <a href="/gtm">gtm</a></p>
     </footer>
   </div>
 </body>
