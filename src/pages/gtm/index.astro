@@ -11,7 +11,7 @@ const { data: signals } = await supabasePublic
   .gte('icp_score', 50)
   .in('status', ['scored', 'queued', 'drafted', 'sent', 'replied', 'won'])
   .order('created_at', { ascending: false })
-  .limit(50)
+  .limit(100)
   .returns<Signal[]>();
 
 const typeLabel: Record<string, string> = {
@@ -30,6 +30,15 @@ function scoreClass(score: number) {
   if (score >= 65) return 'tx-gtm-score--mid';
   return 'tx-gtm-score--low';
 }
+
+const grouped = new Map<string, Signal[]>();
+if (signals) {
+  for (const s of signals) {
+    const date = new Date(s.created_at).toISOString().slice(0, 10);
+    if (!grouped.has(date)) grouped.set(date, []);
+    grouped.get(date)!.push(s);
+  }
+}
 ---
 <TelexLayout title="GTM Intelligence · Ricky's Space" section="gtm" noindex={true}>
   <header class="tx-issue-header">
@@ -41,21 +50,30 @@ function scoreClass(score: number) {
     </div>
   </header>
 
-  {signals && signals.length > 0 ? (
-    <ul class="tx-gtm-list">
-      {signals.map((s) => (
-        <li class="tx-gtm-item">
-          <div class="tx-gtm-meta">
-            <span class="tx-gtm-country">{s.country ?? '—'}</span>
-            <span class="tx-gtm-company">{s.company_name ?? 'Unknown'}</span>
-          </div>
-          <a class="tx-gtm-title" href={`/gtm/${s.id}`}>{s.title}</a>
-          <span class="tx-gtm-badge">{typeLabel[s.signal_type] ?? s.signal_type}</span>
-          <span class={`tx-gtm-score ${scoreClass(s.icp_score)}`}>{Math.round(s.icp_score)}</span>
-          <span class="tx-gtm-date">{new Date(s.created_at).toISOString().slice(0, 10)}</span>
-        </li>
+  {grouped.size > 0 ? (
+    <div class="tx-gtm-groups">
+      {[...grouped.entries()].map(([date, items]) => (
+        <section class="tx-gtm-group">
+          <h2 class="tx-gtm-date-header">
+            <a href={`/gtm/${date}`}>{date}</a>
+            <span class="tx-gtm-date-count">{items.length} signals</span>
+          </h2>
+          <ul class="tx-gtm-list">
+            {items.map((s) => (
+              <li class="tx-gtm-item">
+                <div class="tx-gtm-meta">
+                  <span class="tx-gtm-country">{s.country ?? '—'}</span>
+                  <span class="tx-gtm-company">{s.company_name ?? 'Unknown'}</span>
+                </div>
+                <a class="tx-gtm-title" href={`/gtm/${s.id}`}>{s.title}</a>
+                <span class="tx-gtm-badge">{typeLabel[s.signal_type] ?? s.signal_type}</span>
+                <span class={`tx-gtm-score ${scoreClass(s.icp_score)}`}>{Math.round(s.icp_score)}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
       ))}
-    </ul>
+    </div>
   ) : (
     <p style="color: var(--tx-ink-muted); margin-top: 32px;">
       No signals yet — check back after the next collector run.

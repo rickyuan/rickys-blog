@@ -1,0 +1,147 @@
+---
+import TelexLayout from '@layouts/TelexLayout.astro';
+import { supabasePublic, type Signal } from '@lib/supabase';
+
+export const prerender = false;
+
+const { slug } = Astro.params;
+const isDate = /^\d{4}-\d{2}-\d{2}$/.test(slug as string);
+
+const typeLabel: Record<string, string> = {
+  competitor_blog: 'Competitor',
+  product_launch: 'Launch',
+  funding_round: 'Funding',
+  hiring_signal: 'Hiring',
+  regulation_update: 'Regulation',
+  partnership: 'Partnership',
+  expansion: 'Expansion',
+  other: 'Other',
+};
+
+function scoreClass(score: number) {
+  if (score >= 80) return 'tx-gtm-score--high';
+  if (score >= 65) return 'tx-gtm-score--mid';
+  return 'tx-gtm-score--low';
+}
+
+let signal: Signal | null = null;
+let dateSignals: Signal[] | null = null;
+
+if (isDate) {
+  const dayStart = `${slug}T00:00:00+08:00`;
+  const dayEnd = `${slug}T23:59:59+08:00`;
+  const { data } = await supabasePublic
+    .from('signals')
+    .select('id, title, company_name, country, signal_type, icp_score, entry_point, url, published_at, created_at, status')
+    .not('icp_score', 'is', null)
+    .gte('icp_score', 50)
+    .in('status', ['scored', 'queued', 'drafted', 'sent', 'replied', 'won'])
+    .gte('created_at', dayStart)
+    .lte('created_at', dayEnd)
+    .order('icp_score', { ascending: false })
+    .returns<Signal[]>();
+  dateSignals = data;
+  if (!dateSignals || dateSignals.length === 0) {
+    return Astro.redirect('/gtm');
+  }
+} else {
+  const { data, error } = await supabasePublic
+    .from('signals')
+    .select('id, title, company_name, country, signal_type, icp_score, entry_point, url, published_at, created_at, status')
+    .eq('id', slug as string)
+    .maybeSingle<Signal>();
+  if (error || !data) {
+    return Astro.redirect('/gtm');
+  }
+  signal = data;
+}
+
+const publishedDate = signal?.published_at
+  ? new Date(signal.published_at).toISOString().slice(0, 10)
+  : null;
+const createdDate = signal
+  ? new Date(signal.created_at).toISOString().slice(0, 10)
+  : null;
+---
+{isDate && dateSignals ? (
+  <TelexLayout title={`${slug} · GTM Intelligence`} section="gtm" noindex={true}>
+    <header class="tx-issue-header">
+      <div class="tx-issue-eyebrow">Daily Report</div>
+      <h1 class="tx-issue-title">{slug}</h1>
+      <div class="tx-curators-note">
+        {dateSignals.length} signals collected on this date.
+      </div>
+    </header>
+
+    <ul class="tx-gtm-list">
+      {dateSignals.map((s) => (
+        <li class="tx-gtm-item">
+          <div class="tx-gtm-meta">
+            <span class="tx-gtm-country">{s.country ?? '—'}</span>
+            <span class="tx-gtm-company">{s.company_name ?? 'Unknown'}</span>
+          </div>
+          <a class="tx-gtm-title" href={`/gtm/${s.id}`}>{s.title}</a>
+          <span class="tx-gtm-badge">{typeLabel[s.signal_type] ?? s.signal_type}</span>
+          <span class={`tx-gtm-score ${scoreClass(s.icp_score)}`}>{Math.round(s.icp_score)}</span>
+        </li>
+      ))}
+    </ul>
+
+    <a class="tx-gtm-back" href="/gtm">← Back to all signals</a>
+  </TelexLayout>
+) : signal ? (
+  <TelexLayout title={`${signal.title} · GTM`} section="gtm" noindex={true}>
+    <header class="tx-issue-header">
+      <div class="tx-issue-eyebrow">
+        {typeLabel[signal.signal_type] ?? signal.signal_type} · {signal.country ?? 'Global'} · {signal.status}
+      </div>
+      <h1 class="tx-issue-title">{signal.title}</h1>
+    </header>
+
+    <div class="tx-gtm-detail">
+      {signal.company_name && (
+        <div class="tx-gtm-detail-row">
+          <span class="tx-gtm-detail-label">Company</span>
+          <span class="tx-gtm-detail-value">{signal.company_name}</span>
+        </div>
+      )}
+
+      <div class="tx-gtm-detail-row">
+        <span class="tx-gtm-detail-label">ICP Score</span>
+        <span class={`tx-gtm-score ${scoreClass(signal.icp_score)}`} style="font-size:1.1rem;">
+          {Math.round(signal.icp_score)}
+        </span>
+      </div>
+
+      {signal.entry_point && (
+        <div class="tx-gtm-detail-row">
+          <span class="tx-gtm-detail-label">Entry Point</span>
+          <span class="tx-gtm-detail-value">{signal.entry_point}</span>
+        </div>
+      )}
+
+      {signal.url && (
+        <div class="tx-gtm-detail-row">
+          <span class="tx-gtm-detail-label">Source</span>
+          <a class="tx-gtm-detail-value" href={signal.url} target="_blank" rel="noopener">
+            {new URL(signal.url).hostname} →
+          </a>
+        </div>
+      )}
+
+      <div class="tx-gtm-detail-row">
+        <span class="tx-gtm-detail-label">Ingested</span>
+        <span class="tx-gtm-detail-value">{createdDate}</span>
+      </div>
+
+      {publishedDate && (
+        <div class="tx-gtm-detail-row">
+          <span class="tx-gtm-detail-label">Published</span>
+          <span class="tx-gtm-detail-value">{publishedDate}</span>
+        </div>
+      )}
+    </div>
+
+    <a class="tx-gtm-back" href="/gtm">← Back to signals</a>
+  </TelexLayout>
+) : null}

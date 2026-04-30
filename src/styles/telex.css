@@ -285,8 +285,54 @@ body.telex {
 .tx-archive-link:hover { color: var(--tx-accent); }
 
 /* ── GTM signal list ────────────────────────────────────── */
+.tx-gtm-groups { margin-top: 24px; }
+
+.tx-gtm-group { margin-bottom: 8px; }
+
+.tx-gtm-date-header {
+  font-family: var(--tx-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--tx-ink);
+  border-top: 1px solid var(--tx-rule-strong);
+  padding-top: 22px;
+  margin: 28px 0 0;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.tx-gtm-date-header::before {
+  content: '';
+  display: inline-block;
+  width: 28px;
+  height: 1px;
+  background: var(--tx-accent);
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+.tx-gtm-date-header a {
+  color: var(--tx-ink);
+  text-decoration: none;
+  border-bottom: 1px dotted var(--tx-ink-muted);
+}
+
+.tx-gtm-date-header a:hover { color: var(--tx-accent); border-bottom-color: var(--tx-accent); }
+
+.tx-gtm-date-count {
+  font-weight: 400;
+  font-size: 0.68rem;
+  color: var(--tx-ink-muted);
+  letter-spacing: 0.04em;
+  margin-left: auto;
+}
+
 .tx-gtm-list {
-  margin: 24px 0 0;
+  margin: 12px 0 0;
   padding: 0;
   list-style: none;
 }
