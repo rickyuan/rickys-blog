@@ -4,14 +4,14 @@ import { supabasePublic, type Signal } from '@lib/supabase';
 
 export const prerender = false;
 
+const SIGNALS_PER_DAY = 10;
+
 const { data: signals } = await supabasePublic
   .from('signals')
   .select('id, title, company_name, country, signal_type, icp_score, entry_point, url, published_at, created_at, status')
-  .not('icp_score', 'is', null)
-  .gte('icp_score', 50)
-  .in('status', ['scored', 'queued', 'drafted', 'sent', 'replied', 'won'])
+  .not('status', 'in', '("watch","ignore")')
   .order('created_at', { ascending: false })
-  .limit(100)
+  .limit(500)
   .returns<Signal[]>();
 
 const typeLabel: Record<string, string> = {
@@ -25,7 +25,8 @@ const typeLabel: Record<string, string> = {
   other: 'Other',
 };
 
-function scoreClass(score: number) {
+function scoreClass(score: number | null) {
+  if (score === null) return '';
   if (score >= 80) return 'tx-gtm-score--high';
   if (score >= 65) return 'tx-gtm-score--mid';
   return 'tx-gtm-score--low';
@@ -38,6 +39,9 @@ if (signals) {
     if (!grouped.has(date)) grouped.set(date, []);
     grouped.get(date)!.push(s);
   }
+  for (const [, items] of grouped) {
+    items.sort((a, b) => (b.icp_score ?? -1) - (a.icp_score ?? -1));
+  }
 }
 ---
 <TelexLayout title="GTM Intelligence · Ricky's Space" section="gtm" noindex={true}>
@@ -46,7 +50,7 @@ if (signals) {
     <h1 class="tx-issue-title">GTM Signals</h1>
     <div class="tx-curators-note">
       AI-scored market signals from SEA & India — competitor moves, funding rounds,
-      partnerships, and expansion plays. Updated daily.
+      partnerships, and expansion plays. Top {SIGNALS_PER_DAY} per day by ICP score.
     </div>
   </header>
 
@@ -56,10 +60,10 @@ if (signals) {
         <section class="tx-gtm-group">
           <h2 class="tx-gtm-date-header">
             <a href={`/gtm/${date}`}>{date}</a>
-            <span class="tx-gtm-date-count">{items.length} signals</span>
+            <span class="tx-gtm-date-count">{items.length} total · top {Math.min(SIGNALS_PER_DAY, items.length)} shown</span>
           </h2>
           <ul class="tx-gtm-list">
-            {items.map((s) => (
+            {items.slice(0, SIGNALS_PER_DAY).map((s) => (
               <li class="tx-gtm-item">
                 <div class="tx-gtm-meta">
                   <span class="tx-gtm-country">{s.country ?? '—'}</span>
@@ -67,7 +71,9 @@ if (signals) {
                 </div>
                 <a class="tx-gtm-title" href={`/gtm/${s.id}`}>{s.title}</a>
                 <span class="tx-gtm-badge">{typeLabel[s.signal_type] ?? s.signal_type}</span>
-                <span class={`tx-gtm-score ${scoreClass(s.icp_score)}`}>{Math.round(s.icp_score)}</span>
+                <span class={`tx-gtm-score ${scoreClass(s.icp_score)}`}>
+                  {s.icp_score !== null ? Math.round(s.icp_score) : '—'}
+                </span>
               </li>
             ))}
           </ul>

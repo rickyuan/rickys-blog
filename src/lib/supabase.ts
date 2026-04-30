@@ -36,7 +36,7 @@ export type Signal = {
   company_name: string | null;
   country: string | null;
   signal_type: string;
-  icp_score: number;
+  icp_score: number | null;
   entry_point: string | null;
   published_at: string | null;
   created_at: string;

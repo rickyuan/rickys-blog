@@ -18,7 +18,8 @@ const typeLabel: Record<string, string> = {
   other: 'Other',
 };
 
-function scoreClass(score: number) {
+function scoreClass(score: number | null) {
+  if (score === null) return '';
   if (score >= 80) return 'tx-gtm-score--high';
   if (score >= 65) return 'tx-gtm-score--mid';
   return 'tx-gtm-score--low';
@@ -33,12 +34,10 @@ if (isDate) {
   const { data } = await supabasePublic
     .from('signals')
     .select('id, title, company_name, country, signal_type, icp_score, entry_point, url, published_at, created_at, status')
-    .not('icp_score', 'is', null)
-    .gte('icp_score', 50)
-    .in('status', ['scored', 'queued', 'drafted', 'sent', 'replied', 'won'])
+    .not('status', 'in', '("watch","ignore")')
     .gte('created_at', dayStart)
     .lte('created_at', dayEnd)
-    .order('icp_score', { ascending: false })
+    .order('icp_score', { ascending: false, nullsFirst: false })
     .returns<Signal[]>();
   dateSignals = data;
   if (!dateSignals || dateSignals.length === 0) {
@@ -82,7 +81,9 @@ const createdDate = signal
           </div>
           <a class="tx-gtm-title" href={`/gtm/${s.id}`}>{s.title}</a>
           <span class="tx-gtm-badge">{typeLabel[s.signal_type] ?? s.signal_type}</span>
-          <span class={`tx-gtm-score ${scoreClass(s.icp_score)}`}>{Math.round(s.icp_score)}</span>
+          <span class={`tx-gtm-score ${scoreClass(s.icp_score)}`}>
+            {s.icp_score !== null ? Math.round(s.icp_score) : '—'}
+          </span>
         </li>
       ))}
     </ul>
@@ -109,7 +110,7 @@ const createdDate = signal
       <div class="tx-gtm-detail-row">
         <span class="tx-gtm-detail-label">ICP Score</span>
         <span class={`tx-gtm-score ${scoreClass(signal.icp_score)}`} style="font-size:1.1rem;">
-          {Math.round(signal.icp_score)}
+          {signal.icp_score !== null ? Math.round(signal.icp_score) : '—'}
         </span>
       </div>
 
