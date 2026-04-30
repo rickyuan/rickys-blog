@@ -29,6 +29,17 @@ export type WeeklyDigest = {
   published_at: string;
 };
 
+export type SignalEnrichment = {
+  score: number;
+  industry: string | null;
+  reasoning: string | null;
+  entry_angle: string | null;
+  competitor_displaced: string | null;
+  company_name_refined: string | null;
+  country_refined: string | null;
+  signal_type_refined: string | null;
+} | null;
+
 export type Signal = {
   id: string;
   title: string;
@@ -38,6 +49,7 @@ export type Signal = {
   signal_type: string;
   icp_score: number | null;
   entry_point: string | null;
+  enrichment: SignalEnrichment;
   published_at: string | null;
   created_at: string;
   status: string;

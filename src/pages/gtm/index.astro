@@ -8,7 +8,7 @@ const SIGNALS_PER_DAY = 10;
 
 const { data: signals } = await supabasePublic
   .from('signals')
-  .select('id, title, company_name, country, signal_type, icp_score, entry_point, url, published_at, created_at, status')
+  .select('id, title, company_name, country, signal_type, icp_score, entry_point, enrichment, url, published_at, created_at, status')
   .not('status', 'in', '("watch","ignore")')
   .order('created_at', { ascending: false })
   .limit(500)
@@ -49,7 +49,7 @@ if (signals) {
     <div class="tx-issue-eyebrow">Intelligence Feed</div>
     <h1 class="tx-issue-title">GTM Signals</h1>
     <div class="tx-curators-note">
-      AI-scored market signals from SEA & India — competitor moves, funding rounds,
+      AI-scored market signals — competitor moves, funding rounds,
       partnerships, and expansion plays. Top {SIGNALS_PER_DAY} per day by ICP score.
     </div>
   </header>
@@ -62,21 +62,45 @@ if (signals) {
             <a href={`/gtm/${date}`}>{date}</a>
             <span class="tx-gtm-date-count">{items.length} total · top {Math.min(SIGNALS_PER_DAY, items.length)} shown</span>
           </h2>
-          <ul class="tx-gtm-list">
+          <div class="tx-gtm-cards">
             {items.slice(0, SIGNALS_PER_DAY).map((s) => (
-              <li class="tx-gtm-item">
-                <div class="tx-gtm-meta">
-                  <span class="tx-gtm-country">{s.country ?? '—'}</span>
-                  <span class="tx-gtm-company">{s.company_name ?? 'Unknown'}</span>
+              <a class="tx-gtm-card" href={`/gtm/${s.id}`}>
+                <div class="tx-gtm-card-head">
+                  <span class={`tx-gtm-card-score ${scoreClass(s.icp_score)}`}>
+                    {s.icp_score !== null ? Math.round(s.icp_score) : '—'}
+                  </span>
+                  <span class="tx-gtm-card-company">{s.company_name ?? 'Unknown'}</span>
+                  {s.country && <span class="tx-gtm-card-country">{s.country}</span>}
+                  {s.enrichment?.industry && (
+                    <span class="tx-gtm-card-industry">{s.enrichment.industry}</span>
+                  )}
+                  {s.enrichment?.competitor_displaced && (
+                    <span class="tx-gtm-card-competitor">vs {s.enrichment.competitor_displaced}</span>
+                  )}
                 </div>
-                <a class="tx-gtm-title" href={`/gtm/${s.id}`}>{s.title}</a>
-                <span class="tx-gtm-badge">{typeLabel[s.signal_type] ?? s.signal_type}</span>
-                <span class={`tx-gtm-score ${scoreClass(s.icp_score)}`}>
-                  {s.icp_score !== null ? Math.round(s.icp_score) : '—'}
-                </span>
-              </li>
+
+                {s.enrichment?.reasoning && (
+                  <p class="tx-gtm-card-reasoning">{s.enrichment.reasoning}</p>
+                )}
+
+                {s.entry_point && (
+                  <p class="tx-gtm-card-entry">→ {s.entry_point}</p>
+                )}
+
+                <div class="tx-gtm-card-foot">
+                  <span class="tx-gtm-badge">{typeLabel[s.signal_type] ?? s.signal_type}</span>
+                  {!s.enrichment?.reasoning && (
+                    <span class="tx-gtm-card-title">{s.title}</span>
+                  )}
+                  {s.url && (
+                    <span class="tx-gtm-card-source">
+                      {new URL(s.url).hostname.replace('www.', '')}
+                    </span>
+                  )}
+                </div>
+              </a>
             ))}
-          </ul>
+          </div>
         </section>
       ))}
     </div>

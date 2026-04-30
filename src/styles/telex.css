@@ -331,65 +331,120 @@ body.telex {
   margin-left: auto;
 }
 
-.tx-gtm-list {
-  margin: 12px 0 0;
-  padding: 0;
-  list-style: none;
-}
+.tx-gtm-cards { margin: 16px 0 0; }
 
-.tx-gtm-item {
-  border-bottom: 1px solid var(--tx-rule);
-  padding: 14px 0;
-  display: grid;
-  grid-template-columns: 100px 1fr auto auto auto;
-  gap: 12px;
-  align-items: baseline;
-}
-
-.tx-gtm-meta {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  min-width: 0;
-}
-
-.tx-gtm-country {
-  font-family: var(--tx-mono);
-  font-size: 0.72rem;
-  color: var(--tx-accent);
-  letter-spacing: 0.08em;
-  font-weight: 700;
-}
-
-.tx-gtm-company {
-  font-family: var(--tx-mono);
-  font-size: 0.72rem;
-  color: var(--tx-ink-muted);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.tx-gtm-title {
-  color: var(--tx-ink);
+.tx-gtm-card {
+  display: block;
+  background: var(--tx-bg-card);
+  border: 1px solid var(--tx-rule);
+  border-left: 3px solid var(--tx-rule-strong);
+  padding: 16px 20px;
+  margin-bottom: 12px;
   text-decoration: none;
-  font-weight: 500;
-  font-size: 0.93rem;
-  line-height: 1.35;
+  color: inherit;
+  transition: border-left-color .15s;
 }
 
-.tx-gtm-title:hover { color: var(--tx-accent); }
+.tx-gtm-card:hover { border-left-color: var(--tx-accent); }
 
-.tx-gtm-badge {
+.tx-gtm-card-head {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.tx-gtm-card-score {
+  font-family: var(--tx-mono);
+  font-weight: 700;
+  font-size: 1.15rem;
+  min-width: 28px;
+}
+
+.tx-gtm-score--high { color: #2d8a4e; }
+.tx-gtm-score--mid { color: #b5850a; }
+.tx-gtm-score--low { color: var(--tx-ink-muted); }
+
+.tx-gtm-card-company {
+  font-family: var(--tx-sans);
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--tx-ink);
+}
+
+.tx-gtm-card-country {
+  font-family: var(--tx-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--tx-accent);
+  letter-spacing: 0.06em;
+}
+
+.tx-gtm-card-industry {
+  font-family: var(--tx-mono);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  background: var(--tx-bg-tag);
+  padding: 2px 7px;
+  border-radius: 2px;
+  color: var(--tx-ink-muted);
+}
+
+.tx-gtm-card-competitor {
   font-family: var(--tx-mono);
   font-size: 0.68rem;
   letter-spacing: 0.04em;
+  color: var(--tx-accent);
+  font-weight: 500;
+}
+
+.tx-gtm-card-reasoning {
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--tx-ink-soft);
+  margin: 0 0 8px;
+}
+
+.tx-gtm-card-entry {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--tx-ink-muted);
+  margin: 0 0 10px;
+  font-style: italic;
+}
+
+.tx-gtm-card-foot {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.tx-gtm-badge {
+  font-family: var(--tx-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   background: var(--tx-bg-tag);
-  padding: 2px 8px;
+  padding: 2px 7px;
   border-radius: 2px;
   color: var(--tx-ink-muted);
   white-space: nowrap;
+}
+
+.tx-gtm-card-title {
+  font-size: 0.82rem;
+  color: var(--tx-ink-soft);
+  line-height: 1.35;
+}
+
+.tx-gtm-card-source {
+  font-family: var(--tx-mono);
+  font-size: 0.68rem;
+  color: var(--tx-ink-muted);
+  margin-left: auto;
 }
 
 .tx-gtm-score {
@@ -397,19 +452,6 @@ body.telex {
   font-weight: 700;
   font-size: 0.85rem;
   min-width: 28px;
-  text-align: right;
-}
-
-.tx-gtm-score--high { color: #2d8a4e; }
-.tx-gtm-score--mid { color: #b5850a; }
-.tx-gtm-score--low { color: var(--tx-ink-muted); }
-
-.tx-gtm-date {
-  font-family: var(--tx-mono);
-  font-size: 0.72rem;
-  color: var(--tx-ink-muted);
-  letter-spacing: 0.04em;
-  white-space: nowrap;
 }
 
 /* ── GTM detail ────────────────────────────────────────── */
@@ -474,7 +516,7 @@ a.tx-gtm-detail-value:hover {
   .telex-container { padding: 40px 18px 72px; }
   .tx-issue-title { font-size: 1.5rem; }
   .tx-archive-item { grid-template-columns: 1fr; gap: 4px; }
-  .tx-gtm-item { grid-template-columns: 1fr; gap: 4px; }
-  .tx-gtm-meta { flex-direction: row; gap: 8px; }
+  .tx-gtm-card { padding: 14px 16px; }
+  .tx-gtm-card-head { gap: 6px; }
   .tx-gtm-detail-row { grid-template-columns: 1fr; gap: 4px; }
 }

@@ -33,7 +33,7 @@ if (isDate) {
   const dayEnd = `${slug}T23:59:59+08:00`;
   const { data } = await supabasePublic
     .from('signals')
-    .select('id, title, company_name, country, signal_type, icp_score, entry_point, url, published_at, created_at, status')
+    .select('id, title, company_name, country, signal_type, icp_score, entry_point, enrichment, url, published_at, created_at, status')
     .not('status', 'in', '("watch","ignore")')
     .gte('created_at', dayStart)
     .lte('created_at', dayEnd)
@@ -46,7 +46,7 @@ if (isDate) {
 } else {
   const { data, error } = await supabasePublic
     .from('signals')
-    .select('id, title, company_name, country, signal_type, icp_score, entry_point, url, published_at, created_at, status')
+    .select('id, title, company_name, country, signal_type, icp_score, entry_point, enrichment, url, published_at, created_at, status')
     .eq('id', slug as string)
     .maybeSingle<Signal>();
   if (error || !data) {
@@ -72,21 +72,45 @@ const createdDate = signal
       </div>
     </header>
 
-    <ul class="tx-gtm-list">
+    <div class="tx-gtm-cards">
       {dateSignals.map((s) => (
-        <li class="tx-gtm-item">
-          <div class="tx-gtm-meta">
-            <span class="tx-gtm-country">{s.country ?? '—'}</span>
-            <span class="tx-gtm-company">{s.company_name ?? 'Unknown'}</span>
+        <a class="tx-gtm-card" href={`/gtm/${s.id}`}>
+          <div class="tx-gtm-card-head">
+            <span class={`tx-gtm-card-score ${scoreClass(s.icp_score)}`}>
+              {s.icp_score !== null ? Math.round(s.icp_score) : '—'}
+            </span>
+            <span class="tx-gtm-card-company">{s.company_name ?? 'Unknown'}</span>
+            {s.country && <span class="tx-gtm-card-country">{s.country}</span>}
+            {s.enrichment?.industry && (
+              <span class="tx-gtm-card-industry">{s.enrichment.industry}</span>
+            )}
+            {s.enrichment?.competitor_displaced && (
+              <span class="tx-gtm-card-competitor">vs {s.enrichment.competitor_displaced}</span>
+            )}
           </div>
-          <a class="tx-gtm-title" href={`/gtm/${s.id}`}>{s.title}</a>
-          <span class="tx-gtm-badge">{typeLabel[s.signal_type] ?? s.signal_type}</span>
-          <span class={`tx-gtm-score ${scoreClass(s.icp_score)}`}>
-            {s.icp_score !== null ? Math.round(s.icp_score) : '—'}
-          </span>
-        </li>
+
+          {s.enrichment?.reasoning && (
+            <p class="tx-gtm-card-reasoning">{s.enrichment.reasoning}</p>
+          )}
+
+          {s.entry_point && (
+            <p class="tx-gtm-card-entry">→ {s.entry_point}</p>
+          )}
+
+          <div class="tx-gtm-card-foot">
+            <span class="tx-gtm-badge">{typeLabel[s.signal_type] ?? s.signal_type}</span>
+            {!s.enrichment?.reasoning && (
+              <span class="tx-gtm-card-title">{s.title}</span>
+            )}
+            {s.url && (
+              <span class="tx-gtm-card-source">
+                {new URL(s.url).hostname.replace('www.', '')}
+              </span>
+            )}
+          </div>
+        </a>
       ))}
-    </ul>
+    </div>
 
     <a class="tx-gtm-back" href="/gtm">← Back to all signals</a>
   </TelexLayout>
@@ -113,6 +137,27 @@ const createdDate = signal
           {signal.icp_score !== null ? Math.round(signal.icp_score) : '—'}
         </span>
       </div>
+
+      {signal.enrichment?.industry && (
+        <div class="tx-gtm-detail-row">
+          <span class="tx-gtm-detail-label">Industry</span>
+          <span class="tx-gtm-detail-value">{signal.enrichment.industry}</span>
+        </div>
+      )}
+
+      {signal.enrichment?.competitor_displaced && (
+        <div class="tx-gtm-detail-row">
+          <span class="tx-gtm-detail-label">Competitor</span>
+          <span class="tx-gtm-detail-value">{signal.enrichment.competitor_displaced}</span>
+        </div>
+      )}
+
+      {signal.enrichment?.reasoning && (
+        <div class="tx-gtm-detail-row">
+          <span class="tx-gtm-detail-label">Analysis</span>
+          <span class="tx-gtm-detail-value">{signal.enrichment.reasoning}</span>
+        </div>
+      )}
 
       {signal.entry_point && (
         <div class="tx-gtm-detail-row">
