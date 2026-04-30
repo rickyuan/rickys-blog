@@ -34,10 +34,11 @@ if (isDate) {
   const { data } = await supabasePublic
     .from('signals')
     .select('id, title, company_name, country, signal_type, icp_score, entry_point, enrichment, url, published_at, created_at, status')
+    .not('icp_score', 'is', null)
     .not('status', 'in', '("watch","ignore")')
     .gte('created_at', dayStart)
     .lte('created_at', dayEnd)
-    .order('icp_score', { ascending: false, nullsFirst: false })
+    .order('icp_score', { ascending: false })
     .returns<Signal[]>();
   dateSignals = data;
   if (!dateSignals || dateSignals.length === 0) {

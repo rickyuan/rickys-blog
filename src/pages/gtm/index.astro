@@ -9,6 +9,7 @@ const SIGNALS_PER_DAY = 10;
 const { data: signals } = await supabasePublic
   .from('signals')
   .select('id, title, company_name, country, signal_type, icp_score, entry_point, enrichment, url, published_at, created_at, status')
+  .not('icp_score', 'is', null)
   .not('status', 'in', '("watch","ignore")')
   .order('created_at', { ascending: false })
   .limit(500)
