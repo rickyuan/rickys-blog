@@ -1,6 +1,7 @@
 ---
 import TelexLayout from '@layouts/TelexLayout.astro';
-import { supabasePublic, type Signal } from '@lib/supabase';
+import { env } from 'cloudflare:workers';
+import { listSignalsForDate, getSignalById, type Signal } from '@lib/db';
 
 export const prerender = false;
 
@@ -28,32 +29,18 @@ function scoreClass(score: number | null) {
 let signal: Signal | null = null;
 let dateSignals: Signal[] | null = null;
 
+const db = env.DB;
+
 if (isDate) {
-  const dayStart = `${slug}T00:00:00+08:00`;
-  const dayEnd = `${slug}T23:59:59+08:00`;
-  const { data } = await supabasePublic
-    .from('signals')
-    .select('id, title, company_name, country, signal_type, icp_score, entry_point, enrichment, url, published_at, created_at, status')
-    .not('icp_score', 'is', null)
-    .not('status', 'in', '("watch","ignore")')
-    .gte('created_at', dayStart)
-    .lte('created_at', dayEnd)
-    .order('icp_score', { ascending: false })
-    .returns<Signal[]>();
-  dateSignals = data;
-  if (!dateSignals || dateSignals.length === 0) {
+  dateSignals = await listSignalsForDate(db, slug as string);
+  if (dateSignals.length === 0) {
     return Astro.redirect('/gtm');
   }
 } else {
-  const { data, error } = await supabasePublic
-    .from('signals')
-    .select('id, title, company_name, country, signal_type, icp_score, entry_point, enrichment, url, published_at, created_at, status')
-    .eq('id', slug as string)
-    .maybeSingle<Signal>();
-  if (error || !data) {
+  signal = await getSignalById(db, slug as string);
+  if (!signal) {
     return Astro.redirect('/gtm');
   }
-  signal = data;
 }
 
 const publishedDate = signal?.published_at

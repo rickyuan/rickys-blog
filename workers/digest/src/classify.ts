@@ -1,5 +1,5 @@
 import type Anthropic from '@anthropic-ai/sdk';
-import type { ParsedItem } from './fetch-feeds.js';
+import type { PendingItem } from './db';
 
 const SYSTEM = `You are an editorial assistant for Ricky Yuan, Product Architect Director at Tencent Cloud TRTC + Chat + TCCC, Singapore, leading SEA + India business growth. He cares about RTC/WebRTC, Chat/IM, CCaaS, AI Voice & Agent, SEA + India market signals, enterprise SaaS GTM.
 
@@ -16,14 +16,14 @@ const VALID_SECTIONS = ['competitive', 'ai_voice', 'sea_market', 'gtm', 'inspira
 
 export async function classifyBatch(
   client: Anthropic,
-  items: ParsedItem[],
+  items: PendingItem[],
 ): Promise<Classification[]> {
   if (items.length === 0) return [];
 
   const itemsBlock = items
     .map(
       (item, idx) =>
-        `[${idx}] Source: ${item.source_label} | Section hint: ${item.source_section}\nURL: ${item.url}\nTitle: ${item.title}\nExcerpt: ${item.raw_excerpt.slice(0, 500)}`,
+        `[${idx}] Source: ${item.source_label ?? 'unknown'} | Section hint: ${item.source_section ?? 'unknown'}\nURL: ${item.url}\nTitle: ${item.title}\nExcerpt: ${(item.raw_excerpt ?? '').slice(0, 500)}`,
     )
     .join('\n\n---\n\n');
 
@@ -67,7 +67,7 @@ Return ONLY the JSON array.`;
     return items.map((_, idx) => normaliseClassification(parsed[idx]));
   } catch (e: unknown) {
     const msg = e instanceof Error ? e.message : String(e);
-    console.warn(`  ⚠️  Haiku batch failed: ${msg.slice(0, 200)}`);
+    console.warn(`haiku batch failed: ${msg.slice(0, 200)}`);
     return items.map(() => ({
       ai_summary_en: null,
       ai_summary_cn: null,
@@ -86,7 +86,7 @@ function normaliseClassification(p: unknown): Classification {
   };
   const section =
     typeof obj.section === 'string' && (VALID_SECTIONS as readonly string[]).includes(obj.section)
-      ? (obj.section as string)
+      ? obj.section
       : 'inspiration';
   return {
     ai_summary_en: typeof obj.summary_en === 'string' ? obj.summary_en : null,

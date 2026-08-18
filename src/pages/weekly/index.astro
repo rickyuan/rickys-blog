@@ -1,14 +1,11 @@
 ---
 import TelexLayout from '@layouts/TelexLayout.astro';
-import { supabase } from '@lib/supabase';
+import { env } from 'cloudflare:workers';
+import { listWeeklies } from '@lib/db';
 
 export const prerender = false;
 
-const { data: weeklies } = await supabase
-  .from('weekly_digests')
-  .select('slug, title, published_at')
-  .order('published_at', { ascending: false })
-  .limit(50);
+const weeklies = await listWeeklies(env.DB, 50);
 ---
 <TelexLayout title="Weekly Archive · Ricky's Space" noindex={true}>
   <header class="tx-issue-header">

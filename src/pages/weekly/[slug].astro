@@ -1,19 +1,16 @@
 ---
 import { marked } from 'marked';
 import TelexLayout from '@layouts/TelexLayout.astro';
-import { supabase, type WeeklyDigest } from '@lib/supabase';
+import { env } from 'cloudflare:workers';
+import { getWeeklyBySlug } from '@lib/db';
 
 export const prerender = false;
 
 const { slug } = Astro.params;
 
-const { data, error } = await supabase
-  .from('weekly_digests')
-  .select('*')
-  .eq('slug', slug as string)
-  .maybeSingle<WeeklyDigest>();
+const data = await getWeeklyBySlug(env.DB, slug as string);
 
-if (error || !data) {
+if (!data) {
   return Astro.redirect('/weekly');
 }
 

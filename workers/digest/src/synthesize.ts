@@ -10,8 +10,8 @@ export type WeeklyCandidate = {
   ai_summary_cn: string | null;
   ai_section: string;
   ai_score: number;
-  source_label: string;
-  source_section: string;
+  source_label: string | null;
+  source_section: string | null;
   priority_score: number;
 };
 
@@ -29,7 +29,7 @@ export type WeeklySynthesis = {
 
 export function isoWeekSGT(date = new Date()): string {
   // Convert to SGT (UTC+8) for week-of-year calc
-  const sgt = new Date(date.getTime() + (8 * 60 - date.getTimezoneOffset()) * 60000);
+  const sgt = new Date(date.getTime() + 8 * 3_600_000);
   const d = new Date(Date.UTC(sgt.getUTCFullYear(), sgt.getUTCMonth(), sgt.getUTCDate()));
   const dayNum = d.getUTCDay() || 7;
   d.setUTCDate(d.getUTCDate() + 4 - dayNum);

@@ -7,23 +7,24 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
-    "preview": "wrangler pages dev ./dist",
-    "deploy": "astro build && mkdir -p dist/client/_worker.js && cp dist/server/entry.mjs dist/client/_worker.js/index.js && cp dist/server/virtual_astro_middleware.mjs dist/client/_worker.js/ && cp -r dist/server/chunks dist/client/_worker.js/ && wrangler pages deploy ./dist/client --project-name rickys-blog --branch main --commit-dirty=true",
+    "preview": "wrangler dev -c dist/server/wrangler.json",
+    "deploy": "astro build && wrangler deploy -c dist/server/wrangler.json",
+    "deploy:worker": "wrangler deploy -c workers/digest/wrangler.jsonc",
+    "db:migrate": "wrangler d1 migrations apply rickys-blog-db --local -c workers/digest/wrangler.jsonc",
+    "db:migrate:remote": "wrangler d1 migrations apply rickys-blog-db --remote -c workers/digest/wrangler.jsonc",
     "astro": "astro",
-    "check": "astro check"
+    "check": "astro check && tsc -p workers/digest"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.91.1",
     "@astrojs/check": "^0.9.4",
     "@astrojs/cloudflare": "^13.2.1",
     "@astrojs/mdx": "^5.0.0",
-    "@supabase/supabase-js": "^2.104.1",
     "astro": "^6.0.0",
-    "marked": "^18.0.2",
-    "rss-parser": "^3.13.0"
+    "fast-xml-parser": "^5.0.0",
+    "marked": "^18.0.2"
   },
   "devDependencies": {
-    "tsx": "^4.21.0",
     "typescript": "^5.7.0",
     "wrangler": "^4.83.0"
   }

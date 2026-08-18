@@ -1,20 +1,16 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
-import { supabase } from '@lib/supabase';
+import { env } from 'cloudflare:workers';
+import { getLatestWeekly, getWeeklyCount } from '@lib/db';
 
 export const prerender = false;
 
-const { data: latestWeekly } = await supabase
-  .from('weekly_digests')
-  .select('slug, title, curators_note_cn, curators_note_en, published_at')
-  .order('published_at', { ascending: false })
-  .limit(1)
-  .maybeSingle();
-
-const { count: weeklyCount } = await supabase
-  .from('weekly_digests')
-  .select('slug', { count: 'exact', head: true });
+const db = env.DB;
+const [latestWeekly, weeklyCount] = await Promise.all([
+  getLatestWeekly(db),
+  getWeeklyCount(db),
+]);
 
 const weeklyDate = latestWeekly?.published_at
   ? new Date(latestWeekly.published_at).toISOString().slice(0, 10)

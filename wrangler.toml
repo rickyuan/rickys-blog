@@ -1,0 +1,17 @@
+# Cloudflare Workers config for the Astro site.
+# `astro build` merges this into dist/server/wrangler.json (the deployable
+# config); `astro dev` reads it to emulate bindings locally.
+# The digest cron worker has its own config: workers/digest/wrangler.jsonc.
+name = "rickys-blog"
+compatibility_date = "2026-05-01"
+compatibility_flags = ["nodejs_compat"]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "rickys-blog-db"
+database_id = "0c9a81ef-c949-4ef2-a180-a88f324ac17f"
+
+# Astro sessions store (auto-enabled by the Cloudflare adapter)
+[[kv_namespaces]]
+binding = "SESSION"
+id = "b03e2c458b7d4ebcba13a91477a97b2f"
