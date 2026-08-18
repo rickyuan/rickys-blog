@@ -5,9 +5,11 @@
   "compatibility_date": "2026-05-01",
   "compatibility_flags": ["nodejs_compat"],
   "triggers": {
+    // Cron schedules disabled 2026-08-18 (Anthropic API credit not topped up).
+    // To re-enable: restore ["0 0 * * SUN", "0 23 * * *"] and redeploy.
     // UTC. Sunday 00:00 UTC = Sunday 08:00 SGT (weekly digest);
     // daily 23:00 UTC = 07:00 SGT next day (GTM collection).
-    "crons": ["0 0 * * SUN", "0 23 * * *"]
+    "crons": []
   },
   "d1_databases": [
     {
