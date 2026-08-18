@@ -301,6 +301,12 @@
 
 .or-spot-notes ul { padding-left: 1.2em; }
 .or-spot-notes p + p { margin-top: 0.4em; }
+.or-spot-notes img {
+  max-width: 100%;
+  border-radius: 10px;
+  margin-top: 8px;
+  display: block;
+}
 
 /* free-form markdown between components */
 .or-timeline > p, .or-day > p {

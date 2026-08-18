@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" font-family="-apple-system, 'PingFang SC', 'Noto Sans SC', sans-serif">
+  <!-- water -->
+  <rect width="800" height="600" fill="#d3e9e6"/>
+  <text x="20" y="565" font-size="20" fill="#5a8a84" font-style="italic">Serangoon Harbour 实龙岗海峡</text>
+
+  <!-- island body -->
+  <path d="M 95 210
+           C 60 185, 90 130, 150 125
+           C 200 118, 250 100, 320 96
+           C 400 90, 470 100, 540 110
+           C 610 118, 680 140, 710 180
+           C 740 218, 730 260, 690 285
+           C 660 305, 640 295, 610 310
+           C 580 325, 560 355, 520 360
+           C 480 366, 450 340, 410 345
+           C 380 348, 360 372, 330 375
+           C 290 380, 260 355, 220 350
+           C 175 344, 150 330, 120 300
+           C 95 275, 115 240, 95 210 Z"
+        fill="#efe7cf" stroke="#c9bf9f" stroke-width="3"/>
+
+  <!-- greenery patches -->
+  <ellipse cx="250" cy="180" rx="90" ry="45" fill="#cfe3b8" opacity="0.75"/>
+  <ellipse cx="520" cy="160" rx="100" ry="42" fill="#cfe3b8" opacity="0.75"/>
+  <ellipse cx="640" cy="250" rx="70" ry="48" fill="#bcd9a8" opacity="0.8"/>
+  <ellipse cx="170" cy="270" rx="60" ry="35" fill="#cfe3b8" opacity="0.7"/>
+
+  <!-- quarry lakes -->
+  <ellipse cx="300" cy="240" rx="34" ry="22" fill="#7fb8c9"/>
+  <text x="300" y="222" font-size="17" fill="#4a7a8a" text-anchor="middle">Ubin Quarry</text>
+  <ellipse cx="225" cy="315" rx="26" ry="16" fill="#7fb8c9"/>
+
+  <!-- island label -->
+  <text x="420" y="150" font-size="30" font-weight="700" fill="#8a7f5c" text-anchor="middle">PULAU UBIN 乌敏岛</text>
+
+  <!-- cycling route: village -> east to Chek Jawa -->
+  <path d="M 355 330 C 420 318, 470 320, 520 300 C 570 280, 610 275, 655 265"
+        fill="none" stroke="#0d9488" stroke-width="6" stroke-dasharray="14 9" stroke-linecap="round"/>
+  <!-- arrowhead east -->
+  <path d="M 648 254 L 668 263 L 650 275" fill="none" stroke="#0d9488" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="500" y="270" font-size="19" fill="#0b6e64" font-weight="600">骑行 ~40min</text>
+
+  <!-- cycling route: village -> northwest to Puaka Hill -->
+  <path d="M 340 325 C 330 300, 330 280, 318 262"
+        fill="none" stroke="#b45309" stroke-width="6" stroke-dasharray="14 9" stroke-linecap="round"/>
+  <path d="M 310 272 L 316 258 L 330 264" fill="none" stroke="#b45309" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="212" y="285" font-size="19" fill="#8f4308" font-weight="600">下午 ~15min</text>
+
+  <!-- boat route -->
+  <path d="M 350 352 C 345 400, 350 440, 360 480"
+        fill="none" stroke="#3b82f6" stroke-width="5" stroke-dasharray="4 10" stroke-linecap="round"/>
+  <text x="375" y="428" font-size="19" fill="#2458b8" font-weight="600">⛴ 摆渡 15min · S$4/人</text>
+
+  <!-- stops -->
+  <!-- 1 village / jetty -->
+  <circle cx="350" cy="338" r="17" fill="#0d9488"/>
+  <text x="350" y="345" font-size="19" fill="#fff" font-weight="700" text-anchor="middle">1</text>
+  <text x="318" y="378" font-size="21" font-weight="700" fill="#1f2328">乌敏村 · 租车</text>
+
+  <!-- 2 Chek Jawa -->
+  <circle cx="672" cy="262" r="17" fill="#0d9488"/>
+  <text x="672" y="269" font-size="19" fill="#fff" font-weight="700" text-anchor="middle">2</text>
+  <text x="600" y="238" font-size="21" font-weight="700" fill="#1f2328">仄爪哇湿地</text>
+  <text x="600" y="215" font-size="17" fill="#57604f">木栈道 + Jejawi 塔</text>
+
+  <!-- 3 lunch back at village (arrow back west) -->
+  <text x="430" y="308" font-size="17" fill="#57604f">③ 原路回村午餐</text>
+
+  <!-- 4 Puaka Hill -->
+  <circle cx="315" cy="248" r="17" fill="#b45309"/>
+  <text x="315" y="255" font-size="19" fill="#fff" font-weight="700" text-anchor="middle">4</text>
+  <text x="150" y="240" font-size="21" font-weight="700" fill="#1f2328">普阿卡山 ⛰</text>
+  <text x="128" y="217" font-size="17" fill="#57604f">步行上山 15min · 俯瞰采石湖</text>
+
+  <!-- 5 Butterfly Hill / Pekan Quarry -->
+  <circle cx="240" cy="330" r="17" fill="#b45309"/>
+  <text x="240" y="337" font-size="19" fill="#fff" font-weight="700" text-anchor="middle">5</text>
+  <text x="120" y="362" font-size="21" font-weight="700" fill="#1f2328">蝴蝶园 · 白鹭</text>
+
+  <!-- Changi Point -->
+  <rect x="270" y="480" width="185" height="66" rx="12" fill="#fff" stroke="#c9bf9f" stroke-width="2"/>
+  <circle cx="300" cy="513" r="15" fill="#3b82f6"/>
+  <text x="300" y="519" font-size="17" fill="#fff" font-weight="700" text-anchor="middle">起</text>
+  <text x="325" y="507" font-size="19" font-weight="700" fill="#1f2328">樟宜角码头</text>
+  <text x="325" y="530" font-size="15" fill="#57604f">Bus 2 ← Tanah Merah</text>
+
+  <!-- legend -->
+  <rect x="580" y="420" width="200" height="126" rx="12" fill="#ffffff" opacity="0.92" stroke="#c9bf9f" stroke-width="2"/>
+  <line x1="596" y1="448" x2="646" y2="448" stroke="#0d9488" stroke-width="6" stroke-dasharray="12 8" stroke-linecap="round"/>
+  <text x="656" y="454" font-size="17" fill="#1f2328">上午骑行线</text>
+  <line x1="596" y1="480" x2="646" y2="480" stroke="#b45309" stroke-width="6" stroke-dasharray="12 8" stroke-linecap="round"/>
+  <text x="656" y="486" font-size="17" fill="#1f2328">下午骑行线</text>
+  <line x1="596" y1="512" x2="646" y2="512" stroke="#3b82f6" stroke-width="5" stroke-dasharray="3 8" stroke-linecap="round"/>
+  <text x="656" y="518" font-size="17" fill="#1f2328">摆渡船</text>
+  <text x="596" y="540" font-size="14" fill="#8a8577">示意图,非精确比例</text>
+
+  <!-- north arrow -->
+  <g transform="translate(748, 60)">
+    <path d="M 0 18 L 0 -18 M -9 -6 L 0 -18 L 9 -6" fill="none" stroke="#5a8a84" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="0" y="42" font-size="18" fill="#5a8a84" text-anchor="middle" font-weight="700">N</text>
+  </g>
+</svg>
