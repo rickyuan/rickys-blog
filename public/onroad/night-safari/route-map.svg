@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 340" font-family="-apple-system, 'PingFang SC', 'Noto Sans SC', sans-serif">
+  <rect width="800" height="340" rx="16" fill="#1a1d29"/>
+  <text x="30" y="46" font-size="24" font-weight="700" fill="#f0f0f5">夜间动物园动线 · 全球首创夜行园区 🌙</text>
+  <text x="30" y="74" font-size="17" fill="#9aa0b5">傍晚出发,先看喂食秀再上游览车,步行道挑 1–2 条,十点前撤</text>
+
+  <line x1="70" y1="180" x2="730" y2="180" stroke="#8b5cf6" stroke-width="6" stroke-linecap="round"/>
+
+  <g text-anchor="middle">
+    <circle cx="80" cy="180" r="16" fill="#b45309"/>
+    <text x="80" y="186" font-size="13" fill="#fff" font-weight="700">18:00</text>
+    <text x="80" y="140" font-size="18" font-weight="700" fill="#f0f0f5">出发</text>
+    <text x="80" y="222" font-size="14" fill="#9aa0b5">Grab ~30min</text>
+
+    <circle cx="230" cy="180" r="14" fill="#8b5cf6"/>
+    <text x="230" y="186" font-size="15" fill="#fff" font-weight="700">1</text>
+    <text x="230" y="140" font-size="18" font-weight="700" fill="#f0f0f5">园区晚餐</text>
+    <text x="230" y="222" font-size="14" fill="#9aa0b5">Ulu Ulu 或入口食阁</text>
+
+    <circle cx="380" cy="180" r="14" fill="#8b5cf6"/>
+    <text x="380" y="186" font-size="15" fill="#fff" font-weight="700">2</text>
+    <text x="380" y="140" font-size="18" font-weight="700" fill="#f0f0f5">动物表演</text>
+    <text x="380" y="222" font-size="14" fill="#9aa0b5">Creatures of the Night</text>
+
+    <circle cx="530" cy="180" r="14" fill="#0d9488"/>
+    <text x="530" y="186" font-size="15" fill="#fff" font-weight="700">3</text>
+    <text x="530" y="140" font-size="18" font-weight="700" fill="#f0f0f5">游览车环线</text>
+    <text x="530" y="222" font-size="14" fill="#9aa0b5">40min 穿越 7 大地理区</text>
+
+    <circle cx="690" cy="180" r="16" fill="#3b82f6"/>
+    <text x="690" y="186" font-size="15" fill="#fff" font-weight="700">4</text>
+    <text x="690" y="140" font-size="18" font-weight="700" fill="#f0f0f5">步行道</text>
+    <text x="690" y="222" font-size="14" fill="#9aa0b5">渔猫道 / 沙袋鼠道选一</text>
+  </g>
+
+  <g text-anchor="middle" font-size="14" fill="#b3a3e8">
+    <text x="155" y="260">🚗 提前买票+订场次</text>
+    <text x="305" y="260">🍽 19:00 场卡位</text>
+    <text x="455" y="260">🎭 20:00 上车</text>
+    <text x="610" y="260">🚶 娃还有电才加</text>
+  </g>
+
+  <text x="30" y="310" font-size="15" fill="#8a8fa8">💡 全园禁闪光灯;游览车右侧视野稍好;周五六人多,选周日晚最舒服</text>
+</svg>

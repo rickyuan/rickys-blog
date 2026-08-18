@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 340" font-family="-apple-system, 'PingFang SC', 'Noto Sans SC', sans-serif">
+  <rect width="800" height="340" rx="16" fill="#ffffff"/>
+  <text x="30" y="46" font-size="24" font-weight="700" fill="#1f2328">榜鹅水道 + Coney Island 骑行 ~10km</text>
+  <text x="30" y="74" font-size="17" fill="#6b7280">Waterway Point 租车,沿水道骑到无人小岛,碎石环线后原路返回</text>
+
+  <path d="M 90 160 H 380 C 460 160, 500 180, 500 210 C 500 240, 460 250, 380 250 H 250"
+        fill="none" stroke="#0d9488" stroke-width="6" stroke-linecap="round"/>
+  <line x1="500" y1="205" x2="700" y2="205" stroke="#b45309" stroke-width="6" stroke-dasharray="12 8" stroke-linecap="round"/>
+
+  <g text-anchor="middle">
+    <circle cx="90" cy="160" r="16" fill="#0d9488"/>
+    <text x="90" y="167" font-size="14" fill="#fff" font-weight="700">起终</text>
+    <text x="90" y="122" font-size="18" font-weight="700" fill="#1f2328">Waterway Point</text>
+    <text x="90" y="296" font-size="15" fill="#6b7280">租车 · 回程晚餐</text>
+
+    <circle cx="280" cy="160" r="14" fill="#0d9488"/>
+    <text x="280" y="166" font-size="15" fill="#fff" font-weight="700">1</text>
+    <text x="280" y="122" font-size="18" font-weight="700" fill="#1f2328">榜鹅水道公园</text>
+    <text x="280" y="192" font-size="14" fill="#6b7280">滨水绿道 ~3km</text>
+
+    <circle cx="500" cy="205" r="14" fill="#b45309"/>
+    <text x="500" y="211" font-size="15" fill="#fff" font-weight="700">2</text>
+    <text x="500" y="168" font-size="18" font-weight="700" fill="#1f2328">Coney Island 西门</text>
+
+    <circle cx="700" cy="205" r="14" fill="#b45309"/>
+    <text x="700" y="211" font-size="15" fill="#fff" font-weight="700">3</text>
+    <text x="700" y="168" font-size="18" font-weight="700" fill="#1f2328">岛内碎石环线</text>
+    <text x="700" y="240" font-size="14" fill="#6b7280">海滩支线 + 观鸟</text>
+
+    <circle cx="250" cy="250" r="14" fill="#0d9488"/>
+    <text x="250" y="256" font-size="15" fill="#fff" font-weight="700">4</text>
+    <text x="250" y="290" font-size="17" font-weight="700" fill="#1f2328">原路返程还车</text>
+  </g>
+
+  <text x="560" y="260" font-size="14" fill="#8f4308" text-anchor="middle">岛内无铺装路,慢骑</text>
+
+  <text x="30" y="325" font-size="15" fill="#8a8577">💡 岛上无水无厕所(西门口有),进岛前补给;公园 7:00–19:00,17:00 前出岛稳妥</text>
+</svg>

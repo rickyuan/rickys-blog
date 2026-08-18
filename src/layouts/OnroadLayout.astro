@@ -7,7 +7,7 @@ interface Props {
   cover: string;
   origin: string;
   destination: string;
-  startDate: Date;
+  startDate?: Date;
   endDate?: Date;
   category: 'sg-local' | 'overseas';
   status: 'planning' | 'ready' | 'done';
@@ -17,11 +17,13 @@ const { title, description, cover, origin, destination, startDate, endDate, cate
   Astro.props;
 
 const fmt = (d: Date) => d.toISOString().slice(0, 10);
-const dateRange = endDate && fmt(endDate) !== fmt(startDate)
-  ? `${fmt(startDate)} → ${fmt(endDate)}`
-  : fmt(startDate);
+const dateRange = !startDate
+  ? '日期待定'
+  : endDate && fmt(endDate) !== fmt(startDate)
+    ? `${fmt(startDate)} → ${fmt(endDate)}`
+    : fmt(startDate);
 
-const STATUS_LABEL = { planning: '🛠 规划中', ready: '✅ 出发就绪', done: '🏁 已完成' } as const;
+const STATUS_LABEL = { planning: '🛠 规划中', ready: '✅ 出发就绪', done: '🏁 已去过' } as const;
 const CATEGORY_LABEL = { 'sg-local': 'SG 本地', overseas: '海外' } as const;
 ---
 <!DOCTYPE html>

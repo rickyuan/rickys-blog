@@ -35,7 +35,7 @@ const onroad = defineCollection({
     category: z.enum(['sg-local', 'overseas']),
     origin: z.string(),
     destination: z.string(),
-    startDate: z.coerce.date(),
+    startDate: z.coerce.date().optional(),
     endDate: z.coerce.date().optional(),
     cover: z.string().default('🧭'),
     status: z.enum(['planning', 'ready', 'done']).default('planning'),

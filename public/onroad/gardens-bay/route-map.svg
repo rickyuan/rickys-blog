@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 340" font-family="-apple-system, 'PingFang SC', 'Noto Sans SC', sans-serif">
+  <rect width="800" height="340" rx="16" fill="#ffffff"/>
+  <text x="30" y="46" font-size="24" font-weight="700" fill="#1f2328">滨海湾花园动线 · 免费区玩足再进冷室</text>
+  <text x="30" y="74" font-size="17" fill="#6b7280">上午儿童花园玩水,正午躲进云雾林吹冷气,傍晚灯光秀免费收尾</text>
+
+  <line x1="70" y1="180" x2="730" y2="180" stroke="#0d9488" stroke-width="6" stroke-linecap="round"/>
+
+  <g text-anchor="middle">
+    <circle cx="80" cy="180" r="16" fill="#0d9488"/>
+    <text x="80" y="187" font-size="14" fill="#fff" font-weight="700">10:00</text>
+    <text x="80" y="140" font-size="18" font-weight="700" fill="#1f2328">儿童花园</text>
+    <text x="80" y="222" font-size="14" fill="#6b7280">免费水乐园 · 周一闭</text>
+
+    <circle cx="240" cy="180" r="14" fill="#0d9488"/>
+    <text x="240" y="186" font-size="15" fill="#fff" font-weight="700">1</text>
+    <text x="240" y="140" font-size="18" font-weight="700" fill="#1f2328">超级树丛林</text>
+    <text x="240" y="222" font-size="14" fill="#6b7280">Supertree Grove</text>
+
+    <circle cx="390" cy="180" r="14" fill="#b45309"/>
+    <text x="390" y="186" font-size="15" fill="#fff" font-weight="700">2</text>
+    <text x="390" y="140" font-size="18" font-weight="700" fill="#1f2328">湾畔午餐</text>
+    <text x="390" y="222" font-size="14" fill="#6b7280">Satay by the Bay</text>
+
+    <circle cx="540" cy="180" r="14" fill="#3b82f6"/>
+    <text x="540" y="186" font-size="15" fill="#fff" font-weight="700">3</text>
+    <text x="540" y="140" font-size="18" font-weight="700" fill="#1f2328">云雾林冷室</text>
+    <text x="540" y="222" font-size="14" fill="#6b7280">35m 室内瀑布</text>
+
+    <circle cx="700" cy="180" r="16" fill="#8b5cf6"/>
+    <text x="700" y="186" font-size="13" fill="#fff" font-weight="700">19:45</text>
+    <text x="700" y="140" font-size="18" font-weight="700" fill="#1f2328">灯光秀</text>
+    <text x="700" y="222" font-size="14" fill="#6b7280">Garden Rhapsody 免费</text>
+  </g>
+
+  <g text-anchor="middle" font-size="14" fill="#0b6e64">
+    <text x="160" y="260">🚶 玩水 2h,备换洗</text>
+    <text x="315" y="260">🚶 8min</text>
+    <text x="465" y="260">🚶 正午避暑</text>
+    <text x="620" y="260">🧺 草坪野餐等天黑</text>
+  </g>
+
+  <text x="30" y="310" font-size="15" fill="#8a8577">💡 冷室门票本地居民有优惠价;只逛免费区 + 灯光秀,这条线可以 S$0 门票玩一天</text>
+</svg>

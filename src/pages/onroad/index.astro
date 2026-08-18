@@ -2,11 +2,19 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '@layouts/BaseLayout.astro';
 
-const trips = (await getCollection('onroad', ({ data }) => !data.draft))
-  .sort((a, b) => b.data.startDate.getTime() - a.data.startDate.getTime());
+// Done trips sink to the bottom; within each group, dated trips first
+// (newest date first), then undated backlog ideas.
+const trips = (await getCollection('onroad', ({ data }) => !data.draft)).sort((a, b) => {
+  const doneRank = Number(a.data.status === 'done') - Number(b.data.status === 'done');
+  if (doneRank !== 0) return doneRank;
+  const at = a.data.startDate?.getTime() ?? -Infinity;
+  const bt = b.data.startDate?.getTime() ?? -Infinity;
+  return bt - at;
+});
 
-const fmt = (d: Date) => d.toISOString().slice(0, 10);
-const STATUS_LABEL = { planning: '🛠 规划中', ready: '✅ 就绪', done: '🏁 完成' } as const;
+const fmt = (d?: Date) => (d ? d.toISOString().slice(0, 10) : '待安排');
+const STATUS_LABEL = { planning: '🛠 规划中', ready: '✅ 就绪', done: '🏁 已去过' } as const;
+const CATEGORY_LABEL = { 'sg-local': 'SG 本地', overseas: '海外' } as const;
 ---
 <BaseLayout title="OnRoad — Ricky's Space" noindex={true}>
 
@@ -20,31 +28,148 @@ const STATUS_LABEL = { planning: '🛠 规划中', ready: '✅ 就绪', done: '�
     <p class="site-desc">家庭出行规划 — 新加坡本地优化路线 & 海外旅行方案,手机打开即用 🧭</p>
   </header>
 
-  <main class="posts" id="posts">
+  <nav class="or-filters" id="or-filters">
+    <button class="filter-btn active" data-filter="all">全部</button>
+    <button class="filter-btn" data-filter="sg-local">SG 本地</button>
+    <button class="filter-btn" data-filter="overseas">海外</button>
+    <button class="filter-btn" data-filter="todo">未走</button>
+    <button class="filter-btn" data-filter="done">🏁 已去过</button>
+  </nav>
+
+  <main class="or-grid" id="trip-grid">
     {trips.map((t) => (
-      <a class="post-card" href={`/onroad/${t.id}`} data-category={t.data.category}>
-        <div class="post-info">
-          <span class="post-tag" data-t="onroad">
-            {t.data.cover} {t.data.category === 'sg-local' ? 'SG 本地' : '海外'}
-          </span>
-          <h2 class="post-title">{t.data.title}</h2>
-          <p class="post-excerpt">
-            {t.data.origin} → {t.data.destination} · {STATUS_LABEL[t.data.status]}
-          </p>
-          <p class="post-excerpt">{t.data.description}</p>
+      <a
+        class={`or-trip-card${t.data.status === 'done' ? ' or-trip-card--done' : ''}`}
+        href={`/onroad/${t.id}`}
+        data-category={t.data.category}
+        data-status={t.data.status}
+      >
+        <div class="or-trip-cover">
+          <span class="or-trip-emoji">{t.data.cover}</span>
+          {t.data.status === 'done' && <span class="or-trip-done-badge">🏁 已去过</span>}
         </div>
-        <span class="post-date">{fmt(t.data.startDate)}</span>
+        <div class="or-trip-body">
+          <div class="or-trip-meta">
+            <span class="post-tag" data-t="onroad">{CATEGORY_LABEL[t.data.category]}</span>
+            <span class="or-trip-status">{STATUS_LABEL[t.data.status]}</span>
+            <span class="or-trip-date">{fmt(t.data.startDate)}</span>
+          </div>
+          <h2 class="or-trip-title">{t.data.title}</h2>
+          <p class="or-trip-route">{t.data.origin} → {t.data.destination}</p>
+          <p class="or-trip-desc">{t.data.description}</p>
+        </div>
       </a>
     ))}
-    {trips.length === 0 && (
-      <p style="color:#888;font-family:'JetBrains Mono',monospace;font-size:0.8rem;">
-        No trips yet — 下一次出行见。
-      </p>
-    )}
   </main>
 
   <footer class="site-footer">
     <p>© 2026 Ricky's Space · <a href="/">← home</a></p>
   </footer>
+
+  <script>
+    const buttons = document.querySelectorAll<HTMLButtonElement>('#or-filters .filter-btn');
+    const cards = document.querySelectorAll<HTMLElement>('.or-trip-card');
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        buttons.forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+        const f = btn.dataset.filter;
+        cards.forEach((card) => {
+          const show =
+            f === 'all' ||
+            card.dataset.category === f ||
+            (f === 'done' && card.dataset.status === 'done') ||
+            (f === 'todo' && card.dataset.status !== 'done');
+          card.style.display = show ? '' : 'none';
+        });
+      });
+    });
+  </script>
+
+  <style>
+    .or-filters {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin: 0 0 24px;
+    }
+    .or-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+    @media (min-width: 640px) {
+      .or-grid { grid-template-columns: 1fr 1fr; }
+    }
+    .or-trip-card {
+      display: flex;
+      flex-direction: column;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      text-decoration: none;
+      color: var(--text);
+      transition: border-color 0.2s, transform 0.2s, opacity 0.2s;
+    }
+    .or-trip-card:hover {
+      border-color: #2dd4bf;
+      transform: translateY(-2px);
+    }
+    .or-trip-cover {
+      position: relative;
+      background: linear-gradient(135deg, #0d948833, #0d221f);
+      padding: 22px 0;
+      text-align: center;
+    }
+    .or-trip-emoji { font-size: 2.6rem; line-height: 1; }
+    .or-trip-done-badge {
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      color: #2dd4bf;
+      background: #0d948822;
+      border: 1px solid #0d948855;
+      border-radius: 999px;
+      padding: 2px 9px;
+    }
+    .or-trip-body { padding: 14px 16px 16px; }
+    .or-trip-meta {
+      display: flex;
+      gap: 8px;
+      align-items: baseline;
+      flex-wrap: wrap;
+    }
+    .or-trip-status, .or-trip-date {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      color: var(--text-dim);
+    }
+    .or-trip-date { margin-left: auto; }
+    .or-trip-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin: 8px 0 2px;
+    }
+    .or-trip-route {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: #2dd4bf;
+      margin-bottom: 6px;
+    }
+    .or-trip-desc {
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      line-height: 1.6;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .or-trip-card--done { opacity: 0.55; }
+    .or-trip-card--done:hover { opacity: 0.9; }
+  </style>
 
 </BaseLayout>

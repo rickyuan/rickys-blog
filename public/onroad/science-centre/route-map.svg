@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 340" font-family="-apple-system, 'PingFang SC', 'Noto Sans SC', sans-serif">
+  <rect width="800" height="340" rx="16" fill="#ffffff"/>
+  <text x="30" y="46" font-size="24" font-weight="700" fill="#1f2328">科学馆 + 裕廊湖花园 · EW 线直达的懒人线</text>
+  <text x="30" y="74" font-size="17" fill="#6b7280">Queenstown 到 Jurong East 只要 15 分钟,上午室内动手玩,下午湖畔放电</text>
+
+  <line x1="70" y1="180" x2="730" y2="180" stroke="#3b82f6" stroke-width="6" stroke-linecap="round"/>
+
+  <g text-anchor="middle">
+    <circle cx="80" cy="180" r="16" fill="#3b82f6"/>
+    <text x="80" y="186" font-size="13" fill="#fff" font-weight="700">10:00</text>
+    <text x="80" y="140" font-size="18" font-weight="700" fill="#1f2328">科学馆</text>
+    <text x="80" y="222" font-size="14" fill="#6b7280">周一闭馆 ⚠️</text>
+
+    <circle cx="250" cy="180" r="14" fill="#3b82f6"/>
+    <text x="250" y="186" font-size="15" fill="#fff" font-weight="700">1</text>
+    <text x="250" y="140" font-size="18" font-weight="700" fill="#1f2328">动手展区</text>
+    <text x="250" y="222" font-size="14" fill="#6b7280">KidsSTOP / 火焰龙卷风</text>
+
+    <circle cx="410" cy="180" r="14" fill="#b45309"/>
+    <text x="410" y="186" font-size="15" fill="#fff" font-weight="700">2</text>
+    <text x="410" y="140" font-size="18" font-weight="700" fill="#1f2328">商场午餐</text>
+    <text x="410" y="222" font-size="14" fill="#6b7280">Westgate / Jem</text>
+
+    <circle cx="570" cy="180" r="14" fill="#0d9488"/>
+    <text x="570" y="186" font-size="15" fill="#fff" font-weight="700">3</text>
+    <text x="570" y="140" font-size="18" font-weight="700" fill="#1f2328">森林游乐场</text>
+    <text x="570" y="222" font-size="14" fill="#6b7280">Forest Ramble 免费</text>
+
+    <circle cx="710" cy="180" r="16" fill="#0d9488"/>
+    <text x="710" y="186" font-size="15" fill="#fff" font-weight="700">4</text>
+    <text x="710" y="140" font-size="18" font-weight="700" fill="#1f2328">孤独的树</text>
+    <text x="710" y="222" font-size="14" fill="#6b7280">Lone Tree 日落片</text>
+  </g>
+
+  <g text-anchor="middle" font-size="14" fill="#2458b8">
+    <text x="165" y="260">🔬 2.5h 够玩</text>
+    <text x="330" y="260">🚶 10min</text>
+    <text x="490" y="260">🚶 湖畔步行 15min</text>
+    <text x="640" y="260">📸 17:30 光线最好</text>
+  </g>
+
+  <text x="30" y="310" font-size="15" fill="#8a8577">💡 全程距家最近的一日游;下雨就把下午换成科学馆穹幕电影,行程不崩</text>
+</svg>

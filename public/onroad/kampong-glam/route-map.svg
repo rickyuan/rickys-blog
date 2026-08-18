@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 340" font-family="-apple-system, 'PingFang SC', 'Noto Sans SC', sans-serif">
+  <rect width="800" height="340" rx="16" fill="#ffffff"/>
+  <text x="30" y="46" font-size="24" font-weight="700" fill="#1f2328">甘榜格南文化半日 · 步行 + 游船</text>
+  <text x="30" y="74" font-size="17" fill="#6b7280">Bugis 站出发,清真寺-壁画巷-老店午餐一路步行,傍晚新加坡河游船收尾</text>
+
+  <line x1="70" y1="180" x2="730" y2="180" stroke="#b45309" stroke-width="6" stroke-linecap="round"/>
+
+  <g text-anchor="middle">
+    <circle cx="80" cy="180" r="16" fill="#3b82f6"/>
+    <text x="80" y="187" font-size="17" fill="#fff" font-weight="700">起</text>
+    <text x="80" y="140" font-size="18" font-weight="700" fill="#1f2328">Bugis MRT</text>
+    <text x="80" y="222" font-size="14" fill="#6b7280">EW 线直达 20min</text>
+
+    <circle cx="240" cy="180" r="14" fill="#b45309"/>
+    <text x="240" y="186" font-size="15" fill="#fff" font-weight="700">1</text>
+    <text x="240" y="140" font-size="18" font-weight="700" fill="#1f2328">苏丹回教堂</text>
+    <text x="240" y="222" font-size="14" fill="#6b7280">金顶地标 · 着装注意</text>
+
+    <circle cx="390" cy="180" r="14" fill="#b45309"/>
+    <text x="390" y="186" font-size="15" fill="#fff" font-weight="700">2</text>
+    <text x="390" y="140" font-size="18" font-weight="700" fill="#1f2328">哈芝巷壁画</text>
+    <text x="390" y="222" font-size="14" fill="#6b7280">Haji Lane + Gelam Gallery</text>
+
+    <circle cx="530" cy="180" r="14" fill="#b45309"/>
+    <text x="530" y="186" font-size="15" fill="#fff" font-weight="700">3</text>
+    <text x="530" y="140" font-size="18" font-weight="700" fill="#1f2328">老店午餐</text>
+    <text x="530" y="222" font-size="14" fill="#6b7280">Zam Zam 印度煎饼 1908</text>
+
+    <circle cx="690" cy="180" r="16" fill="#0d9488"/>
+    <text x="690" y="187" font-size="17" fill="#fff" font-weight="700">终</text>
+    <text x="690" y="140" font-size="18" font-weight="700" fill="#1f2328">河上游船</text>
+    <text x="690" y="222" font-size="14" fill="#6b7280">Clarke Quay → 鱼尾狮</text>
+  </g>
+
+  <g text-anchor="middle" font-size="14" fill="#8f4308">
+    <text x="160" y="260">🚶 5min</text>
+    <text x="315" y="260">🚶 3min 拍照 1h</text>
+    <text x="460" y="260">🚶 5min</text>
+    <text x="610" y="260">🚕 10min 到码头</text>
+  </g>
+
+  <text x="30" y="310" font-size="15" fill="#8a8577">💡 游船约 40 分钟,日落场(约 18:30)最值——白天上船、亮灯下船,一船看两个新加坡</text>
+</svg>
