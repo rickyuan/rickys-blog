@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 640" font-family="-apple-system, 'PingFang SC', 'Noto Sans SC', sans-serif">
+  <!-- sea -->
+  <rect width="800" height="640" fill="#cfe4ec"/>
+  <text x="20" y="618" font-size="20" fill="#5a7f8a" font-style="italic">Singapore Strait 新加坡海峡 · 南部群岛</text>
+
+  <!-- ferry from Marina South Pier (off-map north) -->
+  <path d="M 330 0 C 320 60, 300 120, 285 170" fill="none" stroke="#3b82f6" stroke-width="5" stroke-dasharray="4 10" stroke-linecap="round"/>
+  <text x="345" y="40" font-size="20" fill="#2458b8" font-weight="700">⛴ Marina South Pier</text>
+  <text x="345" y="64" font-size="17" fill="#2458b8">乘渡轮 ~30min · 往返 S$15/人</text>
+
+  <!-- Tekukor -->
+  <ellipse cx="95" cy="120" rx="55" ry="20" transform="rotate(-35 95 120)" fill="#dfd8bd" stroke="#c2b895" stroke-width="2"/>
+  <text x="60" y="90" font-size="16" fill="#8a8266" font-style="italic">Tekukor</text>
+
+  <!-- Kias -->
+  <ellipse cx="330" cy="115" rx="42" ry="18" transform="rotate(-15 330 115)" fill="#e8e0c6" stroke="#c2b895" stroke-width="2"/>
+  <text x="255" y="100" font-size="16" fill="#8a8266" font-style="italic">Kias</text>
+
+  <!-- Seringat + Lazarus complex -->
+  <path d="M 355 135
+           C 400 120, 470 118, 520 132
+           C 560 143, 575 165, 560 185
+           C 545 203, 505 200, 480 210
+           C 500 225, 520 250, 512 285
+           C 505 315, 480 340, 450 355
+           C 425 367, 405 355, 400 330
+           C 395 305, 405 285, 415 265
+           C 420 250, 415 240, 400 235
+           C 375 228, 350 215, 340 195
+           C 328 172, 335 145, 355 135 Z"
+        fill="#e9e2c8" stroke="#c2b895" stroke-width="3"/>
+  <ellipse cx="450" cy="160" rx="48" ry="20" fill="#cfe3b8" opacity="0.8"/>
+  <ellipse cx="460" cy="300" rx="35" ry="40" fill="#cfe3b8" opacity="0.7"/>
+  <text x="415" y="130" font-size="17" fill="#7a7358" font-style="italic">Seringat</text>
+  <text x="470" y="250" font-size="19" font-weight="700" fill="#7a7358" font-style="italic">Lazarus</text>
+
+  <!-- Lazarus lagoon (C-shape) -->
+  <path d="M 512 285 C 540 270, 560 275, 565 295 C 570 318, 550 335, 525 338 C 505 340, 495 330, 500 315 Z" fill="#9fd4d9"/>
+  <text x="585" y="300" font-size="17" fill="#3f7f86">C 形泻湖</text>
+
+  <!-- St John's -->
+  <path d="M 235 380
+           C 200 360, 195 330, 225 315
+           C 255 300, 300 305, 340 320
+           C 375 333, 400 345, 420 370
+           C 440 395, 435 425, 410 445
+           C 385 463, 350 455, 320 470
+           C 290 484, 260 480, 240 460
+           C 220 440, 250 415, 235 380 Z"
+        fill="#e9e2c8" stroke="#c2b895" stroke-width="3"/>
+  <ellipse cx="300" cy="360" rx="55" ry="28" fill="#cfe3b8" opacity="0.8"/>
+  <text x="250" y="415" font-size="20" font-weight="700" fill="#7a7358" font-style="italic">St John's</text>
+
+  <!-- causeway walk -->
+  <path d="M 400 340 C 415 330, 425 320, 432 300" fill="none" stroke="#0d9488" stroke-width="6" stroke-dasharray="12 8" stroke-linecap="round"/>
+
+  <!-- Kusu -->
+  <path d="M 640 380 C 620 360, 630 335, 665 330 C 700 325, 740 335, 755 355 C 770 375, 755 398, 725 405 C 695 412, 658 400, 640 380 Z"
+        fill="#e9e2c8" stroke="#c2b895" stroke-width="3"/>
+  <ellipse cx="700" cy="368" rx="35" ry="18" fill="#cfe3b8" opacity="0.8"/>
+  <text x="660" y="440" font-size="19" font-weight="700" fill="#7a7358" font-style="italic">Kusu 龟屿</text>
+
+  <!-- Sisters -->
+  <ellipse cx="90" cy="520" rx="40" ry="22" fill="#dfd8bd" stroke="#c2b895" stroke-width="2"/>
+  <ellipse cx="160" cy="560" rx="30" ry="16" fill="#dfd8bd" stroke="#c2b895" stroke-width="2"/>
+  <text x="55" y="480" font-size="16" fill="#8a8266" font-style="italic">Sisters' Islands</text>
+
+  <!-- ferry continues: St John's -> Kusu (day2) -->
+  <path d="M 275 430 C 330 480, 480 470, 620 400" fill="none" stroke="#3b82f6" stroke-width="5" stroke-dasharray="4 10" stroke-linecap="round"/>
+  <text x="380" y="500" font-size="18" fill="#2458b8" font-weight="600">D2 跳岛渡轮 ~15min</text>
+
+  <!-- kayak zone -->
+  <path d="M 545 310 C 590 300, 615 320, 605 350 C 595 378, 555 385, 530 370"
+        fill="none" stroke="#b45309" stroke-width="5" stroke-dasharray="10 8" stroke-linecap="round"/>
+  <path d="M 596 355 L 605 348 L 612 360" fill="none" stroke="#b45309" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="560" y="415" font-size="18" fill="#8f4308" font-weight="600">🛶 皮划艇活动区</text>
+
+  <!-- stops -->
+  <circle cx="272" cy="422" r="16" fill="#3b82f6"/>
+  <text x="272" y="429" font-size="18" fill="#fff" font-weight="700" text-anchor="middle">1</text>
+  <text x="120" y="445" font-size="19" font-weight="700" fill="#1f2328">码头+海洋实验室 🔬</text>
+
+  <circle cx="418" cy="322" r="16" fill="#0d9488"/>
+  <text x="418" y="329" font-size="18" fill="#fff" font-weight="700" text-anchor="middle">2</text>
+  <text x="290" y="290" font-size="19" font-weight="700" fill="#1f2328">堤道步行 ~20min</text>
+
+  <circle cx="520" cy="315" r="16" fill="#b45309"/>
+  <text x="520" y="322" font-size="18" fill="#fff" font-weight="700" text-anchor="middle">3</text>
+  <text x="490" y="345" font-size="19" font-weight="700" fill="#1f2328">⛺ 泻湖扎营</text>
+
+  <circle cx="640" cy="378" r="16" fill="#3b82f6"/>
+  <text x="640" y="385" font-size="18" fill="#fff" font-weight="700" text-anchor="middle">4</text>
+  <text x="600" y="465" font-size="17" fill="#57604f">大伯公庙 + 乌龟保育园</text>
+
+  <!-- legend -->
+  <rect x="580" y="500" width="200" height="120" rx="12" fill="#ffffff" opacity="0.93" stroke="#c2b895" stroke-width="2"/>
+  <line x1="596" y1="528" x2="646" y2="528" stroke="#3b82f6" stroke-width="5" stroke-dasharray="3 8" stroke-linecap="round"/>
+  <text x="656" y="534" font-size="17" fill="#1f2328">渡轮航线</text>
+  <line x1="596" y1="560" x2="646" y2="560" stroke="#0d9488" stroke-width="6" stroke-dasharray="12 8" stroke-linecap="round"/>
+  <text x="656" y="566" font-size="17" fill="#1f2328">步行堤道</text>
+  <line x1="596" y1="592" x2="646" y2="592" stroke="#b45309" stroke-width="5" stroke-dasharray="10 8" stroke-linecap="round"/>
+  <text x="656" y="598" font-size="17" fill="#1f2328">皮划艇路线</text>
+
+  <!-- north arrow -->
+  <g transform="translate(748, 70)">
+    <path d="M 0 18 L 0 -18 M -9 -6 L 0 -18 L 9 -6" fill="none" stroke="#5a7f8a" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="0" y="42" font-size="18" fill="#5a7f8a" text-anchor="middle" font-weight="700">N</text>
+  </g>
+</svg>
