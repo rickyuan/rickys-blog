@@ -1,0 +1,50 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@layouts/BaseLayout.astro';
+
+const trips = (await getCollection('onroad', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.startDate.getTime() - a.data.startDate.getTime());
+
+const fmt = (d: Date) => d.toISOString().slice(0, 10);
+const STATUS_LABEL = { planning: '🛠 规划中', ready: '✅ 就绪', done: '🏁 完成' } as const;
+---
+<BaseLayout title="OnRoad — Ricky's Space" noindex={true}>
+
+  <header class="site-header">
+    <div class="terminal-prompt">
+      <span>~/rickys-space/onroad $</span>
+      <span>ls -t trips/</span>
+      <span class="cursor"></span>
+    </div>
+    <h1 class="site-title">OnRoad</h1>
+    <p class="site-desc">家庭出行规划 — 新加坡本地优化路线 & 海外旅行方案,手机打开即用 🧭</p>
+  </header>
+
+  <main class="posts" id="posts">
+    {trips.map((t) => (
+      <a class="post-card" href={`/onroad/${t.id}`} data-category={t.data.category}>
+        <div class="post-info">
+          <span class="post-tag" data-t="onroad">
+            {t.data.cover} {t.data.category === 'sg-local' ? 'SG 本地' : '海外'}
+          </span>
+          <h2 class="post-title">{t.data.title}</h2>
+          <p class="post-excerpt">
+            {t.data.origin} → {t.data.destination} · {STATUS_LABEL[t.data.status]}
+          </p>
+          <p class="post-excerpt">{t.data.description}</p>
+        </div>
+        <span class="post-date">{fmt(t.data.startDate)}</span>
+      </a>
+    ))}
+    {trips.length === 0 && (
+      <p style="color:#888;font-family:'JetBrains Mono',monospace;font-size:0.8rem;">
+        No trips yet — 下一次出行见。
+      </p>
+    )}
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2026 Ricky's Space · <a href="/">← home</a></p>
+  </footer>
+
+</BaseLayout>

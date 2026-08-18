@@ -1,0 +1,37 @@
+---
+/**
+ * An activity / sight / meal stop on the itinerary.
+ * Slot content = free-form notes (markdown works inside MDX).
+ */
+interface Props {
+  name: string;
+  cn?: string;
+  time?: string;
+  cost?: string;
+  img?: string;
+  map?: string; // Google Maps search query; defaults to name
+  tag?: string; // e.g. 景点 / 美食 / 亲子 / 酒店
+}
+const { name, cn, time, cost, img, map, tag } = Astro.props;
+const mapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(map ?? name)}`;
+const hasNotes = Astro.slots.has('default');
+---
+<div class="or-spot">
+  {img && <img class="or-spot-img" src={img} alt={name} loading="lazy" />}
+  <div class="or-spot-body">
+    <div class="or-spot-head">
+      {tag && <span class="or-spot-tag">{tag}</span>}
+      {time && <span class="or-spot-time">{time}</span>}
+    </div>
+    <h3 class="or-spot-name">
+      <a href={mapUrl} target="_blank" rel="noopener">{name} <span class="or-spot-pin">📍</span></a>
+    </h3>
+    {cn && <p class="or-spot-cn">{cn}</p>}
+    {cost && <p class="or-spot-cost">💰 {cost}</p>}
+    {hasNotes && (
+      <div class="or-spot-notes">
+        <slot />
+      </div>
+    )}
+  </div>
+</div>

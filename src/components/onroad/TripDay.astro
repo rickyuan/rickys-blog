@@ -1,0 +1,22 @@
+---
+/**
+ * One day of a trip. The OnroadLayout script builds the sticky day-tab bar
+ * from these sections at runtime.
+ */
+interface Props {
+  day: number;
+  title: string;
+  date?: string;
+}
+const { day, title, date } = Astro.props;
+---
+<section class="or-day" data-day={day} id={`day-${day}`}>
+  <header class="or-day-head">
+    <span class="or-day-num">DAY {day}</span>
+    <h2 class="or-day-title">{title}</h2>
+    {date && <span class="or-day-date">{date}</span>}
+  </header>
+  <div class="or-timeline">
+    <slot />
+  </div>
+</section>

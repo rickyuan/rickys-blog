@@ -1,0 +1,34 @@
+---
+import { getCollection, render } from 'astro:content';
+import OnroadLayout from '@layouts/OnroadLayout.astro';
+import TripDay from '@components/onroad/TripDay.astro';
+import Leg from '@components/onroad/Leg.astro';
+import Spot from '@components/onroad/Spot.astro';
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const entries = await getCollection('onroad', ({ data }) => !data.draft);
+  return entries.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const d = entry.data;
+---
+<OnroadLayout
+  title={d.title}
+  description={d.description}
+  cover={d.cover}
+  origin={d.origin}
+  destination={d.destination}
+  startDate={d.startDate}
+  endDate={d.endDate}
+  category={d.category}
+  status={d.status}
+>
+  <Content components={{ TripDay, Leg, Spot }} />
+</OnroadLayout>

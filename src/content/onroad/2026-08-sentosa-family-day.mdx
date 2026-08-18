@@ -1,0 +1,77 @@
+---
+title: 圣淘沙家庭一日游(示例模板)
+description: 缆车上岛 + 海洋馆 + 沙滩日落,一天玩透圣淘沙,带娃节奏友好版。
+category: sg-local
+origin: Orchard
+destination: Sentosa 圣淘沙
+startDate: 2026-08-30
+cover: 🏝️
+status: ready
+---
+
+> 👋 这是 OnRoad 的**示例行程**,展示了交互玩法:上方按天切换,每个交通段可以一键跳 Google Maps 导航,景点名字点一下直接打开地图定位。真实出行时告诉 Claude 出发地 + 目的地 + 日期,就会生成一份这样的方案。
+
+<TripDay day={1} date="2026-08-30 (Sat)" title="缆车上岛 · 海洋馆 · 沙滩日落">
+
+<Leg mode="mrt" from="Orchard MRT" to="HarbourFront MRT" time="~15 min" note="NS 线 → NE 线,Dhoby Ghaut 换乘" />
+
+<Leg mode="cablecar" from="HarbourFront Tower 2" to="Sentosa Imbiah" time="~10 min" note="Mount Faber Line,娃的第一个兴奋点 🎢" />
+
+<Spot
+  name="Singapore Cable Car"
+  cn="新加坡缆车 — 建议直接买 Sky Pass 往返"
+  time="10:00–10:30"
+  cost="约 S$35/成人,S$25/儿童(官网提前买有折扣)"
+  tag="交通+体验"
+>
+  - 周末 10 点前到排队最短
+  - 选**面向港口一侧**的位置,能看到整个 Keppel Harbour
+</Spot>
+
+<Spot
+  name="S.E.A. Aquarium"
+  cn="SEA 海洋馆 — 室内避暑主力,鲨鱼隧道是娃的最爱"
+  time="11:00–13:30"
+  cost="S$44/成人,S$33/儿童"
+  tag="亲子"
+  map="S.E.A. Aquarium Sentosa"
+>
+  - 门口自动售票机排队短,或提前 Klook 买
+  - 大洋池观景窗前的座位适合休息 + 拍照
+  - 出口连着 VivoCity 方向的美食广场,午餐可以就地解决
+</Spot>
+
+<Leg mode="bus" from="Resorts World Sentosa" to="Siloso Beach" time="~8 min" note="岛内免费 Bus A / Beach Shuttle" />
+
+<Spot
+  name="Siloso Beach"
+  cn="西乐索沙滩 — 挖沙 + 日落,行程收尾"
+  time="16:30–19:00"
+  cost="免费"
+  tag="沙滩"
+  map="Siloso Beach Sentosa"
+>
+  - 带换洗衣物,沙滩边有冲脚点
+  - 18:45 左右日落,Ola Beach Club 门口那段视角最好
+  - 晚餐:沙滩边 Coastes 亲子友好,或回 VivoCity 大食代
+</Spot>
+
+<Leg mode="mrt" from="HarbourFront MRT" to="Orchard MRT" time="~15 min" note="Sentosa Express 出岛(免费出岛)→ NE 线" />
+
+</TripDay>
+
+## 📋 出发前清单
+
+- [ ] 缆车 + 海洋馆门票(提前一天线上买)
+- [ ] 防晒霜、帽子、娃的换洗衣物
+- [ ] 充电宝(拍照 + 导航耗电)
+- [ ] EZ-Link / SimplyGo 卡余额检查
+
+## 💰 预算速算
+
+| 项目 | 一家三口约 |
+|---|---|
+| 缆车 Sky Pass | S$95 |
+| 海洋馆 | S$121 |
+| 午餐 + 晚餐 | S$80 |
+| **合计** | **约 S$296** |

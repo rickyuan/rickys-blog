@@ -262,6 +262,7 @@ body {
 .post-tag[data-t="life"] { color: var(--cyan); background: var(--cyan-dim); }
 .post-tag[data-t="work"] { color: var(--blue); background: #3b82f622; }
 .post-tag[data-t="education"] { color: var(--amber); background: #f59e0b22; }
+.post-tag[data-t="onroad"] { color: #2dd4bf; background: #2dd4bf22; }
 
 .post-title {
   font-size: 1.2rem;

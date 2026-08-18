@@ -22,6 +22,9 @@ const dossiers = (await getCollection('dossiers', ({ data }) => !data.draft))
 const sgLifeEntries = (await getCollection('sg-life', ({ data }) => !data.draft))
   .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
 
+const trips = (await getCollection('onroad', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.startDate.getTime() - a.data.startDate.getTime());
+
 
 ---
 <BaseLayout title="Ricky's Space">
@@ -78,6 +81,7 @@ const sgLifeEntries = (await getCollection('sg-life', ({ data }) => !data.draft)
     <button class="filter-btn" data-category="sports"># sports</button>
     <button class="filter-btn" data-category="tech"># tech</button>
     <button class="filter-btn" data-category="sg-life"># sg-life</button>
+    <button class="filter-btn" data-category="onroad"># onroad</button>
   </div>
 
   <main class="posts" id="posts">
@@ -104,6 +108,17 @@ const sgLifeEntries = (await getCollection('sg-life', ({ data }) => !data.draft)
       </div>
       <span class="post-date">2026-04-19</span>
     </a>
+
+    {trips.map((t) => (
+      <a class="post-card" href={`/onroad/${t.id}`} data-category="onroad">
+        <div class="post-info">
+          <span class="post-tag" data-t="onroad">{t.data.cover} onroad</span>
+          <h2 class="post-title">{t.data.title}</h2>
+          <p class="post-excerpt">{t.data.origin} → {t.data.destination} · {t.data.description}</p>
+        </div>
+        <span class="post-date">{t.data.startDate.toISOString().slice(0, 10)}</span>
+      </a>
+    ))}
 
     {sgLifeEntries.map((e) => (
       <a class="post-card" href={`/sg-life/${e.id}`} data-category="sg-life">

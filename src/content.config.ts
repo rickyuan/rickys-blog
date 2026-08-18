@@ -27,7 +27,24 @@ const sgLife = defineCollection({
   }),
 });
 
+const onroad = defineCollection({
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/onroad' }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    category: z.enum(['sg-local', 'overseas']),
+    origin: z.string(),
+    destination: z.string(),
+    startDate: z.coerce.date(),
+    endDate: z.coerce.date().optional(),
+    cover: z.string().default('🧭'),
+    status: z.enum(['planning', 'ready', 'done']).default('planning'),
+    draft: z.boolean().default(false),
+  }),
+});
+
 export const collections = {
   dossiers,
   'sg-life': sgLife,
+  onroad,
 };

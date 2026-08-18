@@ -1,0 +1,102 @@
+---
+import '@styles/onroad.css';
+
+interface Props {
+  title: string;
+  description: string;
+  cover: string;
+  origin: string;
+  destination: string;
+  startDate: Date;
+  endDate?: Date;
+  category: 'sg-local' | 'overseas';
+  status: 'planning' | 'ready' | 'done';
+}
+
+const { title, description, cover, origin, destination, startDate, endDate, category, status } =
+  Astro.props;
+
+const fmt = (d: Date) => d.toISOString().slice(0, 10);
+const dateRange = endDate && fmt(endDate) !== fmt(startDate)
+  ? `${fmt(startDate)} → ${fmt(endDate)}`
+  : fmt(startDate);
+
+const STATUS_LABEL = { planning: '🛠 规划中', ready: '✅ 出发就绪', done: '🏁 已完成' } as const;
+const CATEGORY_LABEL = { 'sg-local': 'SG 本地', overseas: '海外' } as const;
+---
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title} — OnRoad</title>
+  <meta name="description" content={description} />
+  <meta name="robots" content="noindex" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap"
+    rel="stylesheet"
+  />
+</head>
+<body class="or-page">
+  <div class="or-wrap">
+    <a class="or-back" href="/onroad">← onroad</a>
+
+    <header class="or-hero">
+      <div class="or-hero-cover">{cover}</div>
+      <h1 class="or-hero-title">{title}</h1>
+      <p class="or-hero-desc">{description}</p>
+      <div class="or-hero-route">
+        <span>📍 {origin}</span>
+        <span class="sep">→</span>
+        <span>🎯 {destination}</span>
+      </div>
+      <div class="or-hero-meta">
+        <span>🗓 {dateRange}</span>
+        <span>{CATEGORY_LABEL[category]}</span>
+        <span class="or-status">{STATUS_LABEL[status]}</span>
+      </div>
+    </header>
+
+    <nav class="or-tabs" id="or-tabs" hidden></nav>
+
+    <main class="or-prose" id="or-content">
+      <slot />
+    </main>
+
+    <footer class="or-footer">
+      <p>OnRoad · <a href="/onroad">全部行程</a> · <a href="/">Ricky's Space</a></p>
+    </footer>
+  </div>
+
+  <script>
+    // Build sticky day tabs from <TripDay> sections. One-day trips get no tabs.
+    const days = [...document.querySelectorAll<HTMLElement>('.or-day')];
+    const tabs = document.getElementById('or-tabs')!;
+    if (days.length > 1) {
+      tabs.hidden = false;
+      const mk = (label: string, onClick: () => void) => {
+        const b = document.createElement('button');
+        b.className = 'or-tab';
+        b.textContent = label;
+        b.addEventListener('click', () => {
+          tabs.querySelectorAll('.or-tab').forEach((t) => t.classList.remove('active'));
+          b.classList.add('active');
+          onClick();
+        });
+        tabs.appendChild(b);
+        return b;
+      };
+      const showAll = mk('全部', () => days.forEach((d) => d.classList.remove('or-hidden')));
+      days.forEach((d) => {
+        mk(`D${d.dataset.day}`, () => {
+          days.forEach((x) => x.classList.toggle('or-hidden', x !== d));
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      });
+      showAll.classList.add('active');
+    }
+  </script>
+</body>
+</html>

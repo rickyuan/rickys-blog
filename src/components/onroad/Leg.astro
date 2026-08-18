@@ -1,0 +1,58 @@
+---
+/**
+ * A transport segment between two places.
+ * `mode` picks the icon; a Google Maps directions deep link opens the phone's
+ * native map app with the right travel mode.
+ */
+interface Props {
+  mode: 'walk' | 'mrt' | 'bus' | 'taxi' | 'car' | 'plane' | 'train' | 'boat' | 'cablecar' | 'bike';
+  from: string;
+  to: string;
+  time?: string;
+  note?: string;
+  nav?: boolean; // set false to hide the navigation link
+}
+const { mode, from, to, time, note, nav = true } = Astro.props;
+
+const ICONS: Record<Props['mode'], string> = {
+  walk: '🚶',
+  mrt: '🚇',
+  bus: '🚌',
+  taxi: '🚕',
+  car: '🚗',
+  plane: '✈️',
+  train: '🚆',
+  boat: '⛴️',
+  cablecar: '🚡',
+  bike: '🚲',
+};
+
+const TRAVELMODE: Partial<Record<Props['mode'], string>> = {
+  walk: 'walking',
+  mrt: 'transit',
+  bus: 'transit',
+  train: 'transit',
+  taxi: 'driving',
+  car: 'driving',
+  bike: 'bicycling',
+};
+
+const navUrl =
+  `https://www.google.com/maps/dir/?api=1` +
+  `&origin=${encodeURIComponent(from)}` +
+  `&destination=${encodeURIComponent(to)}` +
+  (TRAVELMODE[mode] ? `&travelmode=${TRAVELMODE[mode]}` : '');
+---
+<div class="or-leg">
+  <span class="or-leg-icon">{ICONS[mode]}</span>
+  <div class="or-leg-body">
+    <span class="or-leg-route">{from} <span class="or-leg-arrow">→</span> {to}</span>
+    <span class="or-leg-meta">
+      {time && <span class="or-leg-time">{time}</span>}
+      {note && <span class="or-leg-note">{note}</span>}
+      {nav && (
+        <a class="or-leg-nav" href={navUrl} target="_blank" rel="noopener">导航 ↗</a>
+      )}
+    </span>
+  </div>
+</div>
