@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 340" font-family="-apple-system, 'PingFang SC', 'Noto Sans SC', sans-serif">
+  <rect width="800" height="340" rx="16" fill="#ffffff"/>
+  <text x="30" y="46" font-size="24" font-weight="700" fill="#1f2328">树冠吊桥环线 · Windsor 短线 ~5km</text>
+  <text x="30" y="74" font-size="17" fill="#6b7280">从 Venus Drive 进出,比 MacRitchie 正门起步省一半路,带娃首选</text>
+
+  <!-- loop: line out and back -->
+  <path d="M 90 160 H 480 C 560 160, 600 180, 600 210 C 600 240, 560 250, 480 250 H 90"
+        fill="none" stroke="#0d9488" stroke-width="6" stroke-linecap="round"/>
+
+  <g text-anchor="middle">
+    <circle cx="90" cy="160" r="16" fill="#0d9488"/>
+    <text x="90" y="167" font-size="15" fill="#fff" font-weight="700">起终</text>
+    <text x="90" y="122" font-size="18" font-weight="700" fill="#1f2328">Venus Drive 入口</text>
+    <text x="90" y="296" font-size="15" fill="#6b7280">Windsor Nature Park</text>
+
+    <circle cx="280" cy="160" r="14" fill="#0d9488"/>
+    <text x="280" y="166" font-size="15" fill="#fff" font-weight="700">1</text>
+    <text x="280" y="122" font-size="18" font-weight="700" fill="#1f2328">雨林步道</text>
+    <text x="280" y="192" font-size="14" fill="#6b7280">土路缓坡 ~45min</text>
+
+    <circle cx="480" cy="160" r="14" fill="#b45309"/>
+    <text x="480" y="166" font-size="15" fill="#fff" font-weight="700">2</text>
+    <text x="480" y="122" font-size="18" font-weight="700" fill="#1f2328">TreeTop Walk 吊桥</text>
+    <text x="480" y="192" font-size="14" fill="#6b7280">250m · 高 25m · 单向通行</text>
+
+    <circle cx="480" cy="250" r="14" fill="#0d9488"/>
+    <text x="480" y="256" font-size="15" fill="#fff" font-weight="700">3</text>
+    <text x="480" y="290" font-size="17" font-weight="700" fill="#1f2328">回程林道 ~60min</text>
+
+    <circle cx="280" cy="250" r="14" fill="#b45309"/>
+    <text x="280" y="256" font-size="15" fill="#fff" font-weight="700">4</text>
+    <text x="280" y="290" font-size="17" font-weight="700" fill="#1f2328">Casuarina 印度煎饼</text>
+  </g>
+
+  <text x="620" y="215" font-size="15" fill="#8f4308">桥上不折返,</text>
+  <text x="620" y="235" font-size="15" fill="#8f4308">跟指示牌走环线</text>
+
+  <text x="30" y="325" font-size="15" fill="#8a8577">💡 吊桥周一维护关闭;猴子多,零食全收包里、塑料袋别拎手上</text>
+</svg>

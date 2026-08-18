@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 340" font-family="-apple-system, 'PingFang SC', 'Noto Sans SC', sans-serif">
+  <rect width="800" height="340" rx="16" fill="#ffffff"/>
+  <text x="30" y="46" font-size="24" font-weight="700" fill="#1f2328">博物馆区一日 · 全程步行串联</text>
+  <text x="30" y="74" font-size="17" fill="#6b7280">City Hall 站出发,三个点位相距都在 10 分钟步行内,下雨也好走</text>
+
+  <line x1="70" y1="180" x2="730" y2="180" stroke="#8b5cf6" stroke-width="6" stroke-linecap="round"/>
+
+  <g text-anchor="middle">
+    <circle cx="80" cy="180" r="16" fill="#3b82f6"/>
+    <text x="80" y="187" font-size="17" fill="#fff" font-weight="700">起</text>
+    <text x="80" y="140" font-size="18" font-weight="700" fill="#1f2328">City Hall MRT</text>
+    <text x="80" y="222" font-size="14" fill="#6b7280">EW 线直达</text>
+
+    <circle cx="250" cy="180" r="14" fill="#8b5cf6"/>
+    <text x="250" y="186" font-size="16" fill="#fff" font-weight="700">1</text>
+    <text x="250" y="140" font-size="18" font-weight="700" fill="#1f2328">儿童博物馆</text>
+    <text x="250" y="222" font-size="14" fill="#6b7280">9:00 场 · 需预约 ⚠️</text>
+
+    <circle cx="420" cy="180" r="14" fill="#8b5cf6"/>
+    <text x="420" y="186" font-size="16" fill="#fff" font-weight="700">2</text>
+    <text x="420" y="140" font-size="18" font-weight="700" fill="#1f2328">国家博物馆</text>
+    <text x="420" y="222" font-size="14" fill="#6b7280">玻璃圆厅 · 历史馆</text>
+
+    <circle cx="590" cy="180" r="14" fill="#0d9488"/>
+    <text x="590" y="186" font-size="16" fill="#fff" font-weight="700">3</text>
+    <text x="590" y="140" font-size="18" font-weight="700" fill="#1f2328">福康宁山</text>
+    <text x="590" y="222" font-size="14" fill="#6b7280">树洞拍照 · 山顶草坪</text>
+
+    <circle cx="720" cy="180" r="16" fill="#b45309"/>
+    <text x="720" y="187" font-size="17" fill="#fff" font-weight="700">终</text>
+    <text x="720" y="140" font-size="18" font-weight="700" fill="#1f2328">Bras Basah</text>
+    <text x="720" y="222" font-size="14" fill="#6b7280">晚餐后回家</text>
+  </g>
+
+  <g text-anchor="middle" font-size="14" fill="#6d28d9">
+    <text x="165" y="260">🚶 8min</text>
+    <text x="335" y="260">🚶 8min</text>
+    <text x="505" y="260">🚶 10min 上小坡</text>
+    <text x="655" y="260">🚶 10min</text>
+  </g>
+
+  <text x="30" y="310" font-size="15" fill="#8a8577">💡 儿童博物馆周一闭馆、场次全靠预约;国家博物馆公民/PR 免费,树洞早上人最少</text>
+</svg>

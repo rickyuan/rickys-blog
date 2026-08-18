@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 340" font-family="-apple-system, 'PingFang SC', 'Noto Sans SC', sans-serif">
+  <rect width="800" height="340" rx="16" fill="#ffffff"/>
+  <text x="30" y="46" font-size="24" font-weight="700" fill="#1f2328">南部山脊线 · 单向徒步 ~5km</text>
+  <text x="30" y="74" font-size="17" fill="#6b7280">HortPark 进 → 花柏山出,全程高架步道+桥,推车不友好、娃步行 OK</text>
+
+  <!-- main line -->
+  <line x1="70" y1="180" x2="730" y2="180" stroke="#0d9488" stroke-width="6" stroke-linecap="round"/>
+
+  <!-- stops -->
+  <g text-anchor="middle">
+    <circle cx="80" cy="180" r="16" fill="#0d9488"/>
+    <text x="80" y="187" font-size="17" fill="#fff" font-weight="700">起</text>
+    <text x="80" y="140" font-size="18" font-weight="700" fill="#1f2328">HortPark</text>
+    <text x="80" y="222" font-size="14" fill="#6b7280">园艺公园</text>
+
+    <circle cx="230" cy="180" r="14" fill="#0d9488"/>
+    <text x="230" y="186" font-size="16" fill="#fff" font-weight="700">1</text>
+    <text x="230" y="140" font-size="18" font-weight="700" fill="#1f2328">Forest Walk</text>
+    <text x="230" y="222" font-size="14" fill="#6b7280">树冠高架步道 1.3km</text>
+
+    <circle cx="390" cy="180" r="14" fill="#b45309"/>
+    <text x="390" y="186" font-size="16" fill="#fff" font-weight="700">2</text>
+    <text x="390" y="140" font-size="18" font-weight="700" fill="#1f2328">Henderson Waves</text>
+    <text x="390" y="222" font-size="14" fill="#6b7280">全岛最高人行桥 36m</text>
+
+    <circle cx="550" cy="180" r="14" fill="#0d9488"/>
+    <text x="550" y="186" font-size="16" fill="#fff" font-weight="700">3</text>
+    <text x="550" y="140" font-size="18" font-weight="700" fill="#1f2328">Mount Faber</text>
+    <text x="550" y="222" font-size="14" fill="#6b7280">山顶观景 · 缆车站</text>
+
+    <circle cx="720" cy="180" r="16" fill="#3b82f6"/>
+    <text x="720" y="187" font-size="17" fill="#fff" font-weight="700">终</text>
+    <text x="720" y="140" font-size="18" font-weight="700" fill="#1f2328">VivoCity</text>
+    <text x="720" y="222" font-size="14" fill="#6b7280">Marang Trail 下山午餐</text>
+  </g>
+
+  <!-- segment labels -->
+  <g text-anchor="middle" font-size="14" fill="#0b6e64">
+    <text x="155" y="260">🚶 15min</text>
+    <text x="310" y="260">🚶 25min 高架无遮阳</text>
+    <text x="470" y="260">🚶 20min 缓坡上山</text>
+    <text x="635" y="260">🚶 20min 下山 800m</text>
+  </g>
+
+  <text x="30" y="310" font-size="15" fill="#8a8577">💡 全程 8:30 前出发最凉快;Henderson Waves 木面桥娃可以跑,但两侧看好</text>
+</svg>

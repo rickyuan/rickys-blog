@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 340" font-family="-apple-system, 'PingFang SC', 'Noto Sans SC', sans-serif">
+  <rect width="800" height="340" rx="16" fill="#ffffff"/>
+  <text x="30" y="46" font-size="24" font-weight="700" fill="#1f2328">飞禽天堂园区动线 · 按喂食时刻表走</text>
+  <text x="30" y="74" font-size="17" fill="#6b7280">开园 9:00 直奔企鹅馆避开人流,大鸟舍安排在中段,下午看飞行表演</text>
+
+  <line x1="70" y1="180" x2="730" y2="180" stroke="#0d9488" stroke-width="6" stroke-linecap="round"/>
+
+  <g text-anchor="middle">
+    <circle cx="80" cy="180" r="16" fill="#0d9488"/>
+    <text x="80" y="187" font-size="17" fill="#fff" font-weight="700">9:00</text>
+    <text x="80" y="140" font-size="18" font-weight="700" fill="#1f2328">入口</text>
+    <text x="80" y="222" font-size="14" fill="#6b7280">门票提前线上买</text>
+
+    <circle cx="220" cy="180" r="14" fill="#3b82f6"/>
+    <text x="220" y="186" font-size="15" fill="#fff" font-weight="700">1</text>
+    <text x="220" y="140" font-size="18" font-weight="700" fill="#1f2328">企鹅湾</text>
+    <text x="220" y="222" font-size="14" fill="#6b7280">Penguin Cove 水下视角</text>
+
+    <circle cx="360" cy="180" r="14" fill="#0d9488"/>
+    <text x="360" y="186" font-size="15" fill="#fff" font-weight="700">2</text>
+    <text x="360" y="140" font-size="18" font-weight="700" fill="#1f2328">沉浸大鸟舍</text>
+    <text x="360" y="222" font-size="14" fill="#6b7280">非洲之心 · 亚洲之翼</text>
+
+    <circle cx="490" cy="180" r="14" fill="#b45309"/>
+    <text x="490" y="186" font-size="15" fill="#fff" font-weight="700">3</text>
+    <text x="490" y="140" font-size="18" font-weight="700" fill="#1f2328">午餐</text>
+    <text x="490" y="222" font-size="14" fill="#6b7280">园内餐厅 12:00 前占座</text>
+
+    <circle cx="610" cy="180" r="14" fill="#0d9488"/>
+    <text x="610" y="186" font-size="15" fill="#fff" font-weight="700">4</text>
+    <text x="610" y="140" font-size="18" font-weight="700" fill="#1f2328">鹦鹉谷喂食</text>
+    <text x="610" y="222" font-size="14" fill="#6b7280">Lory Loft 手心喂鹦鹉</text>
+
+    <circle cx="720" cy="180" r="16" fill="#8b5cf6"/>
+    <text x="720" y="187" font-size="15" fill="#fff" font-weight="700">🎭</text>
+    <text x="720" y="140" font-size="18" font-weight="700" fill="#1f2328">飞行表演</text>
+    <text x="720" y="222" font-size="14" fill="#6b7280">Sky Amphitheatre</text>
+  </g>
+
+  <g text-anchor="middle" font-size="14" fill="#0b6e64">
+    <text x="150" y="260">开园冲刺 🐧</text>
+    <text x="290" y="260">走 2-3 个鸟舍</text>
+    <text x="425" y="260">🍽</text>
+    <text x="550" y="260">花蜜杯 S$8</text>
+    <text x="665" y="260">按当日时刻表 ⚠️</text>
+  </g>
+
+  <text x="30" y="310" font-size="15" fill="#8a8577">💡 喂食/表演时间以当日官方 App 时刻表为准;园区大,回程班车留足 30 分钟</text>
+</svg>
