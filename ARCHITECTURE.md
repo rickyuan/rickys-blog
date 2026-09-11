@@ -111,6 +111,28 @@ npm run deploy:worker      # deploy digest cron worker
 npm run db:migrate[:remote]
 ```
 
+## Deploy (GitHub Actions)
+
+[.github/workflows/deploy.yml](.github/workflows/deploy.yml) runs on every push
+to `main` (and manually via *Actions → Deploy → Run workflow*):
+
+1. `npm run check` (astro check + worker tsc) and `astro build`
+2. `npm run db:migrate:remote` — applies any new `migrations/*.sql` to D1
+3. `wrangler deploy -c dist/server/wrangler.json` — site worker
+4. `npm run deploy:worker` — digest cron worker (with whatever `crons` its
+   config carries; currently none)
+
+Pull requests run step 1 only. The workflow needs two repository secrets
+(GitHub → Settings → Secrets and variables → Actions):
+
+| Secret | Value |
+|---|---|
+| `CLOUDFLARE_API_TOKEN` | API token created from the **Edit Cloudflare Workers** template, plus **D1 → Edit** |
+| `CLOUDFLARE_ACCOUNT_ID` | Dashboard → Workers & Pages → Account ID (or `npx wrangler whoami`) |
+
+Deploying from a laptop (`npm run deploy` / `npm run deploy:worker`) still
+works and is the fallback if CI is red.
+
 ## History
 
 - **v1** (2026-04): static HTML on Cloudflare Pages.
