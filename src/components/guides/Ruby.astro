@@ -1,0 +1,45 @@
+---
+/**
+ * Chinese text with per-character pinyin printed above it (ruby annotation),
+ * the way a Chinese children's book does it — the point is that a kid who
+ * cannot read 蟆口鸱 can still say it.
+ *
+ * Alignment is per Han character; punctuation and Latin pass through bare. If
+ * the stored pinyin does not line up with the characters, `zipRuby` drops the
+ * annotation entirely rather than printing the wrong sound over a character.
+ */
+import { zipRuby } from '@lib/ruby';
+
+interface Props {
+  text: string;
+  pinyin?: string;
+  /** extra class on the wrapper */
+  class?: string;
+  /** only used to make a build-time misalignment warning findable */
+  label?: string;
+}
+
+const { text, pinyin, class: className, label } = Astro.props;
+const segments = zipRuby(text, pinyin, label);
+const annotated = segments.some((s) => s.py);
+---
+{
+  annotated ? (
+    <span class:list={['gd-rb', className]} data-plain={text}>
+      {segments.map((s) =>
+        s.py ? (
+          <ruby>
+            {s.ch}
+            <rt>{s.py}</rt>
+          </ruby>
+        ) : (
+          <span class="gd-rb-gap">{s.ch}</span>
+        ),
+      )}
+    </span>
+  ) : (
+    <span class:list={className} data-plain={text}>
+      {text}
+    </span>
+  )
+}

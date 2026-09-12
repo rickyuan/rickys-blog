@@ -26,7 +26,12 @@
   margin-bottom: 8px;
   border-bottom: 1px solid var(--or-line);
 }
-.gd-toolbar-row { display: flex; gap: 8px; align-items: center; }
+.gd-toolbar-row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+/* On a phone the search box plus 闪卡 plus 朗读(with its duration estimate)
+   cannot share one 375px row — give the search its own line. */
+@media (max-width: 520px) {
+  .gd-toolbar-row .gd-search { flex: 1 0 100%; }
+}
 .gd-search {
   flex: 1;
   min-width: 0;
@@ -192,4 +197,408 @@
   color: var(--or-ink-dim);
   font-size: 0.86rem;
   padding: 30px 0;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   拼音注音 (Ruby.astro) — shared by the grid card and the deck slide
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.gd-rb { ruby-position: over; -webkit-ruby-position: before; }
+.gd-rb ruby { margin: 0 0.04em; }
+
+/* rt uses the SANS stack, deliberately breaking the house mono convention:
+   tone marks (ǎ ǜ ǚ) are Latin Extended-B and JetBrains Mono's coverage there
+   is not dependable — a missing glyph renders as tofu on exactly the syllables
+   that carry the meaning. */
+rt {
+  font-family: var(--or-sans);
+  font-weight: 500;
+  letter-spacing: 0;
+  ruby-align: center;
+}
+
+/* Grid card: an absolute floor, not an em ratio. 0.34em of a 1.15rem name
+   computes to 0.39rem, which is decoration rather than something a child can
+   read. Dim, not teal — .gd-en is already teal and 197 teal annotations would
+   fight it. */
+.gd-cn rt { font-size: 0.55rem; color: var(--or-ink-dim); }
+.gd-names { padding-top: 2px; }          /* ruby ascenders clear the photo above */
+.gd-quick dd rt { font-size: 0.5rem; color: var(--or-ink-dim); }
+
+/* ═══════════════════════════════════════════════════════════════════════
+   放映朗读 — the deck overlay (.gd-dk-*)
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.gd-dk {
+  position: fixed;
+  inset: 0;
+  z-index: 120;                           /* clears the sticky toolbar's 20 */
+  background: var(--or-bg);
+  color: var(--or-ink);
+  font-family: var(--or-sans);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  height: 100dvh;                         /* dvh wins where supported */
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) 0 env(safe-area-inset-left);
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior: contain;
+}
+.gd-dk[hidden] { display: none; }         /* REQUIRED — the base rule is display:flex */
+
+/* ── top bar ── */
+.gd-dk-bar {
+  flex: 0 0 auto;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 6px 0 2px;
+}
+.gd-dk-x {
+  width: 44px; height: 44px;
+  flex: 0 0 44px;
+  border: 0; background: none; cursor: pointer;
+  color: var(--or-ink-dim);
+  font-size: 1rem; line-height: 1;
+}
+.gd-dk-kicker {
+  flex: 1; min-width: 0;
+  font-family: var(--or-mono);
+  font-size: 0.62rem;
+  color: var(--or-ink-dim);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.gd-dk-counter {
+  flex: 0 0 auto;
+  font-family: var(--or-mono);
+  font-size: 0.66rem;
+  color: var(--or-ink-dim);
+}
+
+/* ── progress rail ── */
+.gd-dk-rail { flex: 0 0 2px; background: var(--or-line); }
+.gd-dk-rail-fill {
+  display: block; height: 100%; width: 0;
+  background: var(--or-accent);
+  transition: width 0.2s linear;
+}
+
+/* ── amber notice strip (State A / State B) ── */
+.gd-dk-note {
+  flex: 0 0 auto;
+  display: flex; align-items: flex-start; gap: 10px;
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  border-radius: 10px;
+  margin: 8px 12px 0;
+  padding: 8px 10px;
+  font-size: 0.72rem;
+  line-height: 1.6;
+}
+.gd-dk-note[hidden] { display: none; }
+.gd-dk-note p { flex: 1; min-width: 0; white-space: pre-line; }
+.gd-dk-note-x {
+  flex: 0 0 auto;
+  font-family: var(--or-mono); font-size: 0.66rem;
+  color: var(--or-amber);
+  background: none; border: 0; cursor: pointer; padding: 2px 4px;
+}
+
+/* ── stage ── */
+.gd-dk-stage {
+  flex: 1; min-height: 0;
+  position: relative;
+  overflow: hidden;
+  touch-action: pan-y;
+}
+.gd-dk-edge {
+  position: absolute; top: 0; bottom: 0; width: 18%;
+  z-index: 1;
+}
+.gd-dk-edge--l { left: 0; }
+.gd-dk-edge--r { right: 0; }
+
+.gd-dk-slide {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 0 18px 8px;
+  transform: translate3d(calc(var(--o) * 100%), 0, 0);
+  transition: transform 0.22s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.gd-dk-slide.dragging { transition: none; }
+
+/* stage image well */
+.gd-dk-well {
+  flex: 0 0 38dvh;
+  position: relative;
+  background: var(--or-ink);
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+.gd-dk-img {
+  width: 100%; height: 100%;
+  object-fit: contain;                    /* never cover — sources are mixed orientation */
+  display: block;
+}
+.gd-dk-img[hidden] { display: none; }
+.gd-dk-plate {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, #0d948822, #0d948808);
+}
+.gd-dk-plate[hidden] { display: none; }
+.gd-dk-emoji { font-size: clamp(4rem, 16vh, 10rem); line-height: 1; }
+.gd-dk-kind {
+  position: absolute; top: 10px; left: 12px;
+  font-family: var(--or-mono); font-size: 0.6rem;
+  color: var(--or-accent);
+  background: #ffffffee;
+  border: 1px solid #0d948855;
+  border-radius: 999px;
+  padding: 2px 9px;
+}
+
+/* slide text */
+.gd-dk-text {
+  flex: 1;
+  padding: clamp(14px, 4vw, 28px) 0;
+  text-align: center;
+}
+.gd-dk-name {
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--or-ink);
+  padding-top: 0.5em;                     /* ruby overhang */
+  display: flex; flex-wrap: wrap; justify-content: center;
+  font-size: clamp(1.6rem, 8vw, 3.2rem);  /* 6–7 char default, written first */
+}
+.gd-dk-name[data-han='2'], .gd-dk-name[data-han='3'] { font-size: clamp(2.2rem, 12vw, 4.4rem); }
+.gd-dk-name[data-han='4'], .gd-dk-name[data-han='5'] { font-size: clamp(1.9rem, 10vw, 3.8rem); }
+.gd-dk-name rt { font-size: 0.32em; color: var(--or-accent); }
+.gd-dk-sub { font-size: 0.95rem; color: var(--or-ink-dim); margin-top: 8px; }
+.gd-dk-sub[hidden] { display: none; }
+.gd-dk-sub rt { font-size: 0.5rem; color: var(--or-ink-dim); }
+.gd-dk-en {
+  font-size: clamp(1rem, 4vw, 1.9rem);
+  font-weight: 600; color: var(--or-accent);
+  margin-top: 10px;
+}
+.gd-dk-sci {
+  font-family: var(--or-mono); font-style: italic;
+  font-size: 0.68rem; color: var(--or-ink-dim);
+}
+.gd-dk-body {
+  font-size: clamp(0.95rem, 3.6vw, 1.35rem);
+  line-height: 1.8;
+  margin-top: clamp(12px, 3vh, 26px);
+  text-align: left;
+}
+.gd-dk-body[hidden] { display: none; }
+.gd-dk-body.kids {
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  border-radius: 10px;
+  padding: clamp(10px, 2vw, 16px) clamp(12px, 2.5vw, 20px);
+}
+.gd-dk-more {
+  display: inline-block;
+  font-family: var(--or-mono); font-size: 0.68rem;
+  color: var(--or-accent); text-decoration: none;
+  margin-top: 14px;
+}
+
+/* segment highlight — driven by our own loop, never by onboundary */
+.gd-dk-body.reading { background: linear-gradient(transparent 62%, #b453091f 62%); }
+.gd-dk-body.kids.reading { background: #fff4d6; }
+.gd-dk-name.reading, .gd-dk-en.reading {
+  text-decoration: underline;
+  text-decoration-color: var(--or-accent);
+  text-decoration-thickness: 3px;
+  text-underline-offset: 6px;
+}
+
+/* the 🔇 badge that explains State B silence on every slide */
+.gd-dk-mute {
+  display: none;
+  font-size: 0.7rem; color: var(--or-amber);
+  font-family: var(--or-mono);
+}
+.gd-dk.nozh .gd-dk-mute { display: block; }
+
+/* 猜名字 — new class names; the grid's .flash/.revealed are left alone */
+.gd-dk-slide.guessing .gd-dk-name,
+.gd-dk-slide.guessing .gd-dk-sub,
+.gd-dk-slide.guessing .gd-dk-en,
+.gd-dk-slide.guessing .gd-dk-sci {
+  filter: blur(14px);
+  user-select: none;
+  transition: filter 0.25s;
+}
+
+/* resume tap target after backgrounding */
+.gd-dk-resume {
+  position: absolute; inset: 0;
+  z-index: 3;
+  background: #f7f6f2f2;
+  border: 0; cursor: pointer;
+  font-family: var(--or-sans); font-size: 1.1rem; color: var(--or-ink);
+}
+.gd-dk-resume[hidden] { display: none; }
+
+/* ── rest / end cards ── */
+.gd-dk-card {
+  position: absolute; inset: 0; z-index: 2;
+  background: var(--or-bg);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 16px; padding: 24px; text-align: center;
+}
+.gd-dk-card[hidden] { display: none; }
+.gd-dk-card-icon { font-size: 3rem; line-height: 1; }
+.gd-dk-card-title { font-size: clamp(1.05rem, 4.5vw, 1.5rem); font-weight: 700; }
+.gd-dk-card-row { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+
+.gd-dk-ring { position: relative; width: 92px; height: 92px; display: grid; place-items: center; }
+.gd-dk-ring svg { position: absolute; inset: 0; width: 100%; height: 100%; transform: rotate(-90deg); }
+.gd-dk-ring circle {
+  fill: none; stroke: var(--or-accent); stroke-width: 3;
+  stroke-dasharray: 138.2; stroke-dashoffset: 0;
+  transition: stroke-dashoffset 0.2s linear;
+}
+.gd-dk-ring-num {
+  position: absolute; top: -4px; right: -4px;
+  font-family: var(--or-mono); font-size: 0.8rem; color: var(--or-accent);
+}
+.gd-dk-ring-num[hidden] { display: none; }
+.gd-dk-go {
+  width: 64px; height: 64px; border-radius: 50%;
+  border: 0; cursor: pointer;
+  background: var(--or-accent); color: #fff;
+  font-size: 0.8rem; font-family: var(--or-sans);
+}
+
+/* ── sign sheet ── */
+.gd-dk-sheet {
+  position: absolute; inset: 0; z-index: 4;
+  background: var(--or-ink);
+  display: flex; flex-direction: column;
+  touch-action: pinch-zoom;
+}
+.gd-dk-sheet[hidden] { display: none; }
+.gd-dk-sheet-img { flex: 1; min-height: 0; width: 100%; object-fit: contain; }
+.gd-dk-sheet-bar {
+  flex: 0 0 auto;
+  display: flex; gap: 10px; justify-content: center;
+  padding: 10px calc(10px + env(safe-area-inset-right)) calc(10px + env(safe-area-inset-bottom)) calc(10px + env(safe-area-inset-left));
+}
+
+/* ── transport ── */
+.gd-dk-ctrl {
+  flex: 0 0 auto;
+  min-height: 72px;                       /* must clear the 64px play button */
+  display: flex; align-items: center; justify-content: center; gap: 14px;
+}
+.gd-dk-nav {
+  min-width: 44px; height: 44px;
+  border: 0; background: none; cursor: pointer;
+  color: var(--or-ink-dim);
+  font-family: var(--or-mono); font-size: 0.72rem;
+  padding: 0 8px;
+}
+.gd-dk-nav:disabled { opacity: 0.3; cursor: default; }
+.gd-dk-play {
+  width: 64px; height: 64px; border-radius: 50%;
+  border: 0; cursor: pointer;
+  background: var(--or-accent); color: #fff;
+  font-size: 1.4rem; line-height: 1;
+  display: grid; place-items: center;
+}
+.gd-dk-ctrl2 {
+  flex: 0 0 auto;
+  display: flex; gap: 8px; flex-wrap: wrap;
+  align-items: center; justify-content: center;
+  padding: 0 12px calc(10px + env(safe-area-inset-bottom));
+}
+.gd-dk-pill {
+  font-family: var(--or-mono); font-size: 0.74rem;
+  padding: 7px 12px; border-radius: 999px;
+  background: var(--or-card); color: var(--or-ink-dim);
+  border: 1px solid var(--or-line);
+  cursor: pointer; text-decoration: none;
+  min-height: 34px;
+}
+.gd-dk-pill[hidden] { display: none; }
+.gd-dk-pill.active { background: var(--or-accent); border-color: var(--or-accent); color: #fff; }
+.gd-dk-voice { max-width: 46vw; }
+.gd-dk-help {
+  font-family: var(--or-mono); font-size: 0.68rem;
+  color: var(--or-ink-dim);
+  background: none; border: 0; cursor: pointer;
+  text-decoration: underline; padding: 7px 4px;
+}
+.gd-dk-helpbox {
+  flex: 0 0 auto;
+  margin: 0 12px calc(10px + env(safe-area-inset-bottom));
+  padding: 10px 12px;
+  background: var(--or-card);
+  border: 1px solid var(--or-line);
+  border-radius: 10px;
+  font-size: 0.72rem; line-height: 1.7;
+  white-space: pre-line;
+}
+.gd-dk-helpbox[hidden] { display: none; }
+
+.gd-dk-hint {
+  position: absolute; left: 50%; bottom: 130px;
+  transform: translateX(-50%);
+  background: #1f2328e6; color: #fff;
+  font-size: 0.72rem; border-radius: 999px;
+  padding: 6px 14px; white-space: nowrap;
+  pointer-events: none; z-index: 5;
+}
+.gd-dk-hint[hidden] { display: none; }
+
+.gd-dk-live {
+  position: absolute; width: 1px; height: 1px;
+  overflow: hidden; clip-path: inset(50%); white-space: nowrap;
+}
+
+/* ── landscape / laptop / cast TV ── */
+@media (min-width: 900px) {
+  .gd-dk-slide {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    gap: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+  .gd-dk-well { flex: none; height: 100%; border-radius: 0; }
+  .gd-dk-text {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 3vh clamp(20px, 3vw, 48px);
+    border-left: 1px solid var(--or-line);
+    overflow-y: auto;
+  }
+  .gd-dk-name { font-size: clamp(2.6rem, 5vw, 5rem); }
+  .gd-dk-body { font-size: 1.15rem; line-height: 1.9; }
+  /* chrome gets out of the way only here — never on the phone, where fading
+     the pause button is exactly wrong when a child has grabbed it */
+  .gd-dk.idle .gd-dk-ctrl,
+  .gd-dk.idle .gd-dk-ctrl2 { opacity: 0; transition: opacity 0.4s; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gd-dk-slide,
+  .gd-dk-rail-fill,
+  .gd-dk-ring circle,
+  .gd-dk-slide.guessing .gd-dk-name,
+  .gd-dk-slide.guessing .gd-dk-sub,
+  .gd-dk-slide.guessing .gd-dk-en,
+  .gd-dk-slide.guessing .gd-dk-sci,
+  .gd-dk.idle .gd-dk-ctrl,
+  .gd-dk.idle .gd-dk-ctrl2 { transition: none; }
 }

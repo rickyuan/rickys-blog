@@ -44,8 +44,11 @@ const zoneName = (id?: string) => (id ? zoneMap.get(id)?.name : undefined);
 
   <div class="gd-toolbar" id="gd-toolbar">
     <div class="gd-toolbar-row">
-      <input class="gd-search" id="gd-search" type="search" placeholder="搜中文 / English / 学名 / 分区…" autocomplete="off" />
+      <input class="gd-search" id="gd-search" type="search" placeholder="搜中文 / 拼音 / English / 学名 / 分区…" autocomplete="off" />
       <button class="gd-flash" id="gd-flash" type="button" title="隐藏名字,点卡片揭晓">🎴 闪卡</button>
+      <button class="gd-flash" id="gd-play" type="button" title="从当前筛选的鸟里,一只一只念给你听">
+        <span id="gd-play-lbl">🔊 朗读</span> <span id="gd-play-est"></span>
+      </button>
     </div>
     {zones.length > 1 && (
       <nav class="gd-zones or-tabs" id="gd-zones" style="position: static; padding-left: 2px;">
@@ -62,6 +65,100 @@ const zoneName = (id?: string) => (id ? zoneMap.get(id)?.name : undefined);
   </section>
   <p class="gd-empty" id="gd-empty" hidden>没有匹配的鸟,换个词试试 🔍</p>
 
+  {/* 放映朗读 — moved to document.body on first open so no future ancestor
+      transform/filter can turn position:fixed into position:absolute. */}
+  <div id="gd-deck" class="gd-dk" role="dialog" aria-modal="true" aria-label="朗读放映" tabindex="-1" hidden>
+    <div class="gd-dk-bar">
+      <button class="gd-dk-x" id="gd-dk-close" type="button" aria-label="关闭放映">✕</button>
+      <p class="gd-dk-kicker" id="gd-dk-kicker"></p>
+      <p class="gd-dk-counter" id="gd-dk-counter"></p>
+    </div>
+
+    <div class="gd-dk-rail"><i class="gd-dk-rail-fill" id="gd-dk-rail-fill"></i></div>
+
+    <div class="gd-dk-note" id="gd-dk-note" hidden>
+      <p id="gd-dk-note-text"></p>
+      <button class="gd-dk-note-x" id="gd-dk-note-x" type="button" hidden>知道了</button>
+    </div>
+
+    <div class="gd-dk-stage" id="gd-dk-stage">
+      <span class="gd-dk-edge gd-dk-edge--l" id="gd-dk-edge-l" aria-hidden="true"></span>
+      <span class="gd-dk-edge gd-dk-edge--r" id="gd-dk-edge-r" aria-hidden="true"></span>
+
+      {[-1, 0, 1].map((o) => (
+        <article class="gd-dk-slide" style={`--o:${o}`}>
+          <div class="gd-dk-well">
+            <img class="gd-dk-img" alt="" decoding="async" hidden />
+            <div class="gd-dk-plate"><span class="gd-dk-emoji"></span></div>
+            <span class="gd-dk-kind"></span>
+          </div>
+          <div class="gd-dk-text">
+            <h2 class="gd-dk-name" data-han=""></h2>
+            <p class="gd-dk-sub" hidden></p>
+            <p class="gd-dk-mute">🔇 这台设备没有中文语音</p>
+            <p class="gd-dk-en"></p>
+            <p class="gd-dk-sci"></p>
+            <p class="gd-dk-body"></p>
+            <a class="gd-dk-more" href="#">查看完整卡片 ↗</a>
+          </div>
+          <button class="gd-dk-resume" type="button" hidden>👆 点一下继续</button>
+        </article>
+      ))}
+
+      <div class="gd-dk-card gd-dk-rest" id="gd-dk-rest" hidden>
+        <p class="gd-dk-card-icon">🌿</p>
+        <p class="gd-dk-card-title" id="gd-dk-rest-title"></p>
+        <div class="gd-dk-ring" id="gd-dk-ring">
+          <svg viewBox="0 0 52 52" aria-hidden="true"><circle cx="26" cy="26" r="22" /></svg>
+          <span class="gd-dk-ring-num" id="gd-dk-ring-num" hidden>10</span>
+          <button class="gd-dk-go" id="gd-dk-rest-go" type="button">▶ 继续</button>
+        </div>
+        <div class="gd-dk-card-row">
+          <button class="gd-dk-pill" id="gd-dk-rest-skip" type="button" hidden>⏭ 跳过这一区</button>
+          <button class="gd-dk-pill" id="gd-dk-rest-end" type="button">结束</button>
+        </div>
+      </div>
+
+      <div class="gd-dk-card gd-dk-end" id="gd-dk-end" hidden>
+        <p class="gd-dk-card-icon">🎉</p>
+        <p class="gd-dk-card-title" id="gd-dk-end-title"></p>
+        <div class="gd-dk-card-row">
+          <button class="gd-dk-pill" id="gd-dk-end-again" type="button">再听一遍</button>
+          <button class="gd-dk-pill" id="gd-dk-end-close" type="button">回到列表</button>
+        </div>
+      </div>
+
+      <div class="gd-dk-sheet" id="gd-dk-sheet" hidden>
+        <img class="gd-dk-sheet-img" id="gd-dk-sheet-img" alt="园区介绍牌" />
+        <div class="gd-dk-sheet-bar">
+          <button class="gd-dk-pill" id="gd-dk-sheet-x" type="button">✕ 返回</button>
+          <a class="gd-dk-pill" id="gd-dk-sheet-raw" target="_blank" rel="noopener" href="#">在新标签打开原图 ↗</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="gd-dk-ctrl">
+      <button class="gd-dk-nav" id="gd-dk-prev" type="button" aria-label="上一只">⏮</button>
+      <button class="gd-dk-play" id="gd-dk-play" type="button" aria-pressed="true" aria-label="暂停">⏸</button>
+      <button class="gd-dk-nav" id="gd-dk-again" type="button">🔁 重听</button>
+      <button class="gd-dk-nav" id="gd-dk-next" type="button" aria-label="下一只">⏭</button>
+    </div>
+
+    <div class="gd-dk-ctrl2">
+      <button class="gd-dk-pill gd-dk-rate" data-rate="0.8" type="button">🐢 0.8×</button>
+      <button class="gd-dk-pill gd-dk-rate active" data-rate="1" type="button">🚶 1×</button>
+      <button class="gd-dk-pill gd-dk-rate" data-rate="1.2" type="button">🐇 1.2×</button>
+      <button class="gd-dk-pill" id="gd-dk-guess" type="button" aria-pressed="false">🎴 猜名字</button>
+      <button class="gd-dk-pill" id="gd-dk-sign" type="button" hidden>🪧 介绍牌</button>
+      <select class="gd-dk-pill gd-dk-voice" id="gd-dk-voice" aria-label="中文声音" hidden></select>
+      <button class="gd-dk-help" id="gd-dk-help" type="button" aria-expanded="false">听不到声音?</button>
+    </div>
+    <div class="gd-dk-helpbox" id="gd-dk-helpbox" hidden></div>
+
+    <p class="gd-dk-hint" id="gd-dk-hint" hidden>点画面可以暂停 · 左右滑动翻页</p>
+    <p class="gd-dk-live" id="gd-dk-live" aria-live="polite" role="status"></p>
+  </div>
+
   <script>
     const grid = document.getElementById('gd-grid')!;
     const cards = [...grid.querySelectorAll<HTMLElement>('.gd-card')];
@@ -71,7 +168,10 @@ const zoneName = (id?: string) => (id ? zoneMap.get(id)?.name : undefined);
     const zoneBtns = [...document.querySelectorAll<HTMLButtonElement>('#gd-zones .or-tab')];
     const flashBtn = document.getElementById('gd-flash')!;
     const toolbar = document.getElementById('gd-toolbar')!;
+    const playBtn = document.getElementById('gd-play') as HTMLButtonElement;
+    const playEst = document.getElementById('gd-play-est')!;
     let zone = '';
+    const SEC_PER_SLIDE = 12; // measured average; the 朗读 button shows an honest length up front
 
     function apply() {
       const q = search.value.trim().toLowerCase();
@@ -83,8 +183,11 @@ const zoneName = (id?: string) => (id ? zoneMap.get(id)?.name : undefined);
       }
       count.textContent = `${shown} 种`;
       empty.hidden = shown > 0;
+      playEst.textContent = shown ? `· 约 ${Math.max(1, Math.round((shown * SEC_PER_SLIDE) / 60))} 分钟` : '';
+      playBtn.disabled = shown === 0;
     }
 
+    apply(); // also fills 朗读's duration estimate, which is empty until it runs
     search.addEventListener('input', apply);
     zoneBtns.forEach((b) =>
       b.addEventListener('click', () => {
@@ -109,5 +212,966 @@ const zoneName = (id?: string) => (id ? zoneMap.get(id)?.name : undefined);
         c.classList.toggle('revealed');
       }),
     );
+
+    /* ═══════════════════════════════════════════════════════════════════
+       放映朗读 — a PPT-style deck over the current filter, read aloud with
+       the browser's own speechSynthesis. Every pacing number lives here so
+       it can be tuned after a sofa test with the actual child.
+       ═══════════════════════════════════════════════════════════════════ */
+
+    const PACE = {
+      nameSlow: 0.7, nameNorm: 0.88, enRate: 1.0, enCap: 1.15, bodyRate: 0.88,
+      gapSlow: 380, gapNorm: 520, gapEn: 520, gapChunk: 240, gapSlide: 1100,
+      think: 1400, restEvery: 12, restSeconds: 10,
+      dwellPerHan: 260, dwellBase: 2500, dwellMin: 4500, dwellMax: 14000,
+      tapDebounce: 400, swipeMin: 48, hintMs: 3500, idleMs: 4000,
+    };
+
+    const HAN_JS = /\p{Script=Han}/u;
+    const hanCountJS = (t: string) => [...t].filter((c) => HAN_JS.test(c)).length;
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const ls = {
+      get(k: string) { try { return localStorage.getItem(k); } catch { return null; } },
+      set(k: string, v: string) { try { localStorage.setItem(k, v); } catch { /* private mode */ } },
+    };
+
+    /* ── TTS ──────────────────────────────────────────────────────────── */
+    type Seg = { text: string; lang: 'zh' | 'en'; voice: SpeechSynthesisVoice | null; rate: number; gapAfter: number; el: HTMLElement | null; han: number; reveal?: boolean };
+
+    const NOVELTY = /grandma|grandpa|eddy|flo|reed|rocko|sandy|shelley|bells|bubbles|boing|bahh|jester|organ|trinoids|whisper|zarvox|wobble|superstar|bad news|good news|albert|cellos/i;
+    const ZH_PREF = ['tingting', 'ting-ting', 'google 普通话', 'google mandarin', 'chinese (china', 'huihui', 'yaoyao', 'kangkang', 'xiaoxiao', 'yunxi', 'yunyang', 'meijia', 'mei-jia', 'sinji'];
+    const EN_PREF = ['samantha', 'google us english', 'aaron', 'ava', 'allison', 'daniel', 'karen', 'moira', 'microsoft aria', 'microsoft zira'];
+
+    const TTS = (() => {
+      let gen = 0;
+      let current: SpeechSynthesisUtterance | null = null;
+      let voices: SpeechSynthesisVoice[] = [];
+      let loaded = false;
+
+      const supported = () => typeof speechSynthesis !== 'undefined' && typeof SpeechSynthesisUtterance !== 'undefined';
+      const normLang = (l: string) => String(l || '').replace(/_/g, '-').toLowerCase();
+      const read = () => { try { return speechSynthesis.getVoices() || []; } catch { return []; } };
+
+      // Must be the FIRST statement of any gesture handler: an await before it
+      // consumes WebKit's trusted session and every later speak() is dropped.
+      function unlock() {
+        if (!supported()) return;
+        try { const u = new SpeechSynthesisUtterance(' '); u.volume = 0; u.rate = 10; speechSynthesis.speak(u); } catch { /* ignore */ }
+      }
+
+      // cancel() does not clear the paused state, and .paused reports garbage.
+      function stop() {
+        gen++;
+        current = null;
+        if (!supported()) return;
+        try { speechSynthesis.cancel(); speechSynthesis.resume(); } catch { /* ignore */ }
+      }
+
+      const token = () => gen;
+
+      function sleep(ms: number, myGen: number): Promise<boolean> {
+        return new Promise((res) => {
+          if (myGen !== gen) return res(false);
+          setTimeout(() => res(myGen === gen), ms); // re-checked INSIDE the callback
+        });
+      }
+
+      // Three stages: sync read (Safari answers here) → voiceschanged → poll
+      // with a hard deadline that resolves [] rather than hanging forever.
+      function loadVoices(): Promise<SpeechSynthesisVoice[]> {
+        if (loaded) return Promise.resolve(voices);
+        return new Promise((resolve) => {
+          if (!supported()) { loaded = true; return resolve([]); }
+          let poll = 0 as unknown as ReturnType<typeof setInterval>;
+          let deadline = 0 as unknown as ReturnType<typeof setTimeout>;
+          let settled = false;
+          const onChange = () => { const v = read(); if (v.length) done(v); };
+          const done = (v: SpeechSynthesisVoice[]) => {
+            if (settled) return;
+            settled = true; loaded = true; voices = v || [];
+            clearInterval(poll); clearTimeout(deadline);
+            try { speechSynthesis.removeEventListener('voiceschanged', onChange); } catch { /* ignore */ }
+            resolve(voices);
+          };
+          const first = read();
+          if (first.length) return done(first);
+          try { speechSynthesis.addEventListener('voiceschanged', onChange); }
+          catch { try { (speechSynthesis as any).onvoiceschanged = onChange; } catch { /* ignore */ } }
+          poll = setInterval(onChange, 250);
+          deadline = setTimeout(() => done(read()), 5000);
+        });
+      }
+
+      function pickVoice(list: SpeechSynthesisVoice[], prefixes: string[], preferred: string[]) {
+        let best: SpeechSynthesisVoice | null = null;
+        let bestScore = -Infinity;
+        for (const v of list) {
+          const lang = normLang(v.lang);
+          const j = prefixes.findIndex((p) => lang.startsWith(p));
+          if (j < 0) continue;
+          const name = String(v.name || '').toLowerCase();
+          let score = (prefixes.length - j) * 100;
+          const pi = preferred.findIndex((p) => name.includes(p));
+          if (pi >= 0) score += 1000 - 10 * pi;
+          if (NOVELTY.test(name)) score -= 2000; // else macOS hands a child "Eddy"
+          if (v.localService) score += 30;
+          if (v.default) score += 5;
+          if (score > bestScore) { bestScore = score; best = v; }
+        }
+        return best;
+      }
+
+      const zhList = () => voices.filter((v) => ['zh-cn', 'zh-hans', 'zh', 'cmn'].some((p) => normLang(v.lang).startsWith(p)));
+
+      function estimateMs(text: string, rate: number) {
+        const han = hanCountJS(text);
+        return (((han / 4.5) + ((text.length - han) / 14)) * 1000) / Math.max(0.5, rate) + 400;
+      }
+
+      // Chrome fires NO event for an utterance cancelled while still queued, so
+      // every promise must also be able to settle from the poll or the watchdog.
+      function speakOne(seg: Seg, myGen: number): Promise<{ why: string; ms: number }> {
+        return new Promise((resolve) => {
+          if (myGen !== gen) return resolve({ why: 'cancel', ms: 0 });
+          if (!supported() || !seg.text.trim()) return resolve({ why: 'skip', ms: 0 });
+          const t0 = Date.now();
+          let started = false, settled = false;
+          let poll = 0 as unknown as ReturnType<typeof setInterval>;
+          let u: SpeechSynthesisUtterance;
+          const finish = (why: string) => {
+            if (settled) return;
+            settled = true;
+            clearInterval(poll);
+            if (current === u) current = null;
+            resolve({ why, ms: Date.now() - t0 });
+          };
+          try { u = new SpeechSynthesisUtterance(seg.text); } catch { return resolve({ why: 'error', ms: 0 }); }
+          if (seg.voice) u.voice = seg.voice;
+          u.lang = seg.voice ? seg.voice.lang : seg.lang === 'zh' ? 'zh-CN' : 'en-US';
+          u.rate = seg.rate;
+          u.volume = 1; // volume is the hardware buttons' job
+          u.onstart = () => { started = true; };
+          u.onend = () => finish('end');
+          u.onerror = (e: any) => finish(e && e.error === 'interrupted' ? 'cancel' : 'error');
+          current = u; // a GC'd utterance stops firing events
+          const est = estimateMs(seg.text, seg.rate);
+          poll = setInterval(() => {
+            if (myGen !== gen) return finish('cancel');
+            const el = Date.now() - t0;
+            let speaking = false, pending = false;
+            try { speaking = speechSynthesis.speaking; pending = speechSynthesis.pending; } catch { /* ignore */ }
+            if (started && !speaking && !pending) return finish('end');
+            if (!started && el > 3000 && !speaking && !pending) return finish('watchdog-nostart');
+            // A wedged engine keeps reporting speaking:true forever and never
+            // fires start, so the condition above can never be reached there.
+            if (!started && el > 5000) return finish('watchdog-nostart');
+            if (el > est * 3 + 6000) return finish('watchdog-timeout');
+          }, 400);
+          try { speechSynthesis.speak(u); } catch { finish('error'); }
+        });
+      }
+
+      return { supported, unlock, stop, token, sleep, loadVoices, pickVoice, speakOne, zhList, get voices() { return voices; } };
+    })();
+
+    // 👧 would be read aloud as "girl"; parentheses as "括号"; 150–190 as a dash.
+    const sanitizeZh = (t: string) => String(t)
+      .replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}]/gu, '')
+      .replace(/[（(]/g, '，')
+      .replace(/[）)]/g, '')
+      .replace(/(\d)\s*[–—~-]\s*(\d)/g, '$1到$2')
+      .replace(/\bcm\b/gi, '厘米').replace(/\bmm\b/gi, '毫米')
+      .replace(/\bkg\b/gi, '公斤').replace(/\bg\b/g, '克')
+      .replace(/\s+/g, ' ')
+      .trim();
+
+    function chunkForSpeech(text: string, max: number) {
+      const parts: string[] = [];
+      let buf = '';
+      for (const ch of text) {              // no regex lookbehind — Safari < 16.4
+        buf += ch;
+        if ('。！？；.!?;\n'.indexOf(ch) >= 0) { if (buf.trim()) parts.push(buf.trim()); buf = ''; }
+      }
+      if (buf.trim()) parts.push(buf.trim());
+      const out: string[] = [];
+      for (const p of parts) {
+        if (p.length <= max) { out.push(p); continue; }
+        for (let i = 0; i < p.length; i += max) out.push(p.slice(i, i + max));
+      }
+      return out.filter(Boolean);
+    }
+
+    // Short Latin runs stay inside the Chinese utterance — a zh voice reads
+    // English fine, just accented, while an en voice reading Chinese is silence.
+    function segmentByScript(text: string, zh: SpeechSynthesisVoice | null, en: SpeechSynthesisVoice | null, minEnRun: number) {
+      const whole = [{ text, voice: zh, lang: 'zh' as const }];
+      if (!en || !zh) return whole;
+      const out: { text: string; voice: SpeechSynthesisVoice | null; lang: 'zh' | 'en' }[] = [];
+      const re = /[A-Za-z][A-Za-z'’\- .]*/g;
+      let last = 0;
+      let m: RegExpExecArray | null;
+      while ((m = re.exec(text))) {
+        if (m[0].trim().length < minEnRun) continue;
+        if (m.index > last) out.push({ text: text.slice(last, m.index), voice: zh, lang: 'zh' });
+        out.push({ text: m[0], voice: en, lang: 'en' });
+        last = m.index + m[0].length;
+      }
+      if (last < text.length) out.push({ text: text.slice(last), voice: zh, lang: 'zh' });
+      const kept = out.filter((p) => p.text.trim());
+      return kept.length ? kept : whole;
+    }
+
+    /* ── deck ─────────────────────────────────────────────────────────── */
+    type Slide = {
+      id: string; nameHtml: string; cn: string; cnMain: string; cnSub: string; han: number;
+      en: string; sci: string; zoneName: string; emoji: string; photo: string; sign: string;
+      soloSign: string; body: string; isKids: boolean;
+    };
+
+    const $ = (id: string) => document.getElementById(id)!;
+    const deckEl = $('gd-deck');
+    const stage = $('gd-dk-stage');
+    const slides = [...stage.querySelectorAll<HTMLElement>('.gd-dk-slide')];
+    const railFill = $('gd-dk-rail-fill');
+    const kicker = $('gd-dk-kicker');
+    const counter = $('gd-dk-counter');
+    const liveEl = $('gd-dk-live');
+    const noteEl = $('gd-dk-note');
+    const noteText = $('gd-dk-note-text');
+    const noteX = $('gd-dk-note-x') as HTMLButtonElement;
+    const restEl = $('gd-dk-rest');
+    const endEl = $('gd-dk-end');
+    const sheetEl = $('gd-dk-sheet');
+    const sheetImg = $('gd-dk-sheet-img') as HTMLImageElement;
+    const playPause = $('gd-dk-play') as HTMLButtonElement;
+    const signBtn = $('gd-dk-sign') as HTMLButtonElement;
+    const guessBtn = $('gd-dk-guess') as HTMLButtonElement;
+    const voiceSel = $('gd-dk-voice') as HTMLSelectElement;
+    const helpBox = $('gd-dk-helpbox');
+    const hintEl = $('gd-dk-hint');
+
+    let deckSet: Slide[] = [];
+    let cur = 0, curSeg = 0, slotBase = 0;
+    let playing = false, guess = false, revealed = false, sheetOpen = false;
+    let scopeLabel = '', lastRestAt = -1, autoPassed = 0, watchdogStrikes = 0;
+    let zhVoice: SpeechSynthesisVoice | null = null;
+    let enVoice: SpeechSynthesisVoice | null = null;
+    let zhBroken = false;
+    let rate = Number(ls.get('gd-rate') || 1) || 1;
+    let savedY = 0, deckMoved = false, hintShown = false, lastAction = 0;
+    let wakeLock: any = null;
+    let restTimer = 0 as unknown as ReturnType<typeof setInterval>;
+    let idleTimer = 0 as unknown as ReturnType<typeof setTimeout>;
+    let wasPlaying = false;
+
+    const apiMissing = !TTS.supported();
+    let speechDead = false;            // engine accepted utterances but never answered
+    const stateA = () => apiMissing || speechDead;
+    const noZh = () => zhBroken || !zhVoice;
+
+    if (apiMissing) {
+      $('gd-play-lbl').textContent = '🎞 放映';
+      playBtn.title = '一只一只翻页看(这个浏览器不会朗读)';
+    }
+
+    /* The deck's entire data layer: the slide content is already rendered in
+       the card, so there is no JSON island and grid/deck drift is impossible. */
+    function readCard(card: HTMLElement): Slide {
+      const media = card.querySelector('.gd-media')!;
+      const cnEl = card.querySelector('.gd-cn')!;
+      const signA = card.querySelector<HTMLAnchorElement>('a.gd-sign');
+      const sign = signA?.getAttribute('href') ?? '';
+      const kidsEl = card.querySelector('.gd-kids');
+      const factEl = card.querySelector('.gd-facts li');
+      // textContent is poisoned once ruby renders: "绿lǜ皇huáng鸠jiū"
+      const cn = ((cnEl.querySelector('[data-plain]') as HTMLElement)?.dataset.plain ?? cnEl.textContent ?? '').trim();
+      const m = cn.match(/^(.*?)\s*[（(](.+?)[)）]\s*$/);
+      return {
+        id: card.id,
+        nameHtml: cnEl.innerHTML,
+        cn,
+        cnMain: m ? m[1] : cn,
+        cnSub: m ? m[2] : '',
+        han: hanCountJS(cn),
+        en: card.querySelector('.gd-en')?.textContent?.trim() ?? '',
+        sci: card.querySelector('.gd-sci')?.textContent?.trim() ?? '',
+        zoneName: media.querySelector('.gd-zone-chip')?.textContent?.trim() ?? '',
+        emoji: card.dataset.emoji || '🐦',
+        photo: media.querySelector('img')?.getAttribute('src') ?? '',
+        sign,
+        soloSign: sign && !/\/board-/.test(sign) ? sign : '', // 161 species share 29 boards
+        body: (kidsEl ? (kidsEl.textContent ?? '').replace(/^👧\s*/, '') : (factEl?.textContent ?? '')).trim(),
+        isKids: !!kidsEl,
+      };
+    }
+
+    function paintSlide(node: HTMLElement, idx: number) {
+      const d = deckSet[idx];
+      node.hidden = !d;
+      if (!d) return;
+      const nameEl = node.querySelector<HTMLElement>('.gd-dk-name')!;
+      const subEl = node.querySelector<HTMLElement>('.gd-dk-sub')!;
+      const enEl = node.querySelector<HTMLElement>('.gd-dk-en')!;
+      const sciEl = node.querySelector<HTMLElement>('.gd-dk-sci')!;
+      const bodyEl = node.querySelector<HTMLElement>('.gd-dk-body')!;
+      const moreEl = node.querySelector<HTMLAnchorElement>('.gd-dk-more')!;
+      const img = node.querySelector<HTMLImageElement>('.gd-dk-img')!;
+      const plate = node.querySelector<HTMLElement>('.gd-dk-plate')!;
+      const emoji = node.querySelector<HTMLElement>('.gd-dk-emoji')!;
+      const kind = node.querySelector<HTMLElement>('.gd-dk-kind')!;
+
+      nameEl.innerHTML = d.nameHtml;
+      nameEl.dataset.han = String(Math.min(7, d.han));
+      subEl.hidden = true;
+      subEl.innerHTML = '';
+      if (d.cnSub) {
+        const wrap = nameEl.querySelector('.gd-rb') ?? nameEl;
+        const kids = [...wrap.childNodes];
+        const cut = kids.findIndex((n) => (n.textContent ?? '').trim() === '(' || (n.textContent ?? '').trim() === '（');
+        if (cut > 0) {
+          const tail = document.createElement('span');
+          tail.className = 'gd-rb';
+          kids.slice(cut).forEach((n) => tail.appendChild(n));
+          subEl.appendChild(tail);
+          subEl.hidden = false;
+        }
+      }
+      enEl.textContent = d.en;
+      sciEl.textContent = d.sci;
+      bodyEl.textContent = d.body;
+      bodyEl.hidden = !d.body;
+      bodyEl.classList.toggle('kids', d.isKids);
+      moreEl.href = `#${d.id}`;
+
+      // One predicate for both the blur and the withheld photo, so a slide that
+      // was painted as a neighbour is never half in guess state.
+      const guessing = guess && !(idx === cur && revealed);
+      node.classList.toggle('guessing', guessing);
+      // the picture IS the answer, so it is withheld until the reveal
+      const stageSrc = guessing ? '' : d.photo || d.soloSign;
+      if (stageSrc) {
+        kind.textContent = d.photo ? '📷 实拍' : '🪧 介绍牌';
+        kind.hidden = false;
+        plate.hidden = false; // held until decode() resolves so nothing flashes white
+        img.hidden = true;
+        if (img.getAttribute('src') !== stageSrc) img.setAttribute('src', stageSrc);
+        const show = () => { img.hidden = false; plate.hidden = true; };
+        if (img.complete && img.naturalWidth) show();
+        else img.decode ? img.decode().then(show).catch(() => { /* keep the plate */ }) : (img.onload = show);
+        img.onerror = () => { img.hidden = true; plate.hidden = false; };
+      } else {
+        img.hidden = true;
+        img.removeAttribute('src');
+        plate.hidden = false;
+        kind.textContent = guessing ? '🎴 猜猜看' : '🎨 图标';
+        kind.hidden = false;
+      }
+      emoji.textContent = guessing ? '❓' : d.emoji;
+    }
+
+    function warm(i: number) {
+      for (const k of [i + 1, i + 2]) {
+        const d = deckSet[k];
+        const src = d && (d.photo || d.soloSign);
+        if (src) { const im = new Image(); im.src = src; }
+      }
+    }
+
+    function afterRender() {
+      const d = deckSet[cur];
+      const n = deckSet.length;
+      counter.textContent = `${cur + 1} / ${n}`;
+      kicker.textContent = d.zoneName ? `${d.zoneName} · ${scopeLabel}` : scopeLabel;
+      railFill.style.width = `${((cur + 1) / n) * 100}%`;
+      liveEl.textContent = `第 ${cur + 1} 张,共 ${n} 张,${d.cn}`;
+      signBtn.hidden = !d.sign;
+      $('gd-dk-prev').toggleAttribute('disabled', cur === 0);
+      $('gd-dk-next').toggleAttribute('disabled', cur >= n - 1);
+      warm(cur);
+    }
+
+    const slotNode = (k: number) => slides[(slotBase + k) % 3];
+
+    function renderAll(i: number) {
+      cur = i;
+      for (let k = 0; k < 3; k++) {
+        const node = slotNode(k);
+        paintSlide(node, i - 1 + k);
+        node.classList.add('dragging');
+        node.style.setProperty('--o', String(k - 1));
+      }
+      void stage.offsetWidth;
+      slides.forEach((s) => s.classList.remove('dragging'));
+      afterRender();
+    }
+
+    function step(dir: 1 | -1) {
+      const target = cur + dir;
+      if (target < 0 || target >= deckSet.length) return;
+      if (reduced) { renderAll(target); return; }
+      slotBase = (slotBase + (dir > 0 ? 1 : 2)) % 3;
+      cur = target;
+      // the far slot wrapped around the screen — it must teleport, not animate
+      const farK = dir > 0 ? 2 : 0;
+      const far = slotNode(farK);
+      paintSlide(far, cur - 1 + farK);
+      far.classList.add('dragging');
+      far.style.setProperty('--o', String(farK - 1));
+      void far.offsetWidth;
+      far.classList.remove('dragging');
+      for (let k = 0; k < 3; k++) if (k !== farK) slotNode(k).style.setProperty('--o', String(k - 1));
+      // Repaint the incoming slide: it was painted as a neighbour, possibly
+      // before 猜名字 was toggled, so its guess state can be stale.
+      paintSlide(slotNode(1), cur);
+      afterRender();
+    }
+
+    const curNode = () => slotNode(1);
+    const highlight = (el: HTMLElement | null) => {
+      curNode().querySelectorAll('.reading').forEach((n) => n.classList.remove('reading'));
+      if (el) el.classList.add('reading');
+    };
+
+    function buildSegments(i: number): Seg[] {
+      const d = deckSet[i];
+      const node = slotNode(1);
+      const nameEl = node.querySelector<HTMLElement>('.gd-dk-name')!;
+      const enEl = node.querySelector<HTMLElement>('.gd-dk-en')!;
+      const bodyEl = node.querySelector<HTMLElement>('.gd-dk-body')!;
+      const R = (base: number, cap = 1.6) => Math.min(cap, Math.max(0.5, base * rate));
+
+      const enSeg: Seg = {
+        text: d.en, lang: 'en', voice: enVoice || zhVoice, rate: R(PACE.enRate, PACE.enCap),
+        gapAfter: PACE.gapEn, el: enEl, han: 0,
+      };
+      // State B: only the English name is spoken. Chinese is never handed to an
+      // English voice — that is the silent-success trap, not a fallback.
+      if (noZh()) return d.en ? [{ ...enSeg, gapAfter: PACE.gapSlide }] : [];
+
+      const nameText = sanitizeZh(d.cnMain);
+      const nameSegs: Seg[] = [
+        { text: nameText, lang: 'zh', voice: zhVoice, rate: R(PACE.nameSlow), gapAfter: PACE.gapSlow, el: nameEl, han: hanCountJS(nameText) },
+        { text: nameText, lang: 'zh', voice: zhVoice, rate: R(PACE.nameNorm), gapAfter: PACE.gapNorm, el: nameEl, han: hanCountJS(nameText) },
+      ];
+      const bodySegs: Seg[] = [];
+      if (d.body) {
+        const chunks = chunkForSpeech(sanitizeZh(d.body), 140);
+        chunks.forEach((c, ci) => {
+          segmentByScript(c, zhVoice, enVoice, 12).forEach((p, pi, arr) => {
+            const lastOfAll = ci === chunks.length - 1 && pi === arr.length - 1;
+            bodySegs.push({
+              text: p.text, lang: p.lang, voice: p.voice,
+              rate: p.lang === 'en' ? R(PACE.enRate, PACE.enCap) : R(PACE.bodyRate),
+              gapAfter: lastOfAll ? PACE.gapSlide : PACE.gapChunk,
+              el: bodyEl, han: hanCountJS(p.text),
+            });
+          });
+        });
+      }
+
+      if (!guess) return [...nameSegs, enSeg, ...bodySegs];
+      // 猜名字: clue first, a think gap, then the name arrives exactly as it is spoken
+      const clue = bodySegs.map((s, k) => ({ ...s, gapAfter: k === bodySegs.length - 1 ? PACE.think : PACE.gapChunk }));
+      const reveal: Seg[] = [{ ...nameSegs[0], reveal: true }, nameSegs[1], { ...enSeg, gapAfter: PACE.gapSlide }];
+      return clue.length ? [...clue, ...reveal] : reveal;
+    }
+
+    function doReveal() {
+      revealed = true;
+      curNode().classList.remove('guessing');
+      paintSlide(curNode(), cur);
+    }
+
+    const dwellMs = (d: Slide) =>
+      Math.min(PACE.dwellMax, Math.max(PACE.dwellMin, (d.han + hanCountJS(d.body)) * PACE.dwellPerHan + PACE.dwellBase));
+
+    async function play(i: number, fromSeg: number) {
+      TTS.stop();
+      const myGen = TTS.token();
+      if (!(await TTS.sleep(60, myGen))) return; // let cancel() land
+      if (!playing) return;
+      const d = deckSet[i];
+
+      if (stateA()) {                            // silent — timed flip-card show
+        highlight(null);
+        if (!(await TTS.sleep(dwellMs(d), myGen))) return;
+        if (myGen === TTS.token()) advance();
+        return;
+      }
+
+      const segs = buildSegments(i);
+      const t0 = Date.now();
+      for (let k = fromSeg; k < segs.length; k++) {
+        if (myGen !== TTS.token()) return;
+        curSeg = k;
+        const s = segs[k];
+        if (s.reveal) doReveal();
+        highlight(s.el);
+        const r = await TTS.speakOne(s, myGen);
+        if (myGen !== TTS.token()) return;
+        // the verified undetectable failure: 18 Chinese characters "spoken" in 89ms
+        if (r.why === 'end' && s.lang === 'zh' && s.han >= 6 && r.ms < 350) return demoteZh();
+        // Two watchdog settles in a row means the engine is not answering at
+        // all. Give up on audio within ~10s rather than making the family sit
+        // through a minute of silence pretending to be narration.
+        if (r.why === 'watchdog-timeout' || r.why === 'watchdog-nostart') {
+          if (++watchdogStrikes >= 2) return degradeToDwell();
+        } else if (r.why === 'end') watchdogStrikes = 0;
+        if (!(await TTS.sleep(s.gapAfter, myGen))) return;
+      }
+      if (noZh() && !stateA()) {                 // State B pacing, else it flips once a second
+        const rest = dwellMs(d) - (Date.now() - t0);
+        if (rest > 0 && !(await TTS.sleep(rest, myGen))) return;
+      }
+      if (myGen === TTS.token()) advance();
+    }
+
+    function needRest(next: number) {
+      if (next >= deckSet.length) return false;
+      if (deckSet[next].zoneName !== deckSet[next - 1].zoneName) return true;
+      return next - lastRestAt >= PACE.restEvery;
+    }
+
+    function advance() {
+      const next = cur + 1;
+      if (next >= deckSet.length) return showEnd();
+      if (needRest(next)) return showRest(next);
+      revealed = false;
+      step(1);
+      if (playing) play(cur, 0);
+    }
+
+    function clearRest() { clearInterval(restTimer); restEl.hidden = true; }
+
+    function showRest(next: number) {
+      TTS.stop();
+      lastRestAt = next;
+      const zoneDone = deckSet[next - 1].zoneName || scopeLabel;
+      let n = 0;
+      for (const d of deckSet) if ((d.zoneName || scopeLabel) === zoneDone) n++;
+      $('gd-dk-rest-title').textContent = `${zoneDone} · ${n} 种听完了`;
+      // "skip this zone" means the one about to start, not the one just finished
+      const upcoming = deckSet[next].zoneName;
+      const skipTarget = deckSet.findIndex((d, k) => k >= next && d.zoneName !== upcoming);
+      $('gd-dk-rest-skip').hidden = skipTarget < 0;
+      restEl.hidden = false;
+
+      const go = () => { clearRest(); revealed = false; step(1); schedulePlay(0); };
+      (restEl as any)._go = go;
+      (restEl as any)._skip = () => {
+        clearRest();
+        if (skipTarget < 0) return showEnd();
+        revealed = false;
+        renderAll(skipTarget);
+        lastRestAt = skipTarget;
+        schedulePlay(0);
+      };
+
+      const ring = $('gd-dk-ring').querySelector('circle') as SVGCircleElement | null;
+      const num = $('gd-dk-ring-num');
+      const stopCount = autoPassed >= 3;
+      $('gd-dk-rest-title').textContent = stopCount ? '还在听吗?' : `${zoneDone} · ${n} 种听完了`;
+      if (playing && !stateA()) {
+        const myGen = TTS.token();
+        TTS.speakOne(
+          { text: sanitizeZh(`${zoneDone}，${n} 种，听完啦。休息一下。`), lang: 'zh', voice: zhVoice, rate: Math.min(1.6, PACE.nameNorm * rate), gapAfter: 0, el: null, han: 8 },
+          myGen,
+        );
+      }
+      if (stopCount) { if (ring) ring.style.strokeDashoffset = '138.2'; num.hidden = true; return; }
+      let left = PACE.restSeconds;
+      num.hidden = !reduced;
+      num.textContent = String(left);
+      if (ring) ring.style.strokeDashoffset = '0';
+      restTimer = setInterval(() => {
+        left -= 0.2;
+        if (ring && !reduced) ring.style.strokeDashoffset = String(138.2 * (1 - left / PACE.restSeconds));
+        num.textContent = String(Math.max(0, Math.ceil(left)));
+        if (left <= 0) { clearInterval(restTimer); autoPassed++; go(); }
+      }, 200);
+    }
+
+    function showEnd() {
+      TTS.stop();
+      playing = false;
+      releaseLock();
+      $('gd-dk-end-title').textContent = `${scopeLabel},${deckSet.length} 种,都听完啦!`;
+      endEl.hidden = false;
+      syncPlayBtn();
+      if (!stateA() && !noZh()) {
+        TTS.speakOne(
+          { text: sanitizeZh(`${scopeLabel}，${deckSet.length} 种，都听完啦！`), lang: 'zh', voice: zhVoice, rate: Math.min(1.6, PACE.nameNorm * rate), gapAfter: 0, el: null, han: 8 },
+          TTS.token(),
+        );
+      }
+    }
+
+    function demoteZh() {
+      zhBroken = true;
+      TTS.stop();
+      deckEl.classList.add('nozh');
+      showNote('b');
+      if (playing) play(cur, 0);
+    }
+
+    function degradeToDwell() {
+      watchdogStrikes = 0;
+      speechDead = true;                 // State A from here: silent, but still turning pages
+      TTS.stop();
+      showNote('a');
+      $('gd-play-lbl').textContent = '🎞 放映';
+      if (playing) play(cur, 0);
+    }
+
+    const NOTE_A = '🔇 这个浏览器不会朗读,先当翻页卡片看。把网址复制到 Safari 或 Chrome 里打开就能听啦。(在微信 / LINE 里可以点右上角「在浏览器中打开」)';
+    const NOTE_B = [
+      '🔈 这台设备没装中文语音,只能念英文名。中文名和拼音照常显示,可以跟着拼音自己读。',
+      'iPhone:设置 › 辅助功能 › 朗读内容 › 声音 › 中文,下载一个',
+      'Windows:设置 › 时间和语言 › 语音 › 添加语音 › 中文',
+      '安卓:设置 › 无障碍 › 文字转语音 › 安装中文语音包',
+    ].join('\n');
+
+    function showNote(which: 'a' | 'b') {
+      if (which === 'b' && ls.get('gd-zhnote') === 'off') return;
+      noteText.textContent = which === 'a' ? NOTE_A : NOTE_B;
+      noteX.hidden = which === 'a';   // State A is not dismissible: it never gets better
+      noteEl.hidden = false;
+    }
+    noteX.addEventListener('click', () => { noteEl.hidden = true; ls.set('gd-zhnote', 'off'); });
+
+    /* ── wake lock: without it the phone dims at ~30s and hands-free dies ── */
+    async function requestLock() {
+      try { wakeLock = await (navigator as any).wakeLock?.request('screen'); } catch { wakeLock = null; }
+    }
+    function releaseLock() {
+      try { wakeLock?.release(); } catch { /* ignore */ }
+      wakeLock = null;
+    }
+
+    function syncPlayBtn() {
+      playPause.textContent = playing ? '⏸' : '▶';
+      playPause.setAttribute('aria-pressed', String(playing));
+      playPause.setAttribute('aria-label', playing ? '暂停' : '播放');
+    }
+
+    /* ── open / close ── */
+    function openDeck(set: HTMLElement[], index: number) {
+      if (!set.length) return;
+      if (!deckMoved) { document.body.appendChild(deckEl); deckMoved = true; }
+      deckSet = set.map(readCard);
+      const activeTab = document.querySelector('#gd-zones .or-tab.active') as HTMLElement | null;
+      const q = search.value.trim();
+      scopeLabel = zone && activeTab ? activeTab.textContent!.trim() : q ? `搜「${q}」` : '全部';
+      guess = grid.classList.contains('flash');
+      guessBtn.classList.toggle('active', guess);
+      guessBtn.setAttribute('aria-pressed', String(guess));
+      revealed = false;
+      cur = 0; curSeg = 0; slotBase = 0; lastRestAt = -1; autoPassed = 0; watchdogStrikes = 0;
+      restEl.hidden = true; endEl.hidden = true; sheetEl.hidden = true; sheetOpen = false;
+
+      savedY = window.scrollY;
+      document.body.style.cssText += `position:fixed;top:${-savedY}px;left:0;right:0;width:100%;`;
+      history.pushState({ gdDeck: 1 }, '', '#read');
+      [...(document.querySelector('.or-wrap')?.children ?? [])].forEach((el) => {
+        if (el === deckEl) return;
+        if ('inert' in HTMLElement.prototype) (el as any).inert = true;
+        else el.setAttribute('aria-hidden', 'true');
+      });
+
+      deckEl.hidden = false;
+      deckEl.focus();
+      renderAll(index);
+      document.querySelectorAll<HTMLElement>('.gd-dk-resume').forEach((b) => (b.hidden = true));
+      playing = true;
+      syncPlayBtn();
+      requestLock();
+      if (stateA()) showNote('a');
+
+      if (!hintShown) {
+        hintShown = true;
+        hintEl.hidden = false;
+        setTimeout(() => (hintEl.hidden = true), PACE.hintMs);
+      }
+
+      if (stateA()) { play(cur, 0); return; }
+      TTS.loadVoices().then((vs) => {
+        zhVoice = TTS.pickVoice(vs, ['zh-cn', 'zh-hans', 'zh', 'cmn'], ZH_PREF);
+        enVoice = TTS.pickVoice(vs, ['en-us', 'en-gb', 'en'], EN_PREF);
+        const saved = ls.get('gd-voice');
+        const zhs = TTS.zhList();
+        if (saved) {
+          const found = zhs.find((v) => `${v.name}|${v.lang}` === saved);
+          if (found) zhVoice = found;
+        }
+        if (zhs.length >= 2) {
+          voiceSel.hidden = false;
+          voiceSel.innerHTML = '';
+          zhs.forEach((v) => {
+            const o = document.createElement('option');
+            o.value = `${v.name}|${v.lang}`;
+            o.textContent = v.name;
+            if (zhVoice && o.value === `${zhVoice.name}|${zhVoice.lang}`) o.selected = true;
+            voiceSel.appendChild(o);
+          });
+        }
+        deckEl.classList.toggle('nozh', !zhVoice);
+        if (!zhVoice) showNote('b');
+        play(cur, 0);
+      });
+    }
+
+    function closeDeck(opts: { scrollToId?: string } = {}) {
+      if (deckEl.hidden) return;                 // idempotent; never touches history
+      TTS.stop();
+      clearRest();
+      playing = false;
+      releaseLock();
+      deckEl.hidden = true;
+      [...(document.querySelector('.or-wrap')?.children ?? [])].forEach((el) => {
+        if ('inert' in HTMLElement.prototype) (el as any).inert = false;
+        el.removeAttribute('aria-hidden');
+      });
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.left = '';
+      document.body.style.right = '';
+      document.body.style.width = '';
+      window.scrollTo(0, savedY);                 // restore style FIRST, then scroll
+      playBtn.focus();
+      const id = opts.scrollToId ?? deckSet[cur]?.id;
+      if (id) document.getElementById(id)?.scrollIntoView({ block: 'center', behavior: reduced ? 'auto' : 'smooth' });
+    }
+
+    const requestClose = () => {
+      if (history.state?.gdDeck) history.back();  // popstate then calls closeDeck
+      else closeDeck();
+    };
+
+    window.addEventListener('popstate', () => closeDeck());
+    if (location.hash === '#read') history.replaceState(null, '', location.pathname);
+
+    playBtn.addEventListener('click', () => {
+      TTS.unlock();                              // MUST be first — no await before it
+      const set = cards.filter((c) => !c.hidden);
+      if (!set.length) return;
+      openDeck(set, 0);
+    });
+
+    /* ── transport ── */
+    function togglePlay() {
+      if (playing) { TTS.stop(); playing = false; releaseLock(); }
+      else { TTS.unlock(); playing = true; requestLock(); play(cur, curSeg); }
+      syncPlayBtn();
+    }
+    /* Flicking through birds must move the slide instantly, but firing a
+       speak() per press piles up a queue the engine never drains — 15 taps in
+       a second leaves it wedged. So: stop on every press, start once the
+       presses stop. */
+    let playDebounce = 0 as unknown as ReturnType<typeof setTimeout>;
+    function schedulePlay(fromSeg = 0) {
+      clearTimeout(playDebounce);
+      playDebounce = setTimeout(() => { if (playing) play(cur, fromSeg); }, 220);
+    }
+
+    function manualStep(dir: 1 | -1) {
+      if (cur + dir < 0 || cur + dir >= deckSet.length) return;
+      lastAction = Date.now();
+      TTS.stop();
+      clearRest();
+      autoPassed = 0;
+      revealed = false;
+      restEl.hidden = true;
+      step(dir);
+      schedulePlay(0);                            // skip-ahead, not take-over
+    }
+
+    playPause.addEventListener('click', togglePlay);
+    $('gd-dk-prev').addEventListener('click', () => manualStep(-1));
+    $('gd-dk-next').addEventListener('click', () => manualStep(1));
+    $('gd-dk-again').addEventListener('click', () => { lastAction = Date.now(); autoPassed = 0; if (!playing) { playing = true; syncPlayBtn(); requestLock(); } play(cur, 0); });
+    $('gd-dk-close').addEventListener('click', requestClose);
+    $('gd-dk-edge-l').addEventListener('click', () => manualStep(-1));
+    $('gd-dk-edge-r').addEventListener('click', () => manualStep(1));
+    $('gd-dk-rest-go').addEventListener('click', () => { autoPassed = 0; (restEl as any)._go?.(); });
+    $('gd-dk-rest-skip').addEventListener('click', () => { autoPassed = 0; (restEl as any)._skip?.(); });
+    $('gd-dk-rest-end').addEventListener('click', () => { clearRest(); requestClose(); });
+    $('gd-dk-end-again').addEventListener('click', () => { endEl.hidden = true; lastRestAt = -1; autoPassed = 0; revealed = false; playing = true; syncPlayBtn(); requestLock(); renderAll(0); play(0, 0); });
+    $('gd-dk-end-close').addEventListener('click', requestClose);
+
+    document.querySelectorAll<HTMLButtonElement>('.gd-dk-rate').forEach((b) =>
+      b.addEventListener('click', () => {
+        rate = Number(b.dataset.rate) || 1;
+        ls.set('gd-rate', String(rate));
+        document.querySelectorAll('.gd-dk-rate').forEach((x) => x.classList.toggle('active', x === b));
+        autoPassed = 0;
+        schedulePlay(curSeg);                     // rate cannot change on an in-flight utterance
+      }),
+    );
+    document.querySelectorAll<HTMLButtonElement>('.gd-dk-rate').forEach((b) =>
+      b.classList.toggle('active', Number(b.dataset.rate) === rate),
+    );
+
+    guessBtn.addEventListener('click', () => {
+      guess = !guess;                              // takes effect from the next slide
+      guessBtn.classList.toggle('active', guess);
+      guessBtn.setAttribute('aria-pressed', String(guess));
+    });
+
+    voiceSel.addEventListener('change', () => {
+      const found = TTS.zhList().find((v) => `${v.name}|${v.lang}` === voiceSel.value);
+      if (!found) return;
+      zhVoice = found;
+      zhBroken = false;
+      deckEl.classList.remove('nozh');
+      ls.set('gd-voice', voiceSel.value);
+      schedulePlay(curSeg);
+    });
+
+    const HELP = [
+      '1) 手机侧边的静音键是不是开着?(iPhone 静音时朗读没有声音)',
+      '2) 音量调大一点',
+      '3) 从微信 / LINE 里打开的话,点右上角「在浏览器中打开」',
+    ].join('\n');
+    $('gd-dk-help').addEventListener('click', () => {
+      const open = helpBox.hidden;
+      helpBox.textContent = HELP;
+      helpBox.hidden = !open;
+      $('gd-dk-help').setAttribute('aria-expanded', String(open));
+    });
+
+    /* ── sign sheet ── */
+    function openSheet() {
+      const d = deckSet[cur];
+      if (!d?.sign) return;
+      TTS.stop();
+      sheetImg.src = d.sign;
+      ($('gd-dk-sheet-raw') as HTMLAnchorElement).href = d.sign;
+      sheetEl.hidden = false;
+      sheetOpen = true;
+    }
+    function closeSheet() {
+      sheetEl.hidden = true;
+      sheetOpen = false;
+      schedulePlay(curSeg);
+    }
+    signBtn.addEventListener('click', openSheet);
+    $('gd-dk-sheet-x').addEventListener('click', closeSheet);
+
+    /* ── 查看完整卡片 ── */
+    stage.addEventListener('click', (e) => {
+      const a = (e.target as HTMLElement).closest('.gd-dk-more') as HTMLAnchorElement | null;
+      if (!a) return;
+      e.preventDefault();
+      const id = a.getAttribute('href')!.slice(1);
+      requestClose();
+      setTimeout(() => closeDeck({ scrollToId: id }), 0);
+    });
+
+    /* ── touch: edge strips, centre tap, horizontal swipe ── */
+    let dragId = -1, dx = 0, dy = 0, sx = 0, sy = 0, st = 0, axis: '' | 'x' | 'y' = '';
+    stage.addEventListener('pointerdown', (e) => {
+      if (sheetOpen || !restEl.hidden || !endEl.hidden) return;
+      if ((e.target as HTMLElement).closest('button,a,select')) return;
+      dragId = e.pointerId; sx = e.clientX; sy = e.clientY; st = Date.now(); dx = dy = 0; axis = '';
+    });
+    stage.addEventListener('pointermove', (e) => {
+      if (e.pointerId !== dragId) return;
+      dx = e.clientX - sx; dy = e.clientY - sy;
+      if (!axis && Math.hypot(dx, dy) > 8) {        // decided once, never re-evaluated
+        axis = Math.abs(dx) > Math.abs(dy) * 1.6 ? 'x' : 'y';
+        if (axis === 'x') { try { stage.setPointerCapture(e.pointerId); } catch { /* ignore */ } }
+      }
+      if (axis !== 'x') return;
+      const node = curNode();
+      node.classList.add('dragging');
+      node.style.setProperty('--o', String(dx / stage.clientWidth));
+    });
+    function endDrag(commit: boolean) {
+      const node = curNode();
+      node.classList.remove('dragging');
+      node.style.setProperty('--o', '0');
+      const w = stage.clientWidth;
+      const v = Math.abs(dx) / Math.max(1, Date.now() - st);
+      if (commit && axis === 'x' && (Math.abs(dx) > 0.28 * w || (Math.abs(dx) > 40 && v > 0.4)) && Math.abs(dx) > PACE.swipeMin) {
+        manualStep(dx < 0 ? 1 : -1);
+      }
+      dragId = -1; axis = '';
+    }
+    stage.addEventListener('pointerup', (e) => {
+      if (e.pointerId !== dragId) return;
+      const tap = Math.abs(dx) < 8 && Math.abs(dy) < 8 && Date.now() - st < 400;
+      const wasAxis = axis;
+      endDrag(true);
+      if (!tap || wasAxis === 'x') return;
+      if ((e.target as HTMLElement).closest('.gd-dk-edge')) return;
+      if (Date.now() - lastAction < PACE.tapDebounce) return;   // a child mashing the screen
+      lastAction = Date.now();
+      if (guess && !revealed) { TTS.stop(); doReveal(); schedulePlay(0); return; }
+      togglePlay();
+    });
+    stage.addEventListener('pointercancel', () => endDrag(false));
+
+    /* ── keyboard: 7 bindings, that is the whole list ── */
+    document.addEventListener('keydown', (e) => {
+      if (deckEl.hidden) return;
+      if (e.key === 'Tab') {
+        const f = [...deckEl.querySelectorAll<HTMLElement>('button,a[href],select,[tabindex]:not([tabindex="-1"])')].filter((x) => !x.hidden && x.offsetParent !== null);
+        if (!f.length) return;
+        const first = f[0], last = f[f.length - 1];
+        if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+        else if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        return;
+      }
+      const k = e.key;
+      if (k === 'Escape') { e.preventDefault(); if (sheetOpen) closeSheet(); else if (!helpBox.hidden) helpBox.hidden = true; else requestClose(); return; }
+      if (sheetOpen) return;
+      if (k === ' ' || k === 'Enter') {
+        e.preventDefault();
+        if ((document.activeElement as HTMLElement)?.closest('button,a,select')) return;
+        if (guess && !revealed) { TTS.stop(); doReveal(); schedulePlay(0); } else togglePlay();
+      } else if (k === 'ArrowRight' || k === 'ArrowDown') { e.preventDefault(); manualStep(1); }
+      else if (k === 'ArrowLeft' || k === 'ArrowUp') { e.preventDefault(); manualStep(-1); }
+      else if (k === 'r' || k === 'R') { e.preventDefault(); $('gd-dk-again').click(); }
+      else if (k === 's' || k === 'S') {
+        e.preventDefault();
+        const order = [0.8, 1, 1.2];
+        const nextRate = order[(order.indexOf(rate) + 1) % order.length];
+        (document.querySelector(`.gd-dk-rate[data-rate="${nextRate}"]`) as HTMLButtonElement)?.click();
+      } else if (k === 'g' || k === 'G') { e.preventDefault(); guessBtn.click(); }
+    });
+
+    /* ── idle chrome fade, big screens only ── */
+    function pokeIdle() {
+      deckEl.classList.remove('idle');
+      clearTimeout(idleTimer);
+      if (innerWidth >= 900) idleTimer = setTimeout(() => deckEl.classList.add('idle'), PACE.idleMs);
+    }
+    ['pointermove', 'keydown', 'focusin'].forEach((ev) => deckEl.addEventListener(ev, pokeIdle));
+
+    /* ── lifecycle: never auto-restart audio, iOS can wedge mid-utterance ── */
+    document.addEventListener('visibilitychange', () => {
+      if (deckEl.hidden) return;
+      if (document.hidden) {
+        wasPlaying = playing;
+        TTS.stop();
+        playing = false;
+        releaseLock();
+        syncPlayBtn();
+      } else if (wasPlaying) {
+        const btn = curNode().querySelector<HTMLElement>('.gd-dk-resume')!;
+        btn.hidden = false;
+        btn.onclick = () => {
+          TTS.unlock();                            // first statement — re-supplies the gesture
+          btn.hidden = true;
+          playing = true;
+          syncPlayBtn();
+          requestLock();
+          play(cur, curSeg);
+        };
+      }
+    });
+    const teardown = () => { TTS.stop(); releaseLock(); };
+    window.addEventListener('pagehide', teardown);
+    window.addEventListener('beforeunload', teardown);
   </script>
 </GuideLayout>

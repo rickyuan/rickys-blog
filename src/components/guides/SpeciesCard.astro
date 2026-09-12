@@ -4,6 +4,7 @@
  * frontmatter (see `guides` schema in content.config.ts).
  */
 import type { CollectionEntry } from 'astro:content';
+import Ruby from '@components/guides/Ruby.astro';
 
 type Species = CollectionEntry<'guides'>['data']['species'][number];
 
@@ -18,12 +19,29 @@ const IUCN_CN: Record<string, string> = {
   EW: '野外灭绝', EX: '灭绝', DD: '数据缺乏', NE: '未评估',
 };
 
-const searchText = [s.cn, s.en, s.sci, zoneName, s.family, ...s.tags]
+//搜索也认拼音:去掉声调,同时收录分写和连写("ying wu" 和 "yingwu" 都能搜到)。
+const pyPlain = (s.pinyin ?? '').normalize('NFD').replace(/[̀-ͯ]/g, '');
+const searchText = [
+  s.cn,
+  s.en,
+  s.sci,
+  zoneName,
+  s.family,
+  pyPlain,
+  pyPlain.replace(/\s+/g, ''),
+  ...s.tags,
+]
   .filter(Boolean)
   .join(' ')
   .toLowerCase();
 ---
-<article class="gd-card" id={s.id} data-zone={s.zone ?? ''} data-search={searchText}>
+<article
+  class="gd-card"
+  id={s.id}
+  data-zone={s.zone ?? ''}
+  data-emoji={s.emoji ?? '🐦'}
+  data-search={searchText}
+>
   <div class="gd-media">
     {s.photo ? (
       <img src={s.photo} alt={`${s.cn} ${s.en}`} loading="lazy" />
@@ -34,7 +52,7 @@ const searchText = [s.cn, s.en, s.sci, zoneName, s.family, ...s.tags]
   </div>
   <div class="gd-body">
     <div class="gd-names">
-      <h2 class="gd-cn">{s.cn}</h2>
+      <h2 class="gd-cn"><Ruby text={s.cn} pinyin={s.pinyin} label={s.id} /></h2>
       <p class="gd-en">{s.en}</p>
       {s.sci && <p class="gd-sci">{s.sci}</p>}
     </div>
@@ -44,7 +62,12 @@ const searchText = [s.cn, s.en, s.sci, zoneName, s.family, ...s.tags]
         {s.size && <div><dt>体长 SIZE</dt><dd>{s.size}</dd></div>}
         {s.diet && <div><dt>食性 DIET</dt><dd>{s.diet}</dd></div>}
         {s.range && <div><dt>分布 RANGE</dt><dd>{s.range}</dd></div>}
-        {s.family && <div><dt>科 FAMILY</dt><dd>{s.family}</dd></div>}
+        {s.family && (
+          <div>
+            <dt>科 FAMILY</dt>
+            <dd><Ruby text={s.family} pinyin={s.family_pinyin} label={`${s.id} family`} /></dd>
+          </div>
+        )}
         {s.iucn && (
           <div>
             <dt>保护级别 IUCN</dt>

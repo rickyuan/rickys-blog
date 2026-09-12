@@ -65,6 +65,7 @@ const guides = defineCollection({
         z.object({
           id: z.string(),
           name: z.string(),
+          pinyin: z.string().optional(), // 分区名拼音,空格分隔,一个汉字一个音节
           name_en: z.string().optional(),
           note: z.string().optional(),
         }),
@@ -75,11 +76,15 @@ const guides = defineCollection({
         z.object({
           id: z.string(),
           cn: z.string(),
+          // 拼音:空格分隔的音节,数量必须等于中文名里的汉字数(非汉字不占音节)。
+          // 渲染时逐字对齐成 ruby 注音;数量对不上就整体不注音,宁可不注也不注错。
+          pinyin: z.string().optional(),
           en: z.string(),
           sci: z.string().optional(),
           zone: z.string().optional(), // zone id
           emoji: z.string().optional(),
           family: z.string().optional(),
+          family_pinyin: z.string().optional(),
           size: z.string().optional(),
           diet: z.string().optional(),
           range: z.string().optional(),
