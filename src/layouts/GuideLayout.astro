@@ -1,0 +1,63 @@
+---
+import '@styles/onroad.css';
+import '@styles/guide.css';
+
+interface Props {
+  title: string;
+  title_en?: string;
+  description: string;
+  cover: string;
+  park: string;
+  visitDate?: Date;
+  count: number;
+  trip?: { href: string; title: string };
+}
+
+const { title, title_en, description, cover, park, visitDate, count, trip } = Astro.props;
+const dateLabel = visitDate ? visitDate.toISOString().slice(0, 10) : undefined;
+---
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title} — Guides</title>
+  <meta name="description" content={description} />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap"
+    rel="stylesheet"
+  />
+</head>
+<body class="or-page">
+  <div class="or-wrap gd-wrap">
+    <a class="or-back" href="/guides">← guides</a>
+
+    <header class="or-hero">
+      <div class="or-hero-cover">{cover}</div>
+      <h1 class="or-hero-title">{title}</h1>
+      {title_en && <p class="or-hero-desc" style="font-family: var(--or-mono); font-size: 0.78rem; opacity: 0.85;">{title_en}</p>}
+      <p class="or-hero-desc">{description}</p>
+      <div class="or-hero-meta">
+        <span>📍 {park}</span>
+        {dateLabel && <span>🗓 {dateLabel}</span>}
+        <span class="or-status">🐦 {count} 种</span>
+      </div>
+      {trip && (
+        <div class="or-hero-route">
+          <span>🧭 出行计划</span>
+          <span class="sep">·</span>
+          <a href={trip.href} style="color: inherit;">{trip.title} →</a>
+        </div>
+      )}
+    </header>
+
+    <slot />
+
+    <footer class="or-footer">
+      <p>Guides · <a href="/guides">全部图鉴</a> · <a href="/onroad">OnRoad</a> · <a href="/">Ricky's Space</a></p>
+    </footer>
+  </div>
+</body>
+</html>

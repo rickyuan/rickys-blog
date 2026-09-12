@@ -91,6 +91,32 @@
   background: #ffffff2e;
 }
 
+/* ── companion field-guide CTA (trip → /guides/<id>) ── */
+.or-guide-cta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--or-card);
+  border: 1px solid var(--or-accent);
+  border-radius: 14px;
+  padding: 12px 16px;
+  margin-bottom: 14px;
+  text-decoration: none;
+  color: var(--or-ink);
+  box-shadow: 0 1px 3px #0000000a;
+}
+.or-guide-cta-cover { font-size: 1.8rem; line-height: 1; }
+.or-guide-cta-body { display: flex; flex-direction: column; min-width: 0; flex: 1; }
+.or-guide-cta-kicker {
+  font-family: var(--or-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  color: var(--or-accent);
+}
+.or-guide-cta-title { font-weight: 700; font-size: 0.98rem; }
+.or-guide-cta-sub { font-size: 0.74rem; color: var(--or-ink-dim); }
+.or-guide-cta-arrow { color: var(--or-accent); font-weight: 700; }
+
 /* ── sticky day tabs (built by layout script) ── */
 .or-tabs {
   position: sticky;

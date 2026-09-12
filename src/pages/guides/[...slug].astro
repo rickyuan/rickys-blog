@@ -1,0 +1,113 @@
+---
+import { getCollection, getEntry, render } from 'astro:content';
+import GuideLayout from '@layouts/GuideLayout.astro';
+import SpeciesCard from '@components/guides/SpeciesCard.astro';
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const entries = await getCollection('guides', ({ data }) => !data.draft);
+  return entries.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const d = entry.data;
+
+const tripEntry = d.trip ? await getEntry('onroad', d.trip) : undefined;
+const trip = tripEntry ? { href: `/onroad/${tripEntry.id}`, title: tripEntry.data.title } : undefined;
+
+// Zone chips: declared order first, then any zone id only used by a species.
+const zoneMap = new Map(d.zones.map((z) => [z.id, z]));
+for (const s of d.species) {
+  if (s.zone && !zoneMap.has(s.zone)) zoneMap.set(s.zone, { id: s.zone, name: s.zone });
+}
+const zones = [...zoneMap.values()].filter((z) => d.species.some((s) => s.zone === z.id));
+const zoneName = (id?: string) => (id ? zoneMap.get(id)?.name : undefined);
+---
+<GuideLayout
+  title={d.title}
+  title_en={d.title_en}
+  description={d.description}
+  cover={d.cover}
+  park={d.park}
+  visitDate={d.visitDate}
+  count={d.species.length}
+  trip={trip}
+>
+  <div class="gd-intro or-prose">
+    <Content />
+  </div>
+
+  <div class="gd-toolbar" id="gd-toolbar">
+    <div class="gd-toolbar-row">
+      <input class="gd-search" id="gd-search" type="search" placeholder="搜中文 / English / 学名 / 分区…" autocomplete="off" />
+      <button class="gd-flash" id="gd-flash" type="button" title="隐藏名字,点卡片揭晓">🎴 闪卡</button>
+    </div>
+    {zones.length > 1 && (
+      <nav class="gd-zones or-tabs" id="gd-zones" style="position: static; padding-left: 2px;">
+        <button class="or-tab active" data-zone="">全部</button>
+        {zones.map((z) => <button class="or-tab" data-zone={z.id}>{z.name}</button>)}
+      </nav>
+    )}
+    <p class="gd-count" id="gd-count">{d.species.length} 种</p>
+    <p class="gd-flash-hint">闪卡模式:名字已隐藏,先猜再点卡片揭晓 👀</p>
+  </div>
+
+  <section class="gd-grid" id="gd-grid">
+    {d.species.map((s) => <SpeciesCard species={s} zoneName={zoneName(s.zone)} />)}
+  </section>
+  <p class="gd-empty" id="gd-empty" hidden>没有匹配的鸟,换个词试试 🔍</p>
+
+  <script>
+    const grid = document.getElementById('gd-grid')!;
+    const cards = [...grid.querySelectorAll<HTMLElement>('.gd-card')];
+    const search = document.getElementById('gd-search') as HTMLInputElement;
+    const count = document.getElementById('gd-count')!;
+    const empty = document.getElementById('gd-empty')!;
+    const zoneBtns = [...document.querySelectorAll<HTMLButtonElement>('#gd-zones .or-tab')];
+    const flashBtn = document.getElementById('gd-flash')!;
+    const toolbar = document.getElementById('gd-toolbar')!;
+    let zone = '';
+
+    function apply() {
+      const q = search.value.trim().toLowerCase();
+      let shown = 0;
+      for (const c of cards) {
+        const ok = (!zone || c.dataset.zone === zone) && (!q || (c.dataset.search ?? '').includes(q));
+        c.hidden = !ok;
+        if (ok) shown++;
+      }
+      count.textContent = `${shown} 种`;
+      empty.hidden = shown > 0;
+    }
+
+    search.addEventListener('input', apply);
+    zoneBtns.forEach((b) =>
+      b.addEventListener('click', () => {
+        zoneBtns.forEach((x) => x.classList.remove('active'));
+        b.classList.add('active');
+        zone = b.dataset.zone ?? '';
+        apply();
+      }),
+    );
+
+    // Flashcard mode: blur the names, tap a card to reveal it.
+    flashBtn.addEventListener('click', () => {
+      const on = grid.classList.toggle('flash');
+      toolbar.classList.toggle('flash', on);
+      flashBtn.classList.toggle('active', on);
+      cards.forEach((c) => c.classList.remove('revealed'));
+    });
+    cards.forEach((c) =>
+      c.addEventListener('click', (e) => {
+        if (!grid.classList.contains('flash')) return;
+        if ((e.target as HTMLElement).closest('a')) return;
+        c.classList.toggle('revealed');
+      }),
+    );
+  </script>
+</GuideLayout>

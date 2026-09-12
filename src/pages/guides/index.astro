@@ -1,0 +1,70 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@layouts/BaseLayout.astro';
+
+export const prerender = true;
+
+const guides = (await getCollection('guides', ({ data }) => !data.draft)).sort(
+  (a, b) => (b.data.visitDate?.getTime() ?? 0) - (a.data.visitDate?.getTime() ?? 0),
+);
+const fmt = (d?: Date) => (d ? d.toISOString().slice(0, 10) : '');
+---
+<BaseLayout title="Guides — Ricky's Space" description="逛过的园区,拍下的介绍牌,整理成中英双语图鉴。">
+
+  <header class="site-header">
+    <div class="terminal-prompt">
+      <span>~/rickys-space/guides $</span>
+      <span>ls guides/</span>
+      <span class="cursor"></span>
+    </div>
+    <h1 class="site-title">Guides</h1>
+    <p class="site-desc">逛过的园区 · 拍下的介绍牌 · 整理成中英双语图鉴,下次去之前先预习 📖</p>
+  </header>
+
+  <main class="or-grid">
+    {guides.map((g) => (
+      <a class="or-trip-card" href={`/guides/${g.id}`}>
+        <div class="or-trip-cover"><span class="or-trip-emoji">{g.data.cover}</span></div>
+        <div class="or-trip-body">
+          <div class="or-trip-meta">
+            <span class="post-tag" data-t="onroad">图鉴</span>
+            <span class="or-trip-status">🐦 {g.data.species.length} 种</span>
+            <span class="or-trip-date">{fmt(g.data.visitDate)}</span>
+          </div>
+          <h2 class="or-trip-title">{g.data.title}</h2>
+          <p class="or-trip-route">📍 {g.data.park}</p>
+          <p class="or-trip-desc">{g.data.description}</p>
+        </div>
+      </a>
+    ))}
+    {guides.length === 0 && <p style="color: var(--text-dim);">还没有图鉴。</p>}
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2026 Ricky's Space · <a href="/">← home</a> · <a href="/onroad">onroad</a></p>
+  </footer>
+
+  <style>
+    .or-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
+    @media (min-width: 640px) { .or-grid { grid-template-columns: 1fr 1fr; } }
+    .or-trip-card {
+      display: flex; flex-direction: column;
+      background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px;
+      overflow: hidden; text-decoration: none; color: var(--text);
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .or-trip-card:hover { border-color: #2dd4bf; transform: translateY(-2px); }
+    .or-trip-cover { background: linear-gradient(135deg, #0d948833, #0d221f); padding: 22px 0; text-align: center; }
+    .or-trip-emoji { font-size: 2.6rem; line-height: 1; }
+    .or-trip-body { padding: 14px 16px 16px; }
+    .or-trip-meta { display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; }
+    .or-trip-status, .or-trip-date { font-family: var(--mono); font-size: 0.62rem; color: var(--text-dim); }
+    .or-trip-date { margin-left: auto; }
+    .or-trip-title { font-size: 1.05rem; font-weight: 700; margin: 8px 0 2px; }
+    .or-trip-route { font-family: var(--mono); font-size: 0.68rem; color: #2dd4bf; margin-bottom: 6px; }
+    .or-trip-desc {
+      font-size: 0.78rem; color: var(--text-dim); line-height: 1.6;
+      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+    }
+  </style>
+</BaseLayout>

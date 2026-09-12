@@ -11,9 +11,11 @@ interface Props {
   endDate?: Date;
   category: 'sg-local' | 'overseas';
   status: 'planning' | 'ready' | 'done';
+  /** Companion field guide (built from the info signs photographed on the trip). */
+  guide?: { href: string; title: string; cover: string; count: number };
 }
 
-const { title, description, cover, origin, destination, startDate, endDate, category, status } =
+const { title, description, cover, origin, destination, startDate, endDate, category, status, guide } =
   Astro.props;
 
 const fmt = (d: Date) => d.toISOString().slice(0, 10);
@@ -60,6 +62,18 @@ const CATEGORY_LABEL = { 'sg-local': 'SG 本地', overseas: '海外' } as const;
         <span class="or-status">{STATUS_LABEL[status]}</span>
       </div>
     </header>
+
+    {guide && (
+      <a class="or-guide-cta" href={guide.href}>
+        <span class="or-guide-cta-cover">{guide.cover}</span>
+        <span class="or-guide-cta-body">
+          <span class="or-guide-cta-kicker">配套图鉴 · FIELD GUIDE</span>
+          <span class="or-guide-cta-title">{guide.title}</span>
+          <span class="or-guide-cta-sub">{guide.count} 种 · 中英双语 · 下次去之前先认一认</span>
+        </span>
+        <span class="or-guide-cta-arrow">→</span>
+      </a>
+    )}
 
     <nav class="or-tabs" id="or-tabs" hidden></nav>
 

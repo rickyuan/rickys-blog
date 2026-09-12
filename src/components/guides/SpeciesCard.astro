@@ -1,0 +1,79 @@
+---
+/**
+ * One species card in a field guide. Data comes straight from the guide's
+ * frontmatter (see `guides` schema in content.config.ts).
+ */
+import type { CollectionEntry } from 'astro:content';
+
+type Species = CollectionEntry<'guides'>['data']['species'][number];
+
+interface Props {
+  species: Species;
+  zoneName?: string;
+}
+const { species: s, zoneName } = Astro.props;
+
+const IUCN_CN: Record<string, string> = {
+  LC: '无危', NT: '近危', VU: '易危', EN: '濒危', CR: '极危',
+  EW: '野外灭绝', EX: '灭绝', DD: '数据缺乏', NE: '未评估',
+};
+
+const searchText = [s.cn, s.en, s.sci, zoneName, s.family, ...s.tags]
+  .filter(Boolean)
+  .join(' ')
+  .toLowerCase();
+---
+<article class="gd-card" id={s.id} data-zone={s.zone ?? ''} data-search={searchText}>
+  <div class="gd-media">
+    {s.photo ? (
+      <img src={s.photo} alt={`${s.cn} ${s.en}`} loading="lazy" />
+    ) : (
+      <div class="gd-emoji">{s.emoji ?? '🐦'}</div>
+    )}
+    {zoneName && <span class="gd-zone-chip">{zoneName}</span>}
+  </div>
+  <div class="gd-body">
+    <div class="gd-names">
+      <h2 class="gd-cn">{s.cn}</h2>
+      <p class="gd-en">{s.en}</p>
+      {s.sci && <p class="gd-sci">{s.sci}</p>}
+    </div>
+
+    {(s.size || s.diet || s.range || s.family || s.iucn) && (
+      <dl class="gd-quick">
+        {s.size && <div><dt>体长 SIZE</dt><dd>{s.size}</dd></div>}
+        {s.diet && <div><dt>食性 DIET</dt><dd>{s.diet}</dd></div>}
+        {s.range && <div><dt>分布 RANGE</dt><dd>{s.range}</dd></div>}
+        {s.family && <div><dt>科 FAMILY</dt><dd>{s.family}</dd></div>}
+        {s.iucn && (
+          <div>
+            <dt>保护级别 IUCN</dt>
+            <dd><span class={`gd-iucn gd-iucn--${s.iucn}`}>{s.iucn} · {IUCN_CN[s.iucn]}</span></dd>
+          </div>
+        )}
+      </dl>
+    )}
+
+    {s.facts.length > 0 && (
+      <ul class="gd-facts">
+        {s.facts.map((f) => <li>{f}</li>)}
+      </ul>
+    )}
+
+    {s.kids && <p class="gd-kids">👧 {s.kids}</p>}
+
+    {s.en_text && (
+      <details class="gd-en-text">
+        <summary>📖 原牌英文 · READ THE SIGN</summary>
+        <p>{s.en_text}</p>
+      </details>
+    )}
+
+    {s.sign && (
+      <a class="gd-sign" href={s.sign} target="_blank" rel="noopener">
+        <img src={s.sign} alt={`${s.cn} 园区介绍牌`} loading="lazy" />
+        <span>🪧 园区介绍牌原图 · 点开看大图</span>
+      </a>
+    )}
+  </div>
+</article>

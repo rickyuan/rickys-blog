@@ -6,7 +6,8 @@
 
 ## Live URLs
 
-- **Site**: https://rickys-blog.rickyyuansg.workers.dev (Worker: `rickys-blog`)
+- **Site**: https://blog.tarnlab.com (custom domain on Worker `rickys-blog`; also
+  https://rickys-blog.rickyyuansg.workers.dev)
 - **Digest worker**: https://rickys-blog-digest.rickyyuansg.workers.dev (Worker: `rickys-blog-digest`; the HTTP endpoints are token-guarded manual triggers only)
 - The old Cloudflare Pages project (`rickys-blog.pages.dev`) is retired and can be deleted in the dashboard.
 
