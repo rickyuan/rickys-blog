@@ -9,3 +9,7 @@ dist/
 .astro/
 .claude/
 .conductor/
+
+# raw photo dumps (originals stay local; only downscaled copies go under public/)
+res/
+res-small/
